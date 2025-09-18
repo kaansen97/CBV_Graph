@@ -676,6 +676,8 @@
                         broader: data.broader || [],
                         narrower: data.narrower || [],
                         related: data.related || [],
+                        members: data.members || [],
+                        type: data.type || 'concept',
                         translations: data.translations || {}
                     };
                     
@@ -814,7 +816,8 @@
             const relationships = relationshipData[keywordName] || {
                 broader: [],
                 narrower: [],
-                related: []
+                related: [],
+                members: []
             };
 
             // Create nodes
