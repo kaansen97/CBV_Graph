@@ -81,6 +81,18 @@
             text-align: center;
         }
         
+        .stat.clickable {
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        
+        .stat.clickable:hover {
+            transform: translateY(-2px);
+            background: rgba(102, 126, 234, 0.2);
+        }
+        
         .stat-number {
             display: block;
             font-size: 2em;
@@ -268,6 +280,12 @@
             transform: scale(1.05);
         }
         
+        .collection-info {
+            color: #999;
+            font-size: 0.9em;
+            font-weight: normal;
+        }
+        
         @media (max-width: 600px) {
             .container {
                 margin: 10px;
@@ -325,7 +343,7 @@
                 <span class="stat-number">630</span>
                 <span class="stat-label">Related Terms</span>
             </div>
-            <div class="stat">
+            <div class="stat clickable" onclick="showCollectionsOnly()">
                 <span class="stat-number" id="collections-count">0</span>
                 <span class="stat-label">Collections</span>
             </div>
@@ -378,13 +396,15 @@
     
     <script>
         let allKeywords = [];
-        let filteredKeywords = [];
         let currentFilter = 'all';
+        let filteredKeywords = [];
+        let cbvData = {};
         
         // Load keywords from unified CBV data file
         fetch('cbv_data.json')
             .then(response => response.json())
-            .then(cbvData => {
+            .then(data => {
+                cbvData = data;
                 // Extract keyword list from unified data
                 allKeywords = Object.keys(cbvData).map(keyword => ({
                     name: keyword,
@@ -495,6 +515,74 @@
             });
         }
         
+        function showCollectionsOnly() {
+            // Filter to show only collections
+            currentFilter = 'collections';
+            
+            // Update the page title/header to indicate collections view
+            const section = document.querySelector('.all-keywords-section h4');
+            section.textContent = 'Browse Collections:';
+            
+            // Get all collections from the data
+            const collections = [];
+            for (const [keyword, data] of Object.entries(cbvData)) {
+                if (data.type === 'collection') {
+                    collections.push({
+                        name: keyword,
+                        labels: data.labels,
+                        memberCount: (data.members || []).length
+                    });
+                }
+            }
+            
+            // Sort collections alphabetically
+            collections.sort((a, b) => a.name.localeCompare(b.name));
+            
+            // Display collections
+            const container = document.getElementById('all-keywords-list');
+            container.innerHTML = collections.map(collection => 
+                `<a href="graph.html?keyword=${encodeURIComponent(collection.name)}" class="keyword-link">
+                    <strong>${collection.name}</strong>
+                    <span class="collection-info"> (${collection.memberCount} members)</span>
+                </a>`
+            ).join('');
+            
+            // Hide alphabet filter since we're showing collections only
+            document.querySelector('.alphabet-filter').style.display = 'none';
+            
+            // Add a back button
+            if (!document.querySelector('.back-to-all')) {
+                const backButton = document.createElement('button');
+                backButton.className = 'btn back-to-all';
+                backButton.textContent = '← Back to All Keywords';
+                backButton.onclick = backToAllKeywords;
+                document.querySelector('.all-keywords-section').insertBefore(backButton, document.querySelector('.search-container'));
+            }
+        }
+        
+        function backToAllKeywords() {
+            // Reset to show all keywords
+            currentFilter = 'all';
+            
+            // Reset the page title
+            const section = document.querySelector('.all-keywords-section h4');
+            section.textContent = 'Or Browse All Keywords:';
+            
+            // Show alphabet filter again
+            document.querySelector('.alphabet-filter').style.display = 'block';
+            
+            // Remove back button
+            const backButton = document.querySelector('.back-to-all');
+            if (backButton) {
+                backButton.remove();
+            }
+            
+            // Reset active filter and display all keywords
+            document.querySelectorAll('.letter-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.letter-btn[onclick="filterByLetter(\'all\')"]').classList.add('active');
+            displayKeywords();
+        }
+
         function goToKeyword(keywordName) {
             window.location.href = `graph.html?keyword=${encodeURIComponent(keywordName)}`;
         }

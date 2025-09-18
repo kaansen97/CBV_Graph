@@ -221,6 +221,13 @@
                 <ul id="members-list"></ul>
             </div>
             <div class="relationship-section">
+                <div class="relationship-title parent-collections" id="parent-collections-title" style="color: #e67e22;">📁 Parent Collections</div>
+                <div class="relationship-search">
+                    <input type="text" placeholder="Search parent collections..." onkeyup="filterRelationshipList('parentCollections', this.value)">
+                </div>
+                <ul id="parent-collections-list"></ul>
+            </div>
+            <div class="relationship-section">
                 <div class="relationship-title collections" id="collections-title" style="color: #e74c3c;">📚 All Collections</div>
                 <div class="relationship-search">
                     <input type="text" placeholder="Search collections..." onkeyup="filterRelationshipList('collections', this.value)">
@@ -416,12 +423,13 @@
             document.getElementById('narrower-title').textContent = titles.narrower;
             document.getElementById('related-title').textContent = titles.related;
             document.getElementById('members-title').textContent = titles.members;
+            document.getElementById('parent-collections-title').textContent = titles.parentCollections;
             document.getElementById('collections-title').textContent = titles.collections;
             document.getElementById('translation-title').textContent = titles.translation;
             
             // Update search placeholders
             const searchInputs = document.querySelectorAll('.relationship-search input');
-            const types = ['broader', 'narrower', 'related', 'members', 'collections', 'translation'];
+            const types = ['broader', 'narrower', 'related', 'members', 'parentCollections', 'collections', 'translation'];
             searchInputs.forEach((input, index) => {
                 if (types[index]) {
                     input.placeholder = placeholders[types[index]];
@@ -439,6 +447,7 @@
                         narrower: '▼ Términos más específicos',
                         related: '◆ Términos relacionados',
                         members: '★ Miembros de la Colección',
+                        parentCollections: '📁 Colecciones Padre',
                         collections: '📚 Todas las Colecciones',
                         translation: '◎ Traducciones'
                     };
@@ -449,6 +458,7 @@
                         narrower: '▼ Termes plus spécifiques',
                         related: '◆ Termes connexes',
                         members: '★ Membres de la Collection',
+                        parentCollections: '📁 Collections Parent',
                         collections: '📚 Toutes les Collections',
                         translation: '◎ Traductions'
                     };
@@ -460,6 +470,7 @@
                         narrower: '▼ Narrower Topics',
                         related: '◆ Related Topics',
                         members: '★ Collection Members',
+                        parentCollections: '📁 Parent Collections',
                         collections: '📚 All Collections',
                         translation: '◎ Translations'
                     };
@@ -475,6 +486,7 @@
                         narrower: 'Buscar términos más específicos...',
                         related: 'Buscar términos relacionados...',
                         members: 'Buscar miembros...',
+                        parentCollections: 'Buscar colecciones padre...',
                         collections: 'Buscar colecciones...',
                         translation: 'Buscar traducciones...'
                     };
@@ -484,6 +496,7 @@
                         narrower: 'Rechercher des termes plus spécifiques...',
                         related: 'Rechercher des termes connexes...',
                         members: 'Rechercher des membres...',
+                        parentCollections: 'Rechercher des collections parent...',
                         collections: 'Rechercher des collections...',
                         translation: 'Rechercher des traductions...'
                     };
@@ -494,6 +507,7 @@
                         narrower: 'Search narrower topics...',
                         related: 'Search related topics...',
                         members: 'Search members...',
+                        parentCollections: 'Search parent collections...',
                         collections: 'Search collections...',
                         translation: 'Search translations...'
                     };
@@ -713,6 +727,14 @@
             
             updateRelationshipTitles();
             
+            // Update Collection Members title with count if this is a collection
+            const currentData = relationshipData[keyword] || {};
+            if (currentData.type === 'collection') {
+                const memberCount = (currentData.members || []).length;
+                const titles = getRelationshipTitles();
+                document.getElementById('members-title').textContent = `${titles.members} (${memberCount})`;
+            }
+            
             const relationshipTypes = ['broader', 'narrower', 'related', 'members'];
             
             relationshipTypes.forEach(type => {
@@ -737,6 +759,9 @@
                     section.style.display = 'none';
                 }
             });
+            
+            // Update parent collections list
+            updateParentCollectionsList(keyword);
             
             // Update collections list
             updateCollectionsList();
@@ -775,6 +800,44 @@
                 if (isRelatedPanelVisible) {
                     panel.style.display = 'block';
                 }
+            }
+        }
+
+        function updateParentCollectionsList(keyword) {
+            const parentCollectionsList = document.getElementById('parent-collections-list');
+            const parentCollectionsSection = document.querySelector('#parent-collections-list').closest('.relationship-section');
+            const parentCollections = [];
+            
+            // Find collections that contain this keyword as a member
+            for (const [collectionName, data] of Object.entries(relationshipData)) {
+                if (data.type === 'collection' && data.members && data.members.includes(keyword)) {
+                    const memberCount = (data.members || []).length;
+                    parentCollections.push({
+                        name: collectionName,
+                        count: memberCount
+                    });
+                }
+            }
+            
+            // Sort collections by name
+            parentCollections.sort((a, b) => a.name.localeCompare(b.name));
+            
+            if (parentCollections.length > 0) {
+                parentCollectionsList.innerHTML = parentCollections.map(collection => {
+                    const displayLabel = getDisplayLabel(collection.name);
+                    const cbvURL = getCBVSourceURL(collection.name);
+                    return `<li>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <a href="#" onclick="navigateToTopic('${collection.name}'); return false;" style="flex: 1;">
+                                ${displayLabel} <span style="color: #95a5a6; font-size: 11px;">(${collection.count} members)</span>
+                            </a>
+                            ${cbvURL ? `<a href="${cbvURL}" target="_blank" style="color: #4ecdc4; text-decoration: none; font-size: 11px; margin-left: 5px;" title="View in CBV Source">🔗</a>` : ''}
+                        </div>
+                    </li>`;
+                }).join('');
+                parentCollectionsSection.style.display = 'block';
+            } else {
+                parentCollectionsSection.style.display = 'none';
             }
         }
 
@@ -1072,9 +1135,28 @@
                 }
             });
             
+            // Add node labels
             node.append("text")
                 .text(d => getDisplayLabel(d.name))
                 .attr("dy", d => -getNodeRadius(d) - 8);
+            
+            // Add member count text in center of collection nodes
+            node.each(function(d) {
+                if (d.ring === 'center') {
+                    const currentData = relationshipData[d.name] || {};
+                    if (currentData.type === 'collection') {
+                        const memberCount = (currentData.members || []).length;
+                        d3.select(this).append("text")
+                            .text(memberCount)
+                            .attr("dy", 4)
+                            .style("font-size", "14px")
+                            .style("font-weight", "bold")
+                            .style("fill", "white")
+                            .style("text-anchor", "middle")
+                            .style("text-shadow", "1px 1px 2px rgba(0,0,0,0.8)");
+                    }
+                }
+            });
 
             simulation.on("tick", () => {
                 link.attr("x1", d => d.source.x)
@@ -1336,7 +1418,6 @@
             window.addEventListener('resize', handleResize);
         }
 
-        // Start the application
         init();
     </script>
 </body>
