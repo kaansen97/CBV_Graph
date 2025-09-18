@@ -37,9 +37,10 @@
         .lang-btn { padding: 5px 10px; border: 1px solid #667eea; background: transparent; color: #667eea; border-radius: 3px; cursor: pointer; font-size: 12px; transition: all 0.3s ease; }
         .lang-btn.active, .lang-btn:hover { background: #667eea; color: white; }
 
-        #related-keywords-panel { top: 85px; left: 20px; max-width: 280px; max-height: 70vh; display: none; }
+        #related-keywords-panel { top: 85px; left: 20px; max-width: 280px; max-height: 70vh; display: none; overflow-y: auto; }
         #related-keywords-panel h3 { margin-top: 0; margin-bottom: 10px; font-size: 16px; color: #ff6b6b; border-bottom: 1px solid #ff6b6b; padding-bottom: 8px; }
         .relationship-section { margin-bottom: 15px; }
+        #related-content { max-height: calc(70vh - 60px); overflow-y: auto; }
         .relationship-title { font-size: 14px; font-weight: bold; margin-bottom: 5px; color: #4a90e2; }
         .relationship-title.broader { color: #ff8c42; }
         .relationship-title.narrower { color: #8a68cc; }
@@ -90,6 +91,7 @@
                 z-index: 1500;
                 overflow-y: auto;
             }
+            #related-content { max-height: calc(40vh - 60px); overflow-y: auto; }
             .search-panel { 
                 top: 10px; 
                 right: 10px; 
@@ -127,6 +129,7 @@
                 right: 5px;
                 width: calc(100% - 10px);
             }
+            #related-content { max-height: calc(35vh - 60px); overflow-y: auto; }
             .search-panel { 
                 min-width: 180px;
                 right: 5px;
@@ -714,6 +717,7 @@
             
             relationshipTypes.forEach(type => {
                 const list = document.getElementById(`${type}-list`);
+                const section = document.querySelector(`#${type}-list`).closest('.relationship-section');
                 const keywords = relationships[type] || [];
                 
                 if (keywords.length > 0) {
@@ -728,8 +732,9 @@
                             </div>
                         </li>`;
                     }).join('');
+                    section.style.display = 'block';
                 } else {
-                    list.innerHTML = '<li class="no-related">None found.</li>';
+                    section.style.display = 'none';
                 }
             });
             
@@ -738,6 +743,7 @@
             
             // Handle translations
             const translationList = document.getElementById('translation-list');
+            const translationSection = document.querySelector('#translation-list').closest('.relationship-section');
             const translations = relationships.translations || {};
             const translationItems = [];
             
@@ -756,8 +762,9 @@
                          ${term} (${lang.toUpperCase()}) 🌐
                      </a></li>`
                 ).join('');
+                translationSection.style.display = 'block';
             } else {
-                translationList.innerHTML = '<li class="no-related">None found.</li>';
+                translationSection.style.display = 'none';
             }
             
             // Show panel based on screen size
@@ -773,6 +780,7 @@
 
         function updateCollectionsList() {
             const collectionsList = document.getElementById('collections-list');
+            const collectionsSection = document.querySelector('#collections-list').closest('.relationship-section');
             const collections = [];
             
             // Find all collections from relationshipData
@@ -802,8 +810,9 @@
                         </div>
                     </li>`;
                 }).join('');
+                collectionsSection.style.display = 'block';
             } else {
-                collectionsList.innerHTML = '<li class="no-related">No collections found.</li>';
+                collectionsSection.style.display = 'none';
             }
         }
 
