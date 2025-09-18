@@ -75,14 +75,7 @@
             transform: rotate(45deg); 
         }
 
-        .info-panel { 
-            bottom: 20px; 
-            left: 50%; 
-            transform: translateX(-50%); 
-            max-width: 400px; 
-            font-size: 12px; 
-            text-align: center;
-        }
+
         
         /* Responsive design for small screens */
         @media (max-width: 768px) {
@@ -119,13 +112,7 @@
                 right: 10px; 
                 font-size: 11px;
             }
-            .info-panel { 
-                bottom: 10px; 
-                left: 50%; 
-                transform: translateX(-50%); 
-                max-width: calc(100% - 20px); 
-                font-size: 11px;
-            }
+
             .legend-item { margin-bottom: 4px; }
             .legend-color { width: 8px; height: 8px; }
             .legend-color.broader-shape, .legend-color.narrower-shape, .legend-color.diamond-shape { 
@@ -183,7 +170,10 @@
     </div>
 
     <div class="ui-panel search-panel">
-        <div class="current-topic" id="current-topic"></div>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+            <div class="current-topic" id="current-topic" style="margin-bottom: 0;"></div>
+            <a href="#" id="current-topic-cbv-link" target="_blank" style="color: #4ecdc4; text-decoration: none; font-size: 14px; display: none;" title="View current topic in CBV Source">🔗</a>
+        </div>
         <input type="text" class="search-input" id="search-input" placeholder="Search for a keyword..." autocomplete="off">
         <div class="search-suggestions" id="search-suggestions"></div>
         <div class="language-switcher">
@@ -252,19 +242,7 @@
         <div class="legend-item"><div class="legend-color" style="background: #3498db; border-radius: 50%;"></div><span>Collection Members</span></div>
     </div>
 
-    <div class="ui-panel info-panel" id="info-panel">
-        <span id="info-text">
-            <strong>CBV Keyword Explorer:</strong> Navigate through <span id="total-keywords">0</span> multilingual trade keywords and their relationships. Click any keyword to explore its connections.
-        </span>
-        <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2);">
-            <span style="font-size: 11px; color: #aaa;">
-                Want to discover more keywords? Visit source: 
-                <a href="https://cbv.cwr.wto.org/showvoc/#/home" target="_blank" style="color: #667eea; text-decoration: none;">
-                    cbv.cwr.wto.org 🔗
-                </a>
-            </span>
-        </div>
-    </div>
+
 
     <svg id="graph-container"></svg>
     <div class="tooltip" id="tooltip" style="display: none;"></div>
@@ -343,7 +321,6 @@
                 updateRelatedKeywordsPanel(currentKeyword);
                 updateLegend();
                 updateRelationshipTitles();
-                updateInfoPanel();
             }
             updateSearchPlaceholder();
             updateButtonTexts();
@@ -635,69 +612,7 @@
             }
         }
 
-        function updateInfoPanel() {
-            const infoTexts = getInfoTexts();
-            const totalKeywords = document.getElementById('total-keywords').textContent;
-            const infoPanel = document.getElementById('info-panel');
-            
-            let currentKeywordLink = '';
-            if (currentKeyword) {
-                const cbvURL = getCBVSourceURL(currentKeyword);
-                const displayLabel = getDisplayLabel(currentKeyword);
-                if (cbvURL) {
-                    currentKeywordLink = `
-                        <div style="margin: 8px 0; padding: 8px; background: rgba(78, 205, 196, 0.1); border-radius: 5px;">
-                            <strong>Current Topic:</strong> ${displayLabel}<br/>
-                            <a href="${cbvURL}" target="_blank" style="color: #4ecdc4; text-decoration: none; font-size: 13px;">
-                                🔗 View "${displayLabel}" in CBV Source
-                            </a>
-                        </div>
-                    `;
-                }
-            }
-            
-            infoPanel.innerHTML = `
-                <span id="info-text">
-                    <strong>${infoTexts.title}:</strong> ${infoTexts.description.replace('{count}', totalKeywords)} ${infoTexts.instruction}
-                </span>
-                ${currentKeywordLink}
-                <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2);">
-                    <span style="font-size: 11px; color: #aaa;">
-                        ${infoTexts.sourceText} 
-                        <a href="https://cbv.cwr.wto.org/showvoc/#/home" target="_blank" style="color: #667eea; text-decoration: none;">
-                            cbv.cwr.wto.org 🔗
-                        </a>
-                    </span>
-                </div>
-            `;
-        }
 
-        function getInfoTexts() {
-            switch(currentLanguage) {
-                case 'es':
-                    return {
-                        title: 'Explorador de Palabras Clave CBV',
-                        description: 'Navega a través de {count} palabras clave comerciales multilingües y sus relaciones.',
-                        instruction: 'Haz clic en cualquier palabra clave para explorar sus conexiones.',
-                        sourceText: '¿Quieres descubrir más palabras clave? Visita la fuente:'
-                    };
-                case 'fr':
-                    return {
-                        title: 'Explorateur de Mots-clés CBV',
-                        description: 'Naviguez à travers {count} mots-clés commerciaux multilingues et leurs relations.',
-                        instruction: 'Cliquez sur n\'importe quel mot-clé pour explorer ses connexions.',
-                        sourceText: 'Vous voulez découvrir plus de mots-clés? Visitez la source:'
-                    };
-                case 'en':
-                default:
-                    return {
-                        title: 'CBV Keyword Explorer',
-                        description: 'Navigate through {count} multilingual trade keywords and their relationships.',
-                        instruction: 'Click any keyword to explore its connections.',
-                        sourceText: 'Want to discover more keywords? Visit source:'
-                    };
-            }
-        }
 
         async function loadData() {
             try {
@@ -736,9 +651,6 @@
                 
                 // Sort keywords alphabetically
                 allKeywords.sort((a, b) => a.name.localeCompare(b.name));
-                
-                // Update info panel
-                document.getElementById('total-keywords').textContent = allKeywords.length.toLocaleString();
                 
                 return true;
             } catch (error) {
@@ -901,6 +813,17 @@
             const displayLabel = getDisplayLabel(keywordName);
             const topicText = getTopicText();
             document.getElementById('current-topic').textContent = `${topicText}: ${displayLabel}`;
+            
+            // Update CBV link for current topic
+            const cbvLink = document.getElementById('current-topic-cbv-link');
+            const cbvURL = getCBVSourceURL(keywordName);
+            if (cbvURL) {
+                cbvLink.href = cbvURL;
+                cbvLink.style.display = 'inline';
+            } else {
+                cbvLink.style.display = 'none';
+            }
+            
             currentKeyword = keywordName;
 
             const relationships = relationshipData[keywordName] || {
@@ -993,7 +916,6 @@
             const graph = { nodes, links };
             renderGraph(graph);
             updateRelatedKeywordsPanel(keywordName);
-            updateInfoPanel();
         }
 
         function getNodeColor(d) {
@@ -1331,10 +1253,31 @@
             
             // CBV source link is now in the info panel instead of tooltip
             
+            // Calculate tooltip position to avoid overflow
+            const tooltipWidth = 300; // max-width from CSS
+            const tooltipHeight = 150; // estimated height
+            let leftPos = event.pageX + 15;
+            let topPos = event.pageY - 15;
+            
+            // Adjust if tooltip would go off right edge
+            if (leftPos + tooltipWidth > window.innerWidth) {
+                leftPos = event.pageX - tooltipWidth - 15;
+            }
+            
+            // Adjust if tooltip would go off top edge
+            if (topPos < 0) {
+                topPos = event.pageY + 15;
+            }
+            
+            // Adjust if tooltip would go off bottom edge
+            if (topPos + tooltipHeight > window.innerHeight) {
+                topPos = window.innerHeight - tooltipHeight - 10;
+            }
+            
             tooltip.style("display", "block")
                 .html(content)
-                .style("left", (event.pageX + 15) + "px")
-                .style("top", (event.pageY - 15) + "px");
+                .style("left", leftPos + "px")
+                .style("top", topPos + "px");
         }
 
         function hideTooltip() { 
@@ -1369,7 +1312,6 @@
             
             // Initialize multilingual interface
             updateLegend();
-            updateInfoPanel();
             updateSearchPlaceholder();
             updateButtonTexts();
             
