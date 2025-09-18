@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CBV Keyword Graph Explorer</title>
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: 'Segoe UI', sans-serif; overflow: hidden; }
+        svg { width: 100%; height: 100%; background: radial-gradient(circle, #1a1a2e 0%, #16213e 100%); }
+        
+        .node { cursor: pointer; transition: opacity 0.3s ease; }
+        .node text { font-size: 12px; pointer-events: none; text-anchor: middle; fill: #fff; font-weight: 600; text-shadow: 1px 1px 2px rgba(0,0,0,0.7); }
+        
+        .link { stroke: rgba(255, 255, 255, 0.3); stroke-width: 2; transition: opacity 0.3s ease; }
+        .link.broader { stroke: rgba(255, 140, 66, 0.6); stroke-width: 2.5; }
+        .link.narrower { stroke: rgba(138, 104, 204, 0.6); stroke-width: 2.5; }
+        .link.related { stroke: rgba(74, 144, 226, 0.6); stroke-width: 2; }
+        
+        .tooltip { position: absolute; background: rgba(0, 0, 0, 0.9); color: white; padding: 12px; border-radius: 8px; font-size: 14px; pointer-events: none; z-index: 1000; max-width: 300px; border: 1px solid rgba(255,255,255,0.2); }
+        .tooltip .translations { font-size: 12px; color: #ccc; border-top: 1px solid #444; margin-top: 8px; padding-top: 8px; }
+        
+        .ui-panel { position: absolute; background: rgba(0, 0, 0, 0.8); color: white; padding: 15px; border-radius: 10px; z-index: 1000; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease; }
+        
+        .control-panel { top: 20px; left: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+        .control-panel button { background: #667eea; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; transition: background 0.3s ease; font-size: 12px; }
+        .control-panel button:hover { background: #764ba2; }
+        .toggle-panel-btn { display: none; }
+
+        .search-panel { top: 20px; right: 20px; min-width: 300px; }
+        .search-input { width: 100%; padding: 10px; border: none; border-radius: 5px; background: rgba(255, 255, 255, 0.9); color: #333; font-size: 14px; outline: none; box-sizing: border-box; }
+        .search-suggestions { max-height: 200px; overflow-y: auto; background: white; border-radius: 5px; margin-top: 5px; display: none; }
+        .suggestion-item { padding: 10px; cursor: pointer; color: #333; }
+        .suggestion-item:hover { background: #667eea; color: white; }
+        .current-topic { color: #4ecdc4; font-weight: bold; margin-bottom: 10px; font-size: 16px; }
+        
+        .language-switcher { margin-top: 10px; display: flex; gap: 5px; }
+        .lang-btn { padding: 5px 10px; border: 1px solid #667eea; background: transparent; color: #667eea; border-radius: 3px; cursor: pointer; font-size: 12px; transition: all 0.3s ease; }
+        .lang-btn.active, .lang-btn:hover { background: #667eea; color: white; }
+
+        #related-keywords-panel { top: 85px; left: 20px; max-width: 280px; max-height: 70vh; display: none; }
+        #related-keywords-panel h3 { margin-top: 0; margin-bottom: 10px; font-size: 16px; color: #ff6b6b; border-bottom: 1px solid #ff6b6b; padding-bottom: 8px; }
+        .relationship-section { margin-bottom: 15px; }
+        .relationship-title { font-size: 14px; font-weight: bold; margin-bottom: 5px; color: #4a90e2; }
+        .relationship-title.broader { color: #ff8c42; }
+        .relationship-title.narrower { color: #8a68cc; }
+        .relationship-title.related { color: #4a90e2; }
+        .relationship-title.translation { color: #95a5a6; }
+        .relationship-search { margin-bottom: 8px; }
+        .relationship-search input { width: 100%; padding: 4px 8px; border: 1px solid #555; border-radius: 3px; background: rgba(255, 255, 255, 0.9); color: #333; font-size: 12px; outline: none; box-sizing: border-box; }
+        .relationship-search input::placeholder { color: #666; font-size: 11px; }
+        #related-keywords-panel ul { list-style: none; padding: 0; margin: 0 0 10px 0; max-height: 120px; overflow-y: auto; }
+        #related-keywords-panel li a { color: #eee; text-decoration: none; display: block; padding: 6px; border-radius: 3px; transition: background 0.2s ease; font-size: 13px; }
+        #related-keywords-panel li a:hover { background: #667eea; }
+        #translation-list li a { color: #95a5a6 !important; transition: all 0.2s ease; }
+        #translation-list li a:hover { background: #667eea !important; color: white !important; }
+        #related-keywords-panel .no-related { color: #888; font-style: italic; font-size: 12px; }
+        #related-keywords-panel li.hidden { display: none; }
+
+        #legend { bottom: 20px; right: 20px; }
+        .legend-item { display: flex; align-items: center; margin-bottom: 8px; }
+        .legend-color { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
+        .legend-color.broader-shape { 
+            border-radius: 0; 
+            transform: rotate(45deg); 
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%); 
+        }
+        .legend-color.narrower-shape { 
+            border-radius: 0; 
+            transform: rotate(-135deg); 
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%); 
+        }
+        .legend-color.diamond-shape { 
+            border-radius: 0; 
+            transform: rotate(45deg); 
+        }
+
+        .info-panel { bottom: 20px; left: 20px; max-width: 300px; font-size: 12px; }
+        
+        /* Responsive design for small screens */
+        @media (max-width: 768px) {
+            #related-keywords-panel { 
+                position: fixed; 
+                top: 10px; 
+                left: 10px; 
+                right: 10px; 
+                max-width: none; 
+                width: calc(100% - 20px);
+                max-height: 40vh; 
+                z-index: 1500;
+                overflow-y: auto;
+            }
+            .search-panel { 
+                top: 10px; 
+                right: 10px; 
+                min-width: 250px; 
+                max-width: calc(100% - 20px);
+            }
+            .control-panel { 
+                top: 10px; 
+                left: 10px; 
+                z-index: 1600;
+            }
+            .toggle-panel-btn { 
+                display: inline-block !important; 
+            }
+            .close-panel-btn {
+                display: inline-block !important;
+            }
+            #legend { 
+                bottom: 10px; 
+                right: 10px; 
+                font-size: 11px;
+            }
+            .info-panel { 
+                bottom: 10px; 
+                left: 10px; 
+                max-width: calc(100% - 20px); 
+                font-size: 11px;
+            }
+            .legend-item { margin-bottom: 4px; }
+            .legend-color { width: 8px; height: 8px; }
+            .legend-color.broader-shape, .legend-color.narrower-shape, .legend-color.diamond-shape { 
+                width: 10px; height: 10px; 
+            }
+        }
+        
+        @media (max-width: 480px) {
+            #related-keywords-panel { 
+                max-height: 35vh;
+                left: 5px;
+                right: 5px;
+                width: calc(100% - 10px);
+            }
+            .search-panel { 
+                min-width: 180px;
+                right: 5px;
+                top: 5px;
+            }
+            .control-panel {
+                left: 5px;
+                top: 5px;
+            }
+            #related-keywords-panel h3 { 
+                font-size: 14px; 
+                margin-bottom: 8px;
+            }
+            .relationship-title { 
+                font-size: 12px; 
+            }
+            #related-keywords-panel li a { 
+                font-size: 12px; 
+                padding: 4px;
+            }
+            .relationship-search input { 
+                font-size: 11px; 
+                padding: 3px 6px;
+            }
+            .current-topic {
+                font-size: 14px;
+            }
+            .search-input {
+                font-size: 13px;
+                padding: 8px;
+            }
+        }
+    </style>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <!-- UI Panels -->
+    <div class="ui-panel control-panel">
+        <button onclick="window.location.href='index.html'">🏠 Main Menu</button>
+        <button class="toggle-panel-btn" onclick="toggleRelatedPanel()">📋 Relations</button>
+    </div>
+
+    <div class="ui-panel search-panel">
+        <div class="current-topic" id="current-topic"></div>
+        <input type="text" class="search-input" id="search-input" placeholder="Search for a keyword..." autocomplete="off">
+        <div class="search-suggestions" id="search-suggestions"></div>
+        <div class="language-switcher">
+            <button class="lang-btn active" onclick="switchLanguage('en')" data-lang="en">EN</button>
+            <button class="lang-btn" onclick="switchLanguage('fr')" data-lang="fr">FR</button>
+            <button class="lang-btn" onclick="switchLanguage('es')" data-lang="es">ES</button>
+        </div>
+    </div>
+
+    <div class="ui-panel" id="related-keywords-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 id="panel-main-title" style="margin: 0;">Related Topics</h3>
+            <button onclick="toggleRelatedPanel()" style="display: none; background: transparent; border: none; color: white; font-size: 18px; cursor: pointer; padding: 0;" class="close-panel-btn">×</button>
+        </div>
+        <div id="related-content">
+            <div class="relationship-section">
+                <div class="relationship-title broader" id="broader-title">▲ Broader Topics</div>
+                <div class="relationship-search">
+                    <input type="text" placeholder="Search broader topics..." onkeyup="filterRelationshipList('broader', this.value)">
+                </div>
+                <ul id="broader-list"></ul>
+            </div>
+            <div class="relationship-section">
+                <div class="relationship-title narrower" id="narrower-title">▼ Narrower Topics</div>
+                <div class="relationship-search">
+                    <input type="text" placeholder="Search narrower topics..." onkeyup="filterRelationshipList('narrower', this.value)">
+                </div>
+                <ul id="narrower-list"></ul>
+            </div>
+            <div class="relationship-section">
+                <div class="relationship-title related" id="related-title">◆ Related Topics</div>
+                <div class="relationship-search">
+                    <input type="text" placeholder="Search related topics..." onkeyup="filterRelationshipList('related', this.value)">
+                </div>
+                <ul id="related-list"></ul>
+            </div>
+            <div class="relationship-section">
+                <div class="relationship-title translation" id="translation-title">◎ Translations</div>
+                <div class="relationship-search">
+                    <input type="text" placeholder="Search translations..." onkeyup="filterRelationshipList('translation', this.value)">
+                </div>
+                <ul id="translation-list"></ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui-panel" id="legend">
+        <div class="legend-item"><div class="legend-color" style="background: #ff6b6b; border-radius: 50%;"></div><span>Central Topic</span></div>
+        <div class="legend-item"><div class="legend-color narrower-shape" style="background: #8a68cc;"></div><span>Narrower Terms</span></div>
+        <div class="legend-item"><div class="legend-color broader-shape" style="background: #ff8c42;"></div><span>Broader Terms</span></div>
+        <div class="legend-item"><div class="legend-color diamond-shape" style="background: #4a90e2;"></div><span>Related Terms</span></div>
+    </div>
+
+    <div class="ui-panel info-panel" id="info-panel">
+        <span id="info-text">
+            <strong>CBV Keyword Explorer:</strong> Navigate through <span id="total-keywords">0</span> multilingual trade keywords and their relationships. Click any keyword to explore its connections.
+        </span>
+        <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2);">
+            <span style="font-size: 11px; color: #aaa;">
+                Want to discover more keywords? Visit source: 
+                <a href="https://cbv.cwr.wto.org/showvoc/#/home" target="_blank" style="color: #667eea; text-decoration: none;">
+                    cbv.cwr.wto.org 🔗
+                </a>
+            </span>
+        </div>
+    </div>
+
+    <svg id="graph-container"></svg>
+    <div class="tooltip" id="tooltip" style="display: none;"></div>
+
+    <script>
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        const svg = d3.select("#graph-container");
+        const g = svg.append("g");
+        const tooltip = d3.select("#tooltip");
+        
+        let simulation = null, allKeywords = [], keywordData = {}, relationshipData = {}, currentKeyword = '', currentLanguage = 'en';
+        let isRelatedPanelVisible = false;
+
+        // Toggle related topics panel on small screens
+        function toggleRelatedPanel() {
+            const panel = document.getElementById('related-keywords-panel');
+            if (panel.style.display === 'none' || panel.style.display === '') {
+                panel.style.display = 'block';
+                isRelatedPanelVisible = true;
+            } else {
+                panel.style.display = 'none';
+                isRelatedPanelVisible = false;
+            }
+        }
+
+        // Handle window resize
+        function handleResize() {
+            const panel = document.getElementById('related-keywords-panel');
+            if (window.innerWidth > 768) {
+                // Desktop: show panel if there's content
+                if (currentKeyword && panel.innerHTML.trim()) {
+                    panel.style.display = 'block';
+                }
+            } else {
+                // Mobile: only show if user toggled it on
+                if (!isRelatedPanelVisible) {
+                    panel.style.display = 'none';
+                }
+            }
+        }
+
+        // Initialize language based on browser settings
+        function initializeLanguage() {
+            const browserLang = navigator.language || navigator.languages[0] || 'en';
+            const langCode = browserLang.toLowerCase().split('-')[0];
+            
+            if (['en', 'fr', 'es'].includes(langCode)) {
+                currentLanguage = langCode;
+            } else {
+                currentLanguage = 'en'; 
+            }
+            
+            // Update the active language button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === currentLanguage);
+            });
+        }
+
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            
+            if (currentKeyword) {
+                // Update the current topic display
+                const displayLabel = getDisplayLabel(currentKeyword);
+                const topicText = getTopicText();
+                document.getElementById('current-topic').textContent = `${topicText}: ${displayLabel}`;
+                
+                // Update the graph node labels
+                updateGraphLabels();
+                
+                updateRelatedKeywordsPanel(currentKeyword);
+                updateLegend();
+                updateRelationshipTitles();
+                updateInfoPanel();
+            }
+            updateSearchPlaceholder();
+            updateButtonTexts();
+        }
+
+        function updateGraphLabels() {
+            // Update all node text labels to show translated versions
+            g.selectAll('.node text')
+                .text(d => getDisplayLabel(d.name));
+        }
+
+        function switchToTranslation(translatedTerm, targetLang) {
+            // Switch to the target language
+            switchLanguage(targetLang);
+            
+            // Find the English keyword that has this translation
+            const englishKeyword = findEnglishKeywordByTranslation(translatedTerm, targetLang);
+            
+            if (englishKeyword) {
+                navigateToTopic(englishKeyword);
+            } else {
+                // If not found, try to navigate directly (might be the English term)
+                navigateToTopic(translatedTerm);
+            }
+        }
+
+        function findEnglishKeywordByTranslation(translatedTerm, targetLang) {
+            // Search through all keywords to find which English keyword has this translation
+            for (const englishKeyword in keywordData) {
+                const keywordInfo = keywordData[englishKeyword];
+                if (keywordInfo && keywordInfo.labels && keywordInfo.labels[targetLang]) {
+                    const translations = keywordInfo.labels[targetLang].pref || [];
+                    if (translations.includes(translatedTerm)) {
+                        return englishKeyword;
+                    }
+                }
+            }
+            return null;
+        }
+
+        // Function to update legend text based on selected language
+        function updateLegend() {
+            const legendTexts = getLegendTexts();
+            const legendItems = document.querySelectorAll('#legend .legend-item span');
+            
+            if (legendItems.length >= 4) {
+                legendItems[0].textContent = legendTexts.centralTopic;
+                legendItems[1].textContent = legendTexts.narrowerTerms;
+                legendItems[2].textContent = legendTexts.broaderTerms;
+                legendItems[3].textContent = legendTexts.relatedTerms;
+            }
+        }
+
+        // Function to get legend text in the selected language
+        function getLegendTexts() {
+            switch(currentLanguage) {
+                case 'es':
+                    return {
+                        centralTopic: 'Tema Central',
+                        narrowerTerms: 'Términos más específicos',
+                        broaderTerms: 'Términos más amplios',
+                        relatedTerms: 'Términos relacionados'
+                    };
+                case 'fr':
+                    return {
+                        centralTopic: 'Sujet Central',
+                        narrowerTerms: 'Termes plus spécifiques',
+                        broaderTerms: 'Termes plus larges',
+                        relatedTerms: 'Termes connexes'
+                    };
+                case 'en':
+                default:
+                    return {
+                        centralTopic: 'Central Topic',
+                        narrowerTerms: 'Narrower Terms',
+                        broaderTerms: 'Broader Terms',
+                        relatedTerms: 'Related Terms'
+                    };
+            }
+        }
+
+        function updateRelationshipTitles() {
+            const titles = getRelationshipTitles();
+            const placeholders = getSearchPlaceholders();
+            
+            document.getElementById('panel-main-title').textContent = titles.mainTitle;
+            
+            // Update all relationship section titles
+            document.getElementById('broader-title').textContent = titles.broader;
+            document.getElementById('narrower-title').textContent = titles.narrower;
+            document.getElementById('related-title').textContent = titles.related;
+            document.getElementById('translation-title').textContent = titles.translation;
+            
+            // Update search placeholders
+            const searchInputs = document.querySelectorAll('.relationship-search input');
+            const types = ['broader', 'narrower', 'related', 'translation'];
+            searchInputs.forEach((input, index) => {
+                if (types[index]) {
+                    input.placeholder = placeholders[types[index]];
+                }
+            });
+        }
+
+        // Function to get relationship titles in the selected language
+        function getRelationshipTitles() {
+            switch(currentLanguage) {
+                case 'es':
+                    return {
+                        mainTitle: 'Temas Relacionados',
+                        broader: '▲ Términos más amplios',
+                        narrower: '▼ Términos más específicos',
+                        related: '◆ Términos relacionados',
+                        translation: '◎ Traducciones'
+                    };
+                case 'fr':
+                    return {
+                        mainTitle: 'Sujets Connexes',
+                        broader: '▲ Termes plus larges',
+                        narrower: '▼ Termes plus spécifiques',
+                        related: '◆ Termes connexes',
+                        translation: '◎ Traductions'
+                    };
+                case 'en':
+                default:
+                    return {
+                        mainTitle: 'Related Topics',
+                        broader: '▲ Broader Topics',
+                        narrower: '▼ Narrower Topics',
+                        related: '◆ Related Topics',
+                        translation: '◎ Translations'
+                    };
+            }
+        }
+
+        // Function to get search placeholders in the selected language
+        function getSearchPlaceholders() {
+            switch(currentLanguage) {
+                case 'es':
+                    return {
+                        broader: 'Buscar términos más amplios...',
+                        narrower: 'Buscar términos más específicos...',
+                        related: 'Buscar términos relacionados...',
+                        translation: 'Buscar traducciones...'
+                    };
+                case 'fr':
+                    return {
+                        broader: 'Rechercher des termes plus larges...',
+                        narrower: 'Rechercher des termes plus spécifiques...',
+                        related: 'Rechercher des termes connexes...',
+                        translation: 'Rechercher des traductions...'
+                    };
+                case 'en':
+                default:
+                    return {
+                        broader: 'Search broader topics...',
+                        narrower: 'Search narrower topics...',
+                        related: 'Search related topics...',
+                        translation: 'Search translations...'
+                    };
+            }
+        }
+
+        function updateButtonTexts() {
+            const buttonTexts = getButtonTexts();
+            // Update main menu button
+            const mainMenuBtn = document.querySelector('button[onclick="window.location.href=\'index.html\'"]');
+            if (mainMenuBtn) {
+                mainMenuBtn.innerHTML = `🏠 ${buttonTexts.mainMenu}`;
+            }
+            
+            const relationsBtn = document.querySelector('button[onclick="toggleRelatedPanel()"]');
+            if (relationsBtn && relationsBtn.classList.contains('toggle-panel-btn')) {
+                relationsBtn.innerHTML = `📋 ${buttonTexts.relations}`;
+            }
+        }
+
+        function getButtonTexts() {
+            switch(currentLanguage) {
+                case 'es':
+                    return {
+                        mainMenu: 'Menú Principal',
+                        relations: 'Relaciones'
+                    };
+                case 'fr':
+                    return {
+                        mainMenu: 'Menu Principal',
+                        relations: 'Relations'
+                    };
+                case 'en':
+                default:
+                    return {
+                        mainMenu: 'Main Menu',
+                        relations: 'Relations'
+                    };
+            }
+        }
+
+        function updateSearchPlaceholder() {
+            const placeholders = getMainSearchPlaceholders();
+            document.getElementById('search-input').placeholder = placeholders.search;
+        }
+
+        function getMainSearchPlaceholders() {
+            switch(currentLanguage) {
+                case 'es':
+                    return {
+                        search: 'Buscar una palabra clave...'
+                    };
+                case 'fr':
+                    return {
+                        search: 'Rechercher un mot-clé...'
+                    };
+                case 'en':
+                default:
+                    return {
+                        search: 'Search for a keyword...'
+                    };
+            }
+        }
+
+        function getTopicText() {
+            switch(currentLanguage) {
+                case 'es':
+                    return 'Tema';
+                case 'fr':
+                    return 'Sujet';
+                case 'en':
+                default:
+                    return 'Topic';
+            }
+        }
+
+        function getTooltipTexts() {
+            switch(currentLanguage) {
+                case 'es':
+                    return {
+                        centralTopic: 'Tema central de esta visualización',
+                        broader: 'más amplios',
+                        narrower: 'más específicos',
+                        related: 'relacionados',
+                        broaderTerm: 'Término más amplio',
+                        narrowerTerm: 'Término más específico',
+                        relatedTerm: 'Término relacionado',
+                        clickToExplore: 'Haz clic para explorar este tema',
+                        hasChildren: 'Tiene términos hijos',
+                        hasSiblings: 'Términos hermanos'
+                    };
+                case 'fr':
+                    return {
+                        centralTopic: 'Sujet central de cette visualisation',
+                        broader: 'plus larges',
+                        narrower: 'plus spécifiques',
+                        related: 'connexes',
+                        broaderTerm: 'Terme plus large',
+                        narrowerTerm: 'Terme plus spécifique',
+                        relatedTerm: 'Terme connexe',
+                        clickToExplore: 'Cliquez pour explorer ce sujet',
+                        hasChildren: 'A des termes enfants',
+                        hasSiblings: 'Termes frères'
+                    };
+                case 'en':
+                default:
+                    return {
+                        centralTopic: 'Central topic of this visualization',
+                        broader: 'broader',
+                        narrower: 'narrower',
+                        related: 'related',
+                        broaderTerm: 'Broader term',
+                        narrowerTerm: 'Narrower term',
+                        relatedTerm: 'Related term',
+                        clickToExplore: 'Click to explore this topic',
+                        hasChildren: 'Has child terms',
+                        hasSiblings: 'Sibling terms'
+                    };
+            }
+        }
+
+        function updateInfoPanel() {
+            const infoTexts = getInfoTexts();
+            const totalKeywords = document.getElementById('total-keywords').textContent;
+            const infoPanel = document.getElementById('info-panel');
+            
+            infoPanel.innerHTML = `
+                <span id="info-text">
+                    <strong>${infoTexts.title}:</strong> ${infoTexts.description.replace('{count}', totalKeywords)} ${infoTexts.instruction}
+                </span>
+                <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2);">
+                    <span style="font-size: 11px; color: #aaa;">
+                        ${infoTexts.sourceText} 
+                        <a href="https://cbv.cwr.wto.org/showvoc/#/home" target="_blank" style="color: #667eea; text-decoration: none;">
+                            cbv.cwr.wto.org 🔗
+                        </a>
+                    </span>
+                </div>
+            `;
+        }
+
+        function getInfoTexts() {
+            switch(currentLanguage) {
+                case 'es':
+                    return {
+                        title: 'Explorador de Palabras Clave CBV',
+                        description: 'Navega a través de {count} palabras clave comerciales multilingües y sus relaciones.',
+                        instruction: 'Haz clic en cualquier palabra clave para explorar sus conexiones.',
+                        sourceText: '¿Quieres descubrir más palabras clave? Visita la fuente:'
+                    };
+                case 'fr':
+                    return {
+                        title: 'Explorateur de Mots-clés CBV',
+                        description: 'Naviguez à travers {count} mots-clés commerciaux multilingues et leurs relations.',
+                        instruction: 'Cliquez sur n\'importe quel mot-clé pour explorer ses connexions.',
+                        sourceText: 'Vous voulez découvrir plus de mots-clés? Visitez la source:'
+                    };
+                case 'en':
+                default:
+                    return {
+                        title: 'CBV Keyword Explorer',
+                        description: 'Navigate through {count} multilingual trade keywords and their relationships.',
+                        instruction: 'Click any keyword to explore its connections.',
+                        sourceText: 'Want to discover more keywords? Visit source:'
+                    };
+            }
+        }
+
+        async function loadData() {
+            try {
+                // Load unified CBV data file
+                const cbvDataResponse = await fetch('cbv_data.json');
+                const cbvData = await cbvDataResponse.json();
+                
+                // Extract data from unified structure
+                keywordData = {};
+                relationshipData = {};
+                allKeywords = [];
+                
+                for (const [keyword, data] of Object.entries(cbvData)) {
+                    // Extract keyword information (labels, URI)
+                    keywordData[keyword] = {
+                        uri: data.uri,
+                        labels: data.labels
+                    };
+                    
+                    // Extract relationship information
+                    relationshipData[keyword] = {
+                        broader: data.broader || [],
+                        narrower: data.narrower || [],
+                        related: data.related || [],
+                        translations: data.translations || {}
+                    };
+                    
+                    // Create keyword list entry
+                    allKeywords.push({
+                        name: keyword,
+                        labels: data.labels
+                    });
+                }
+                
+                // Sort keywords alphabetically
+                allKeywords.sort((a, b) => a.name.localeCompare(b.name));
+                
+                // Update info panel
+                document.getElementById('total-keywords').textContent = allKeywords.length.toLocaleString();
+                
+                console.log(`Loaded ${allKeywords.length} keywords with relationships from unified data file`);
+                return true;
+            } catch (error) {
+                console.error('Error loading data:', error);
+                return false;
+            }
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('search-input');
+            const suggestions = document.getElementById('search-suggestions');
+            
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase().trim();
+                if (!query) { 
+                    suggestions.style.display = 'none'; 
+                    return; 
+                }
+                
+                const filtered = allKeywords.filter(k => 
+                    k.name.toLowerCase().includes(query)
+                ).slice(0, 8);
+                
+                suggestions.innerHTML = filtered.map(k => 
+                    `<div class="suggestion-item" onclick="navigateToTopic('${k.name}')">${k.name}</div>`
+                ).join('');
+                suggestions.style.display = 'block';
+            });
+            
+            document.addEventListener('click', (e) => { 
+                if (!e.target.closest('.search-panel')) {
+                    suggestions.style.display = 'none'; 
+                }
+            });
+        }
+        
+        function navigateToTopic(topicName) {
+            document.getElementById('search-input').value = '';
+            document.getElementById('search-suggestions').style.display = 'none';
+            const newUrl = `?keyword=${encodeURIComponent(topicName)}`;
+            window.history.pushState({topic: topicName}, '', newUrl);
+            drawGraph(topicName);
+        }
+
+
+
+        async function updateRelatedKeywordsPanel(keyword) {
+            const panel = document.getElementById('related-keywords-panel');
+            
+            const relationships = relationshipData[keyword] || {
+                broader: [],
+                narrower: [],
+                related: [],
+                translations: {}
+            };
+            
+            updateRelationshipTitles();
+            
+            const relationshipTypes = ['broader', 'narrower', 'related'];
+            
+            relationshipTypes.forEach(type => {
+                const list = document.getElementById(`${type}-list`);
+                const keywords = relationships[type] || [];
+                
+                if (keywords.length > 0) {
+                    const sortedKeywords = keywords.sort((a, b) => a.localeCompare(b));
+                    list.innerHTML = sortedKeywords.map(item => {
+                        const displayLabel = getDisplayLabel(item);
+                        return `<li><a href="#" onclick="navigateToTopic('${item}'); return false;">${displayLabel}</a></li>`;
+                    }).join('');
+                } else {
+                    list.innerHTML = '<li class="no-related">None found.</li>';
+                }
+            });
+            
+            // Handle translations
+            const translationList = document.getElementById('translation-list');
+            const translations = relationships.translations || {};
+            const translationItems = [];
+            
+            Object.entries(translations).forEach(([lang, terms]) => {
+                if (Array.isArray(terms) && terms.length > 0) {
+                    terms.forEach(term => {
+                        translationItems.push({term, lang});
+                    });
+                }
+            });
+            
+            if (translationItems.length > 0) {
+                translationList.innerHTML = translationItems.map(({term, lang}) => 
+                    `<li><a href="#" onclick="switchToTranslation('${term}', '${lang}'); return false;" 
+                         style="color: #95a5a6; text-decoration: none; cursor: pointer;">
+                         ${term} (${lang.toUpperCase()}) 🌐
+                     </a></li>`
+                ).join('');
+            } else {
+                translationList.innerHTML = '<li class="no-related">None found.</li>';
+            }
+            
+            // Show panel based on screen size
+            if (window.innerWidth > 768) {
+                panel.style.display = 'block';
+                isRelatedPanelVisible = true;
+            } else {
+                if (isRelatedPanelVisible) {
+                    panel.style.display = 'block';
+                }
+            }
+        }
+
+        function drawGraph(keywordName) {
+            if (simulation) simulation.stop();
+            g.selectAll("*").remove();
+            const displayLabel = getDisplayLabel(keywordName);
+            const topicText = getTopicText();
+            document.getElementById('current-topic').textContent = `${topicText}: ${displayLabel}`;
+            currentKeyword = keywordName;
+
+            const relationships = relationshipData[keywordName] || {
+                broader: [],
+                narrower: [],
+                related: []
+            };
+
+            // Create nodes
+            const nodes = [];
+            const links = [];
+            
+            // Central node
+            nodes.push({
+                id: keywordName,
+                name: keywordName,
+                type: 'central',
+                ring: 'center'
+            });
+            
+            // Narrower terms (inner ring)
+            relationships.narrower.forEach(term => {
+                if (relationshipData[term]) {
+                    nodes.push({
+                        id: term,
+                        name: term,
+                        type: 'narrower',
+                        ring: 'inner'
+                    });
+                    links.push({
+                        source: keywordName,
+                        target: term,
+                        type: 'narrower'
+                    });
+                }
+            });
+            
+            // Broader terms (outer ring)
+            relationships.broader.forEach(term => {
+                if (relationshipData[term]) {
+                    nodes.push({
+                        id: term,
+                        name: term,
+                        type: 'broader',
+                        ring: 'outer'
+                    });
+                    links.push({
+                        source: keywordName,
+                        target: term,
+                        type: 'broader'
+                    });
+                }
+            });
+            
+            // Related terms (outer ring, different color)
+            relationships.related.forEach(term => {
+                if (relationshipData[term] && !nodes.find(n => n.id === term)) {
+                    nodes.push({
+                        id: term,
+                        name: term,
+                        type: 'related',
+                        ring: 'outer'
+                    });
+                    links.push({
+                        source: keywordName,
+                        target: term,
+                        type: 'related'
+                    });
+                }
+            });
+
+            const graph = { nodes, links };
+            renderGraph(graph);
+            updateRelatedKeywordsPanel(keywordName);
+        }
+
+        function getNodeColor(d) {
+            if (d.ring === 'center') return '#ff6b6b';  // Red for central topic
+            if (d.type === 'narrower') return '#8a68cc'; // Purple for narrower terms
+            if (d.type === 'broader') return '#ff8c42';  // Orange for broader terms
+            if (d.type === 'related') return '#4a90e2';  // Blue for related terms
+            return '#8a68cc';
+        }
+
+        function getNodeRadius(d) {
+            if (d.ring === 'center') return 25;
+            return 12;
+        }
+
+        function getDisplayLabel(keywordName) {
+            // If current language is English, return the original name
+            if (currentLanguage === 'en') {
+                return keywordName;
+            }
+            
+            // Try to get translation for the current language
+            const keywordInfo = keywordData[keywordName];
+            if (keywordInfo && keywordInfo.labels && keywordInfo.labels[currentLanguage]) {
+                const translations = keywordInfo.labels[currentLanguage].pref || [];
+                if (translations.length > 0) {
+                    return translations[0]; // Use the first preferred translation
+                }
+            }
+            
+            // Fallback to original English name
+            return keywordName;
+        }
+
+        function renderGraph(graph) {
+            const centerNode = graph.nodes.find(n => n.ring === 'center');
+            const innerNodes = graph.nodes.filter(n => n.ring === 'inner');
+            const outerNodes = graph.nodes.filter(n => n.ring === 'outer');
+
+            const innerRadius = Math.min(width, height) * 0.2;
+            const outerRadius = Math.min(width, height) * 0.35;
+
+            // Position nodes
+            if (centerNode) { 
+                centerNode.fx = width / 2; 
+                centerNode.fy = height / 2; 
+            }
+            
+            innerNodes.forEach((node, i) => {
+                const angle = (i / innerNodes.length) * 2 * Math.PI;
+                node.fx = width / 2 + innerRadius * Math.cos(angle);
+                node.fy = height / 2 + innerRadius * Math.sin(angle);
+            });
+            
+            outerNodes.forEach((node, i) => {
+                const angle = (i / outerNodes.length) * 2 * Math.PI;
+                node.fx = width / 2 + outerRadius * Math.cos(angle);
+                node.fy = height / 2 + outerRadius * Math.sin(angle);
+            });
+
+            simulation = d3.forceSimulation(graph.nodes)
+                .force("link", d3.forceLink(graph.links).id(d => d.id).strength(0.6))
+                .force("charge", d3.forceManyBody().strength(-150))
+                .force("center", d3.forceCenter(width / 2, height / 2))
+                .force("collision", d3.forceCollide().radius(d => getNodeRadius(d) + 15));
+
+            const link = g.append("g").selectAll("line")
+                .data(graph.links)
+                .join("line")
+                .attr("class", d => `link ${d.type}`)
+                .attr("stroke-width", d => d.type === 'broader' || d.type === 'narrower' ? 2.5 : 2);
+            
+            const node = g.append("g").selectAll("g")
+                .data(graph.nodes)
+                .join("g")
+                .attr("class", "node")
+                .call(d3.drag()
+                    .on("start", dragstarted)
+                    .on("drag", dragged)
+                    .on("end", dragended))
+                .on("click", (event, d) => { 
+                    if (d.ring !== 'center') {
+                        navigateToTopic(d.name);
+                    }
+                })
+                .on("mouseover", (event, d) => { showTooltip(event, d); highlightRelated(d); })
+                .on("mouseout", () => { hideTooltip(); resetHighlight(); });
+
+            // Add shapes based on node type
+            node.each(function(d) {
+                const nodeElement = d3.select(this);
+                const radius = getNodeRadius(d);
+                const color = getNodeColor(d);
+                
+                if (d.ring === 'center') {
+                    // Central topic: circle
+                    nodeElement.append("circle")
+                        .attr("r", radius)
+                        .attr("fill", color);
+                } else if (d.type === 'broader') {
+                    // Broader terms: upward triangle
+                    const size = radius * 1.4;
+                    nodeElement.append("polygon")
+                        .attr("points", `0,${-size} ${size*0.866},${size*0.5} ${-size*0.866},${size*0.5}`)
+                        .attr("fill", color);
+                } else if (d.type === 'narrower') {
+                    // Narrower terms: downward triangle
+                    const size = radius * 1.4;
+                    nodeElement.append("polygon")
+                        .attr("points", `0,${size} ${size*0.866},${-size*0.5} ${-size*0.866},${-size*0.5}`)
+                        .attr("fill", color);
+                } else if (d.type === 'related') {
+                    // Related terms: diamond
+                    const size = radius * 1.2;
+                    nodeElement.append("polygon")
+                        .attr("points", `0,${-size} ${size},0 0,${size} ${-size},0`)
+                        .attr("fill", color);
+                }
+            });
+            
+            node.append("text")
+                .text(d => getDisplayLabel(d.name))
+                .attr("dy", d => -getNodeRadius(d) - 8);
+
+            simulation.on("tick", () => {
+                link.attr("x1", d => d.source.x)
+                    .attr("y1", d => d.source.y)
+                    .attr("x2", d => d.target.x)
+                    .attr("y2", d => d.target.y);
+                node.attr("transform", d => `translate(${d.x},${d.y})`);
+            });
+        }
+        
+        function dragstarted(event, d) { 
+            if (!event.active) simulation.alphaTarget(0.3).restart(); 
+            d.fx = d.x; 
+            d.fy = d.y; 
+        }
+        
+        function dragged(event, d) { 
+            d.fx = event.x; 
+            d.fy = event.y; 
+        }
+        
+        function dragended(event, d) { 
+            if (!event.active) simulation.alphaTarget(0); 
+            d.fx = event.x; 
+            d.fy = event.y; 
+        }
+
+        function highlightRelated(d) {
+            // Dim all elements
+            g.selectAll('.node').style('opacity', 0.2);
+            g.selectAll('.link').style('opacity', 0.1);
+            
+            // Always highlight the hovered node
+            g.selectAll('.node').filter(nodeData => nodeData.id === d.id)
+                .style('opacity', 1);
+            
+            if (d.type === 'narrower') {
+                // If hovering over a narrower term, highlight all narrower terms of the central topic (siblings)
+                const currentRelationships = relationshipData[currentKeyword] || {};
+                const allNarrowerTerms = currentRelationships.narrower || [];
+                
+                // Highlight all narrower terms (siblings)
+                g.selectAll('.node').filter(nodeData => 
+                    allNarrowerTerms.includes(nodeData.id)
+                ).style('opacity', 1);
+                
+                // Highlight the central topic (parent)
+                g.selectAll('.node').filter(nodeData => nodeData.id === currentKeyword)
+                    .style('opacity', 1);
+                
+                // Highlight links from central to all narrower terms
+                g.selectAll('.link').filter(linkData => 
+                    linkData.source.id === currentKeyword && 
+                    allNarrowerTerms.includes(linkData.target.id)
+                ).style('opacity', 1);
+                
+            } else if (d.type === 'broader') {
+                // If hovering over a broader term, highlight all its children that are visible in the scene
+                const hoveredNodeRelationships = relationshipData[d.id] || {};
+                const childrenOfBroader = hoveredNodeRelationships.narrower || [];
+                
+                // Get all visible nodes in the current graph
+                const visibleNodeIds = new Set();
+                g.selectAll('.node').each(function(nodeData) {
+                    visibleNodeIds.add(nodeData.id);
+                });
+                
+                // Highlight all children of this broader term that are visible on the graph
+                const visibleChildren = childrenOfBroader.filter(childId => visibleNodeIds.has(childId));
+                
+                g.selectAll('.node').filter(nodeData => 
+                    visibleChildren.includes(nodeData.id)
+                ).style('opacity', 1);
+                
+                // Highlight links from broader term to its visible children
+                g.selectAll('.link').filter(linkData => 
+                    linkData.source.id === d.id && 
+                    visibleChildren.includes(linkData.target.id)
+                ).style('opacity', 1);
+                
+                // Also highlight links from children to broader term (reverse direction)
+                g.selectAll('.link').filter(linkData => 
+                    linkData.target.id === d.id && 
+                    visibleChildren.includes(linkData.source.id)
+                ).style('opacity', 1);
+                
+            } else if (d.type === 'related') {
+                // For related terms, show direct connections
+                g.selectAll('.link').filter(linkData => 
+                    linkData.source.id === d.id || linkData.target.id === d.id
+                ).style('opacity', 1);
+                
+                g.selectAll('.node').filter(nodeData => {
+                    const isConnected = g.selectAll('.link').data().some(linkData => 
+                        (linkData.source.id === d.id && linkData.target.id === nodeData.id) ||
+                        (linkData.target.id === d.id && linkData.source.id === nodeData.id)
+                    );
+                    return isConnected;
+                }).style('opacity', 1);
+                
+            } else if (d.ring === 'center') {
+                // For central topic, highlight all direct connections
+                g.selectAll('.link').filter(linkData => 
+                    linkData.source.id === d.id || linkData.target.id === d.id
+                ).style('opacity', 1);
+                
+                g.selectAll('.node').filter(nodeData => {
+                    const isConnected = g.selectAll('.link').data().some(linkData => 
+                        (linkData.source.id === d.id && linkData.target.id === nodeData.id) ||
+                        (linkData.target.id === d.id && linkData.source.id === nodeData.id)
+                    );
+                    return isConnected;
+                }).style('opacity', 1);
+            }
+        }
+
+        function resetHighlight() {
+            g.selectAll('.node').style('opacity', 1);
+            g.selectAll('.link').style('opacity', 1);
+        }
+
+        function showTooltip(event, d) {
+            const displayLabel = getDisplayLabel(d.name);
+            let content = `<strong>${displayLabel}</strong><br/>`;
+            
+            const tooltipTexts = getTooltipTexts();
+            
+            if (d.ring === 'center') {
+                content += `<span style="color: #ff6b6b;">🎯 ${tooltipTexts.centralTopic}</span><br/>`;
+                const relationships = relationshipData[d.name] || {};
+                const broader = relationships.broader?.length || 0;
+                const narrower = relationships.narrower?.length || 0;
+                const related = relationships.related?.length || 0;
+                content += `<span style="color: #ff8c42;">▲ ${broader} ${tooltipTexts.broader}</span> | `;
+                content += `<span style="color: #8a68cc;">▼ ${narrower} ${tooltipTexts.narrower}</span> | `;
+                content += `<span style="color: #4a90e2;">◆ ${related} ${tooltipTexts.related}</span>`;
+            } else {
+                if (d.type === 'broader') {
+                    content += `<span style="color: #ff8c42;">▲ ${tooltipTexts.broaderTerm}</span><br/>`;
+                    
+                    // Show how many children this broader term has
+                    const hoveredNodeRelationships = relationshipData[d.name] || {};
+                    const childrenCount = (hoveredNodeRelationships.narrower || []).length;
+                    if (childrenCount > 0) {
+                        content += `<span style="color: #8a68cc;">💫 ${tooltipTexts.hasChildren}: ${childrenCount}</span><br/>`;
+                    }
+                    
+                } else if (d.type === 'narrower') {
+                    content += `<span style="color: #8a68cc;">▼ ${tooltipTexts.narrowerTerm}</span><br/>`;
+                    
+                    // Show how many sibling narrower terms exist
+                    const currentRelationships = relationshipData[currentKeyword] || {};
+                    const siblingCount = (currentRelationships.narrower || []).length - 1; // Exclude self
+                    if (siblingCount > 0) {
+                        content += `<span style="color: #8a68cc;">👥 ${tooltipTexts.hasSiblings}: ${siblingCount}</span><br/>`;
+                    }
+                    
+                } else if (d.type === 'related') {
+                    content += `<span style="color: #4a90e2;">◆ ${tooltipTexts.relatedTerm}</span><br/>`;
+                }
+                content += `<span style="color: #4a90e2;">🔍 ${tooltipTexts.clickToExplore}</span>`;
+            }
+            
+            // Show translations if available
+            const keywordInfo = keywordData[d.name];
+            if (keywordInfo && keywordInfo.labels) {
+                const translations = [];
+                ['es', 'fr'].forEach(lang => {
+                    if (keywordInfo.labels[lang] && keywordInfo.labels[lang].pref) {
+                        keywordInfo.labels[lang].pref.forEach(label => {
+                            translations.push(`${label} (${lang.toUpperCase()})`);
+                        });
+                    }
+                });
+                if (translations.length > 0) {
+                    content += `<div class="translations">Also: ${translations.join(', ')}</div>`;
+                }
+            }
+            
+            tooltip.style("display", "block")
+                .html(content)
+                .style("left", (event.pageX + 15) + "px")
+                .style("top", (event.pageY - 15) + "px");
+        }
+
+        function hideTooltip() { 
+            tooltip.style("display", "none"); 
+        }
+        
+        function filterRelationshipList(type, searchTerm) {
+            const list = document.getElementById(`${type}-list`);
+            const items = list.querySelectorAll('li');
+            const term = searchTerm.toLowerCase().trim();
+            
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (term === '' || text.includes(term)) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
+
+        // Initialize the application
+        async function init() {
+            const success = await loadData();
+            if (!success) {
+                document.getElementById('current-topic').textContent = 'Error loading data';
+                return;
+            }
+            
+            initializeLanguage();
+            setupSearch();
+            
+            // Initialize multilingual interface
+            updateLegend();
+            updateInfoPanel();
+            updateSearchPlaceholder();
+            updateButtonTexts();
+            
+            const initialTopic = new URLSearchParams(window.location.search).get('keyword') || 
+                               allKeywords[Math.floor(Math.random() * allKeywords.length)].name;
+            
+            drawGraph(initialTopic);
+            
+            // Add resize listener
+            window.addEventListener('resize', handleResize);
+        }
+
+        // Start the application
+        init();
+    </script>
+</body>
+</html>

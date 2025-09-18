@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBV Keyword Explorer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            max-width: 600px;
+            margin: 20px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        .disclaimer {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            padding: 20px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(10, 10, 10, 0.9);
+            font-size: 1rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease-out 0.6s both;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .disclaimer a {
+            color: #87CEEB;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .disclaimer a:hover {
+            color: #970606;
+            text-decoration: underline;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            display: block;
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 600;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+        
+        .features {
+            margin-top: 30px;
+            text-align: left;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(78, 205, 196, 0.1);
+            border-radius: 10px;
+        }
+        
+        .feature-icon {
+            font-size: 1.5em;
+            margin-right: 15px;
+        }
+        
+        .feature-text {
+            color: #555;
+        }
+        
+        .keyword-selection {
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        .keyword-selection h3, .keyword-selection h4 {
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .keyword-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .keyword-btn {
+            display: block;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-weight: 500;
+        }
+        
+        .keyword-btn:hover {
+            background: rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+        
+        .all-keywords-section {
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        
+        .search-container {
+            position: relative;
+            margin: 15px 0;
+        }
+        
+        .keyword-search-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        .keyword-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1000;
+        }
+        
+        .suggestion-item {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .suggestion-item:hover {
+            background: #f0f0f0;
+        }
+        
+        .alphabet-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin: 15px 0;
+            justify-content: center;
+        }
+        
+        .letter-btn {
+            background: #f0f0f0;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .letter-btn:hover, .letter-btn.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        .all-keywords-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            background: #fafafa;
+        }
+        
+        .keyword-link {
+            display: inline-block;
+            margin: 3px 5px;
+            padding: 5px 10px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 15px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            transition: all 0.2s ease;
+        }
+        
+        .keyword-link:hover {
+            background: #667eea;
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .keyword-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 8px;
+            }
+            
+            .alphabet-filter {
+                gap: 3px;
+            }
+            
+            .letter-btn {
+                padding: 6px 8px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Common Business Vocabulary Keyword Explorer</h1>
+        <div class="subtitle">
+            Navigate through multilingual trade terminology and discover keyword relationships.
+        </div>
+            <div class="disclaimer">
+        <p>All keywords below are taken from the Common Business Vocabulary of WTO and can be investigated through the 
+        <a href="https://cbv.cwr.wto.org/showvoc/#/home" target="_blank" rel="noopener noreferrer">WTO Common Business Vocabulary Portal</a>.</p>
+        </div>
+        <div class="stats">
+            <div class="stat">
+                <span class="stat-number" id="total-keywords">859</span>
+                <span class="stat-label">Keywords</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">748</span>
+                <span class="stat-label">Broader Terms</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">227</span>
+                <span class="stat-label">Narrower Terms</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">630</span>
+                <span class="stat-label">Related Terms</span>
+            </div>
+        </div>
+        
+        <div class="keyword-selection">
+            <div class="all-keywords-section">
+                <h4>Or Browse All Keywords:</h4>
+                <div class="search-container">
+                    <input type="text" id="keyword-search" placeholder="Search keywords..." class="keyword-search-input">
+                    <div id="keyword-suggestions" class="keyword-suggestions"></div>
+                </div>
+                <div class="alphabet-filter">
+                    <button onclick="filterByLetter('all')" class="letter-btn active">All</button>
+                    <button onclick="filterByLetter('A')" class="letter-btn">A</button>
+                    <button onclick="filterByLetter('B')" class="letter-btn">B</button>
+                    <button onclick="filterByLetter('C')" class="letter-btn">C</button>
+                    <button onclick="filterByLetter('D')" class="letter-btn">D</button>
+                    <button onclick="filterByLetter('E')" class="letter-btn">E</button>
+                    <button onclick="filterByLetter('F')" class="letter-btn">F</button>
+                    <button onclick="filterByLetter('G')" class="letter-btn">G</button>
+                    <button onclick="filterByLetter('H')" class="letter-btn">H</button>
+                    <button onclick="filterByLetter('I')" class="letter-btn">I</button>
+                    <button onclick="filterByLetter('J')" class="letter-btn">J</button>
+                    <button onclick="filterByLetter('K')" class="letter-btn">K</button>
+                    <button onclick="filterByLetter('L')" class="letter-btn">L</button>
+                    <button onclick="filterByLetter('M')" class="letter-btn">M</button>
+                    <button onclick="filterByLetter('N')" class="letter-btn">N</button>
+                    <button onclick="filterByLetter('O')" class="letter-btn">O</button>
+                    <button onclick="filterByLetter('P')" class="letter-btn">P</button>
+                    <button onclick="filterByLetter('Q')" class="letter-btn">Q</button>
+                    <button onclick="filterByLetter('R')" class="letter-btn">R</button>
+                    <button onclick="filterByLetter('S')" class="letter-btn">S</button>
+                    <button onclick="filterByLetter('T')" class="letter-btn">T</button>
+                    <button onclick="filterByLetter('U')" class="letter-btn">U</button>
+                    <button onclick="filterByLetter('V')" class="letter-btn">V</button>
+                    <button onclick="filterByLetter('W')" class="letter-btn">W</button>
+                    <button onclick="filterByLetter('X')" class="letter-btn">X</button>
+                    <button onclick="filterByLetter('Y')" class="letter-btn">Y</button>
+                    <button onclick="filterByLetter('Z')" class="letter-btn">Z</button>
+                </div>
+                <div id="all-keywords-list" class="all-keywords-list">
+                    Loading keywords...
+                </div>
+            </div>
+        </div>
+        
+        <a href="graph.html" class="btn"> Start with Random Keyword</a>
+    </div>
+    
+    <script>
+        let allKeywords = [];
+        let filteredKeywords = [];
+        let currentFilter = 'all';
+        
+        // Load keywords from unified CBV data file
+        fetch('cbv_data.json')
+            .then(response => response.json())
+            .then(cbvData => {
+                // Extract keyword list from unified data
+                allKeywords = Object.keys(cbvData).map(keyword => ({
+                    name: keyword,
+                    labels: cbvData[keyword].labels
+                })).sort((a, b) => a.name.localeCompare(b.name));
+                
+                filteredKeywords = allKeywords;
+                document.getElementById('total-keywords').textContent = allKeywords.length;
+                displayKeywords();
+                setupSearch();
+            })
+            .catch(error => {
+                console.log('Could not load keywords:', error);
+                document.getElementById('all-keywords-list').innerHTML = `
+                    <div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 10px; padding: 15px; margin: 10px 0;">
+                        <h4 style="color: #856404; margin: 0 0 10px 0;">⚠️ Server Required</h4>
+                        <p style="color: #856404; margin: 5px 0;">Please start the local server to load the CBV data:</p>
+                        <p style="color: #856404; margin: 5px 0;"><code>python server.py</code></p>
+                        <p style="color: #856404; margin: 5px 0;">Then visit: <code>http://localhost:8000</code></p>
+                    </div>
+                `;
+            });
+        
+        function displayKeywords() {
+            const container = document.getElementById('all-keywords-list');
+            if (filteredKeywords.length === 0) {
+                container.innerHTML = 'No keywords found.';
+                return;
+            }
+            
+            const keywordLinks = filteredKeywords.map(keyword => 
+                `<a href="graph.html?keyword=${encodeURIComponent(keyword.name)}" class="keyword-link">${keyword.name}</a>`
+            ).join('');
+            
+            container.innerHTML = keywordLinks;
+        }
+        
+        function filterByLetter(letter) {
+            // Update active button
+            document.querySelectorAll('.letter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            currentFilter = letter;
+            
+            if (letter === 'all') {
+                filteredKeywords = allKeywords;
+            } else {
+                filteredKeywords = allKeywords.filter(keyword => 
+                    keyword.name.toLowerCase().startsWith(letter.toLowerCase())
+                );
+            }
+            
+            displayKeywords();
+        }
+        
+        function setupSearch() {
+            const searchInput = document.getElementById('keyword-search');
+            const suggestions = document.getElementById('keyword-suggestions');
+            
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase().trim();
+                
+                if (!query) {
+                    suggestions.style.display = 'none';
+                    // Reset to current filter
+                    if (currentFilter === 'all') {
+                        filteredKeywords = allKeywords;
+                    } else {
+                        filteredKeywords = allKeywords.filter(keyword => 
+                            keyword.name.toLowerCase().startsWith(currentFilter.toLowerCase())
+                        );
+                    }
+                    displayKeywords();
+                    return;
+                }
+                
+                // Filter keywords based on search
+                const searchResults = allKeywords.filter(keyword => 
+                    keyword.name.toLowerCase().includes(query)
+                ).slice(0, 10);
+                
+                if (searchResults.length > 0) {
+                    suggestions.innerHTML = searchResults.map(keyword => 
+                        `<div class="suggestion-item" onclick="goToKeyword('${keyword.name}')">${keyword.name}</div>`
+                    ).join('');
+                    suggestions.style.display = 'block';
+                } else {
+                    suggestions.style.display = 'none';
+                }
+                
+                // Also update the main list
+                filteredKeywords = allKeywords.filter(keyword => 
+                    keyword.name.toLowerCase().includes(query)
+                );
+                displayKeywords();
+            });
+            
+            // Hide suggestions when clicking elsewhere
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.search-container')) {
+                    suggestions.style.display = 'none';
+                }
+            });
+        }
+        
+        function goToKeyword(keywordName) {
+            window.location.href = `graph.html?keyword=${encodeURIComponent(keywordName)}`;
+        }
+    </script>
+</body>
+</html>
