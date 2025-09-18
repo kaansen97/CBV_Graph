@@ -325,6 +325,10 @@
                 <span class="stat-number">630</span>
                 <span class="stat-label">Related Terms</span>
             </div>
+            <div class="stat">
+                <span class="stat-number" id="collections-count">0</span>
+                <span class="stat-label">Collections</span>
+            </div>
         </div>
         
         <div class="keyword-selection">
@@ -389,6 +393,11 @@
                 
                 filteredKeywords = allKeywords;
                 document.getElementById('total-keywords').textContent = allKeywords.length;
+                
+                // Count collections
+                const collectionsCount = Object.values(cbvData).filter(item => item.type === 'collection').length;
+                document.getElementById('collections-count').textContent = collectionsCount;
+                
                 displayKeywords();
                 setupSearch();
             })

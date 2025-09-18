@@ -34,7 +34,7 @@ def get_labels_by_language(graph, concept_uri):
     return labels
 
 def parse_thesaurus_rdf(rdf_file):
-    """Parse SKOS RDF file and extract keyword relationships."""
+    """Parse SKOS RDF file and extract keyword relationships and collections."""
     print(f"Loading RDF file: {rdf_file}")
     
     # Load RDF graph
@@ -43,19 +43,25 @@ def parse_thesaurus_rdf(rdf_file):
     
     print(f"Loaded {len(g)} triples from RDF file")
     
-    # Storage for all concepts and relationships
+    # Storage for all concepts, collections, and relationships
     concepts = {}
+    collections = {}
     relationships = defaultdict(lambda: {
         'broader': set(),
-        'narrower': set(), 
+        'narrower': set(),
         'related': set(),
         'translation': defaultdict(set)
     })
-    
-    # Process all concepts
+    collection_relationships = defaultdict(lambda: {
+        'members': set()
+    })    # Process all concepts
     for concept_uri in g.subjects(SKOS.prefLabel, None):
         concept_str = str(concept_uri)
         
+        # Skip if this is a Collection (we'll process those separately)
+        if (concept_uri, None, SKOS.Collection) in g:
+            continue
+            
         # Get labels by language
         labels = get_labels_by_language(g, concept_uri)
         concepts[concept_str] = labels
@@ -84,16 +90,36 @@ def parse_thesaurus_rdf(rdf_file):
     
     print(f"Processed {len(concepts)} concepts")
     
+    # Process all collections
+    for collection_uri in g.subjects(None, SKOS.Collection):
+        collection_str = str(collection_uri)
+        
+        # Get labels by language for collection
+        labels = get_labels_by_language(g, collection_uri)
+        collections[collection_str] = labels
+        
+        # Process member relationships
+        for member_uri in g.objects(collection_uri, SKOS.member):
+            member_labels = get_labels_by_language(g, member_uri)
+            # Use English preferred label as primary identifier
+            if member_labels['en']['pref']:
+                member_name = member_labels['en']['pref'][0]
+                collection_relationships[collection_str]['members'].add(member_name)
+    
+    print(f"Processed {len(collections)} collections")
+    
     # Convert to keyword-based structure (using English preferred labels as keys)
     keyword_data = {}
     keyword_relationships = defaultdict(lambda: {
         'broader': set(),
         'narrower': set(),
         'related': set(),
-        'translations': {}
+        'members': set(),
+        'translations': {},
+        'type': 'concept'  # Default type
     })
     
-    # Create keyword entries
+    # Create keyword entries for concepts
     for concept_uri, labels in concepts.items():
         if labels['en']['pref']:
             primary_keyword = labels['en']['pref'][0]
@@ -101,7 +127,8 @@ def parse_thesaurus_rdf(rdf_file):
             # Store multilingual labels
             keyword_data[primary_keyword] = {
                 'uri': concept_uri,
-                'labels': labels
+                'labels': labels,
+                'type': 'concept'
             }
             
             # Store translations
@@ -113,7 +140,31 @@ def parse_thesaurus_rdf(rdf_file):
                         keyword_relationships[primary_keyword]['translations'][lang] = []
                     keyword_relationships[primary_keyword]['translations'][lang].extend(labels[lang]['alt'])
     
-    # Process relationships using English keywords
+    # Create keyword entries for collections
+    for collection_uri, labels in collections.items():
+        if labels['en']['pref']:
+            primary_keyword = labels['en']['pref'][0]
+            
+            # Store multilingual labels
+            keyword_data[primary_keyword] = {
+                'uri': collection_uri,
+                'labels': labels,
+                'type': 'collection'
+            }
+            
+            # Mark as collection type
+            keyword_relationships[primary_keyword]['type'] = 'collection'
+            
+            # Store translations
+            for lang in ['es', 'fr']:
+                if labels[lang]['pref']:
+                    keyword_relationships[primary_keyword]['translations'][lang] = labels[lang]['pref']
+                if labels[lang]['alt']:
+                    if lang not in keyword_relationships[primary_keyword]['translations']:
+                        keyword_relationships[primary_keyword]['translations'][lang] = []
+                    keyword_relationships[primary_keyword]['translations'][lang].extend(labels[lang]['alt'])
+    
+    # Process concept relationships using English keywords
     for concept_uri, rels in relationships.items():
         if concept_uri in concepts and concepts[concept_uri]['en']['pref']:
             primary_keyword = concepts[concept_uri]['en']['pref'][0]
@@ -122,6 +173,13 @@ def parse_thesaurus_rdf(rdf_file):
             keyword_relationships[primary_keyword]['narrower'] = list(rels['narrower'])
             keyword_relationships[primary_keyword]['related'] = list(rels['related'])
     
+    # Process collection relationships using English keywords
+    for collection_uri, rels in collection_relationships.items():
+        if collection_uri in collections and collections[collection_uri]['en']['pref']:
+            primary_keyword = collections[collection_uri]['en']['pref'][0]
+            
+            keyword_relationships[primary_keyword]['members'] = list(rels['members'])
+    
     # Convert sets to lists for JSON serialization
     final_relationships = {}
     for keyword, rels in keyword_relationships.items():
@@ -129,7 +187,9 @@ def parse_thesaurus_rdf(rdf_file):
             'broader': list(rels['broader']),
             'narrower': list(rels['narrower']),
             'related': list(rels['related']),
-            'translations': dict(rels['translations'])
+            'members': list(rels['members']),
+            'translations': dict(rels['translations']),
+            'type': rels['type']
         }
     
     return keyword_data, final_relationships
@@ -154,16 +214,20 @@ def create_unified_data(keyword_data, relationships):
             'broader': [],
             'narrower': [],
             'related': [],
-            'translations': {}
+            'members': [],
+            'translations': {},
+            'type': data.get('type', 'concept')
         })
         
         # Create unified entry
         unified_data[keyword] = {
             'uri': data['uri'],
             'labels': data['labels'],
+            'type': data.get('type', 'concept'),
             'broader': rels['broader'],
             'narrower': rels['narrower'],
             'related': rels['related'],
+            'members': rels['members'],
             'translations': rels['translations']
         }
     
@@ -188,15 +252,22 @@ def main():
         print(f"- cbv_data.json: {len(unified_data)} keywords with complete data")
         
         # Print some statistics
+        concepts_count = sum(1 for k, v in unified_data.items() if v.get('type') == 'concept')
+        collections_count = sum(1 for k, v in unified_data.items() if v.get('type') == 'collection')
         broader_count = sum(1 for k, v in unified_data.items() if v['broader'])
         narrower_count = sum(1 for k, v in unified_data.items() if v['narrower'])
         related_count = sum(1 for k, v in unified_data.items() if v['related'])
+        members_count = sum(1 for k, v in unified_data.items() if v['members'])
         translation_count = sum(1 for k, v in unified_data.items() if v['translations'])
         
         print(f"\nStatistics:")
+        print(f"- Total entries: {len(unified_data)}")
+        print(f"- Concepts: {concepts_count}")
+        print(f"- Collections: {collections_count}")
         print(f"- Keywords with broader terms: {broader_count}")
         print(f"- Keywords with narrower terms: {narrower_count}")
         print(f"- Keywords with related terms: {related_count}")
+        print(f"- Collections with members: {members_count}")
         print(f"- Keywords with translations: {translation_count}")
         
         print(f"- All keyword data unified in single JSON file")
