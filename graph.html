@@ -641,7 +641,8 @@
                         ${infoTexts.sourceText} 
                         <a href="https://cbv.cwr.wto.org/showvoc/#/home" target="_blank" style="color: #667eea; text-decoration: none;">
                             cbv.cwr.wto.org 🔗
-                        </a>
+                        </a><br/>
+                        <span style="color: #4ecdc4;">🔗 Click links to view individual items in CBV source</span>
                     </span>
                 </div>
             `;
@@ -784,7 +785,13 @@
                     const sortedKeywords = keywords.sort((a, b) => a.localeCompare(b));
                     list.innerHTML = sortedKeywords.map(item => {
                         const displayLabel = getDisplayLabel(item);
-                        return `<li><a href="#" onclick="navigateToTopic('${item}'); return false;">${displayLabel}</a></li>`;
+                        const cbvURL = getCBVSourceURL(item);
+                        return `<li>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <a href="#" onclick="navigateToTopic('${item}'); return false;" style="flex: 1;">${displayLabel}</a>
+                                ${cbvURL ? `<a href="${cbvURL}" target="_blank" style="color: #4ecdc4; text-decoration: none; font-size: 11px; margin-left: 5px;" title="View in CBV Source">🔗</a>` : ''}
+                            </div>
+                        </li>`;
                     }).join('');
                 } else {
                     list.innerHTML = '<li class="no-related">None found.</li>';
@@ -850,9 +857,15 @@
             if (collections.length > 0) {
                 collectionsList.innerHTML = collections.map(collection => {
                     const displayLabel = getDisplayLabel(collection.name);
-                    return `<li><a href="#" onclick="navigateToTopic('${collection.name}'); return false;">
-                        ${displayLabel} <span style="color: #95a5a6; font-size: 11px;">(${collection.count} members)</span>
-                    </a></li>`;
+                    const cbvURL = getCBVSourceURL(collection.name);
+                    return `<li>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <a href="#" onclick="navigateToTopic('${collection.name}'); return false;" style="flex: 1;">
+                                ${displayLabel} <span style="color: #95a5a6; font-size: 11px;">(${collection.count} members)</span>
+                            </a>
+                            ${cbvURL ? `<a href="${cbvURL}" target="_blank" style="color: #4ecdc4; text-decoration: none; font-size: 11px; margin-left: 5px;" title="View in CBV Source">🔗</a>` : ''}
+                        </div>
+                    </li>`;
                 }).join('');
             } else {
                 collectionsList.innerHTML = '<li class="no-related">No collections found.</li>';
@@ -990,6 +1003,17 @@
             
             // Fallback to original English name
             return keywordName;
+        }
+
+        function getCBVSourceURL(keywordName) {
+            // Get the URI for this keyword/collection
+            const keywordInfo = keywordData[keywordName];
+            if (keywordInfo && keywordInfo.uri) {
+                // URL encode the URI for the CBV website
+                const encodedURI = encodeURIComponent(keywordInfo.uri);
+                return `https://cbv.cwr.wto.org/showvoc/#/datasets/WTO_Thesaurus/data?resId=${encodedURI}`;
+            }
+            return null;
         }
 
         function renderGraph(graph) {
@@ -1277,6 +1301,16 @@
                 if (translations.length > 0) {
                     content += `<div class="translations">Also: ${translations.join(', ')}</div>`;
                 }
+            }
+            
+            // Add CBV source link
+            const cbvURL = getCBVSourceURL(d.name);
+            if (cbvURL) {
+                content += `<div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #444;">
+                    <a href="${cbvURL}" target="_blank" style="color: #4ecdc4; text-decoration: none; font-size: 12px;">
+                        🔗 View in CBV Source
+                    </a>
+                </div>`;
             }
             
             tooltip.style("display", "block")
