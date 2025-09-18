@@ -1009,8 +1009,11 @@
             // Get the URI for this keyword/collection
             const keywordInfo = keywordData[keywordName];
             if (keywordInfo && keywordInfo.uri) {
-                // URL encode the URI for the CBV website
-                const encodedURI = encodeURIComponent(keywordInfo.uri);
+                // Manual encoding for CBV website compatibility
+                // Replace characters one by one to match CBV expected format
+                const encodedURI = keywordInfo.uri
+                    .replace(/:/g, '%3A')
+                    .replace(/\//g, '%2F');
                 return `https://cbv.cwr.wto.org/showvoc/#/datasets/WTO_Thesaurus/data?resId=${encodedURI}`;
             }
             return null;
