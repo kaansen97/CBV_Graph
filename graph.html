@@ -1012,7 +1012,9 @@
                 // Manual encoding for CBV website compatibility
                 // Based on your examples: https: stays as is, but // becomes %2F%2F and other / become %2F
                 const encodedURI = keywordInfo.uri.replace(/https:\/\//, 'https:%2F%2F').replace(/\//g, '%2F');
-                return `https://cbv.cwr.wto.org/showvoc/#/datasets/WTO_Thesaurus/data?resId=${encodedURI}`;
+                const finalURL = `https://cbv.cwr.wto.org/showvoc/#/datasets/WTO_Thesaurus/data?resId=${encodedURI}`;
+                console.log(`CBV URL for ${keywordName}: ${finalURL}`);
+                return finalURL;
             }
             return null;
         }
