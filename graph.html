@@ -228,9 +228,9 @@
                 <ul id="parent-collections-list"></ul>
             </div>
             <div class="relationship-section" id="collections-section" style="display: none;">
-                <div class="relationship-title collections" id="collections-title" style="color: #e74c3c;">📚 Collection Members</div>
+                <div class="relationship-title collections" id="collections-title" style="color: #e74c3c;">📚 Other Collections</div>
                 <div class="relationship-search">
-                    <input type="text" placeholder="Search collection members..." onkeyup="filterRelationshipList('collections', this.value)">
+                    <input type="text" placeholder="Search other collections..." onkeyup="filterRelationshipList('collections', this.value)">
                 </div>
                 <ul id="collections-list"></ul>
             </div>
@@ -448,7 +448,7 @@
                         related: '◆ Términos relacionados',
                         members: '★ Miembros de la Colección',
                         parentCollections: '📁 Colecciones Padre',
-                        collections: '📚 Todas las Colecciones',
+                        collections: '📚 Otras Colecciones',
                         translation: '◎ Traducciones'
                     };
                 case 'fr':
@@ -459,7 +459,7 @@
                         related: '◆ Termes connexes',
                         members: '★ Membres de la Collection',
                         parentCollections: '📁 Collections Parent',
-                        collections: '📚 Toutes les Collections',
+                        collections: '📚 Autres Collections',
                         translation: '◎ Traductions'
                     };
                 case 'en':
@@ -471,7 +471,7 @@
                         related: '◆ Related Topics',
                         members: '★ Collection Members',
                         parentCollections: '📁 Parent Collections',
-                        collections: '📚 All Collections',
+                        collections: '📚 Other Collections',
                         translation: '◎ Translations'
                     };
             }
@@ -487,7 +487,7 @@
                         related: 'Buscar términos relacionados...',
                         members: 'Buscar miembros...',
                         parentCollections: 'Buscar colecciones padre...',
-                        collections: 'Buscar miembros de la colección...',
+                        collections: 'Buscar otras colecciones...',
                         translation: 'Buscar traducciones...'
                     };
                 case 'fr':
@@ -497,7 +497,7 @@
                         related: 'Rechercher des termes connexes...',
                         members: 'Rechercher des membres...',
                         parentCollections: 'Rechercher des collections parent...',
-                        collections: 'Rechercher des membres de la collection...',
+                        collections: 'Rechercher d\'autres collections...',
                         translation: 'Rechercher des traductions...'
                     };
                 case 'en':
@@ -508,7 +508,7 @@
                         related: 'Search related topics...',
                         members: 'Search members...',
                         parentCollections: 'Search parent collections...',
-                        collections: 'Search collection members...',
+                        collections: 'Search other collections...',
                         translation: 'Search translations...'
                     };
             }
@@ -847,22 +847,39 @@
             
             // Only show this section if current topic is a collection
             const currentData = relationshipData[currentKeyword];
-            if (currentData && currentData.type === 'collection' && currentData.members) {
-                const members = currentData.members.map(member => {
-                    const displayLabel = getDisplayLabel(member);
-                    const cbvURL = getCBVSourceURL(member);
-                    return `<li>
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <a href="#" onclick="navigateToTopic('${member}'); return false;" style="flex: 1;">
-                                ${displayLabel}
-                            </a>
-                            ${cbvURL ? `<a href="${cbvURL}" target="_blank" style="color: #4ecdc4; text-decoration: none; font-size: 11px; margin-left: 5px;" title="View in CBV Source">🔗</a>` : ''}
-                        </div>
-                    </li>`;
-                });
+            if (currentData && currentData.type === 'collection') {
+                // Show OTHER collections (not the current one)
+                const collections = [];
+                for (const [keyword, data] of Object.entries(relationshipData)) {
+                    if (data.type === 'collection' && keyword !== currentKeyword) {
+                        const memberCount = (data.members || []).length;
+                        collections.push({
+                            name: keyword,
+                            count: memberCount
+                        });
+                    }
+                }
                 
-                collectionsList.innerHTML = members.join('');
-                collectionsSection.style.display = 'block';
+                // Sort collections by name
+                collections.sort((a, b) => a.name.localeCompare(b.name));
+                
+                if (collections.length > 0) {
+                    collectionsList.innerHTML = collections.map(collection => {
+                        const displayLabel = getDisplayLabel(collection.name);
+                        const cbvURL = getCBVSourceURL(collection.name);
+                        return `<li>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <a href="#" onclick="navigateToTopic('${collection.name}'); return false;" style="flex: 1;">
+                                    ${displayLabel} <span style="color: #95a5a6; font-size: 11px;">(${collection.count} members)</span>
+                                </a>
+                                ${cbvURL ? `<a href="${cbvURL}" target="_blank" style="color: #4ecdc4; text-decoration: none; font-size: 11px; margin-left: 5px;" title="View in CBV Source">🔗</a>` : ''}
+                            </div>
+                        </li>`;
+                    }).join('');
+                    collectionsSection.style.display = 'block';
+                } else {
+                    collectionsSection.style.display = 'none';
+                }
             } else {
                 collectionsSection.style.display = 'none';
             }
@@ -1129,29 +1146,23 @@
                 .text(d => getDisplayLabel(d.name))
                 .attr("dy", d => -getNodeRadius(d) - 8);
             
-            // Add member names text in center of collection nodes
+            // Add member count text in center of collection nodes
             node.each(function(d) {
                 if (d.ring === 'center') {
                     const currentData = relationshipData[d.name] || {};
                     if (currentData.type === 'collection') {
                         const members = currentData.members || [];
-                        if (members.length > 0) {
-                            // Show first 2 members to avoid overcrowding
-                            const memberNames = members.slice(0, 2).join(', '); 
-                            const moreCount = members.length > 2 ? ` +${members.length - 2}` : '';
-                            let displayText = memberNames.length > 20 ? memberNames.substring(0, 17) + '...' : memberNames;
-                            displayText += moreCount;
-                            
-                            d3.select(this).append("text")
-                                .text(displayText)
-                                .attr("dy", 4)
-                                .style("font-size", "9px")
-                                .style("font-weight", "bold")
-                                .style("fill", "white")
-                                .style("text-anchor", "middle")
-                                .style("text-shadow", "1px 1px 2px rgba(0,0,0,0.8)")
-                                .style("max-width", "100px");
-                        }
+                        const memberCount = members.length;
+                        const displayText = `(${memberCount}) Members`;
+                        
+                        d3.select(this).append("text")
+                            .text(displayText)
+                            .attr("dy", 4)
+                            .style("font-size", "11px")
+                            .style("font-weight", "bold")
+                            .style("fill", "white")
+                            .style("text-anchor", "middle")
+                            .style("text-shadow", "1px 1px 2px rgba(0,0,0,0.8)");
                     }
                 }
             });
