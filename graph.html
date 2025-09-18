@@ -1029,6 +1029,11 @@
                     nodeElement.append("polygon")
                         .attr("points", `0,${-size} ${size},0 0,${size} ${-size},0`)
                         .attr("fill", color);
+                } else if (d.type === 'members') {
+                    // Collection members: circle
+                    nodeElement.append("circle")
+                        .attr("r", radius)
+                        .attr("fill", color);
                 }
             });
             
