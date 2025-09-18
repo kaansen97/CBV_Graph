@@ -220,6 +220,13 @@
                 <ul id="members-list"></ul>
             </div>
             <div class="relationship-section">
+                <div class="relationship-title collections" id="collections-title" style="color: #e74c3c;">📚 All Collections</div>
+                <div class="relationship-search">
+                    <input type="text" placeholder="Search collections..." onkeyup="filterRelationshipList('collections', this.value)">
+                </div>
+                <ul id="collections-list"></ul>
+            </div>
+            <div class="relationship-section">
                 <div class="relationship-title translation" id="translation-title">◎ Translations</div>
                 <div class="relationship-search">
                     <input type="text" placeholder="Search translations..." onkeyup="filterRelationshipList('translation', this.value)">
@@ -420,11 +427,13 @@
             document.getElementById('broader-title').textContent = titles.broader;
             document.getElementById('narrower-title').textContent = titles.narrower;
             document.getElementById('related-title').textContent = titles.related;
+            document.getElementById('members-title').textContent = titles.members;
+            document.getElementById('collections-title').textContent = titles.collections;
             document.getElementById('translation-title').textContent = titles.translation;
             
             // Update search placeholders
             const searchInputs = document.querySelectorAll('.relationship-search input');
-            const types = ['broader', 'narrower', 'related', 'translation'];
+            const types = ['broader', 'narrower', 'related', 'members', 'collections', 'translation'];
             searchInputs.forEach((input, index) => {
                 if (types[index]) {
                     input.placeholder = placeholders[types[index]];
@@ -441,6 +450,8 @@
                         broader: '▲ Términos más amplios',
                         narrower: '▼ Términos más específicos',
                         related: '◆ Términos relacionados',
+                        members: '★ Miembros de la Colección',
+                        collections: '📚 Todas las Colecciones',
                         translation: '◎ Traducciones'
                     };
                 case 'fr':
@@ -449,6 +460,8 @@
                         broader: '▲ Termes plus larges',
                         narrower: '▼ Termes plus spécifiques',
                         related: '◆ Termes connexes',
+                        members: '★ Membres de la Collection',
+                        collections: '📚 Toutes les Collections',
                         translation: '◎ Traductions'
                     };
                 case 'en':
@@ -458,6 +471,8 @@
                         broader: '▲ Broader Topics',
                         narrower: '▼ Narrower Topics',
                         related: '◆ Related Topics',
+                        members: '★ Collection Members',
+                        collections: '📚 All Collections',
                         translation: '◎ Translations'
                     };
             }
@@ -471,6 +486,8 @@
                         broader: 'Buscar términos más amplios...',
                         narrower: 'Buscar términos más específicos...',
                         related: 'Buscar términos relacionados...',
+                        members: 'Buscar miembros...',
+                        collections: 'Buscar colecciones...',
                         translation: 'Buscar traducciones...'
                     };
                 case 'fr':
@@ -478,6 +495,8 @@
                         broader: 'Rechercher des termes plus larges...',
                         narrower: 'Rechercher des termes plus spécifiques...',
                         related: 'Rechercher des termes connexes...',
+                        members: 'Rechercher des membres...',
+                        collections: 'Rechercher des collections...',
                         translation: 'Rechercher des traductions...'
                     };
                 case 'en':
@@ -486,6 +505,8 @@
                         broader: 'Search broader topics...',
                         narrower: 'Search narrower topics...',
                         related: 'Search related topics...',
+                        members: 'Search members...',
+                        collections: 'Search collections...',
                         translation: 'Search translations...'
                     };
             }
@@ -770,6 +791,9 @@
                 }
             });
             
+            // Update collections list
+            updateCollectionsList();
+            
             // Handle translations
             const translationList = document.getElementById('translation-list');
             const translations = relationships.translations || {};
@@ -802,6 +826,36 @@
                 if (isRelatedPanelVisible) {
                     panel.style.display = 'block';
                 }
+            }
+        }
+
+        function updateCollectionsList() {
+            const collectionsList = document.getElementById('collections-list');
+            const collections = [];
+            
+            // Find all collections from relationshipData
+            for (const [keyword, data] of Object.entries(relationshipData)) {
+                if (data.type === 'collection') {
+                    const memberCount = (data.members || []).length;
+                    collections.push({
+                        name: keyword,
+                        count: memberCount
+                    });
+                }
+            }
+            
+            // Sort collections by name
+            collections.sort((a, b) => a.name.localeCompare(b.name));
+            
+            if (collections.length > 0) {
+                collectionsList.innerHTML = collections.map(collection => {
+                    const displayLabel = getDisplayLabel(collection.name);
+                    return `<li><a href="#" onclick="navigateToTopic('${collection.name}'); return false;">
+                        ${displayLabel} <span style="color: #95a5a6; font-size: 11px;">(${collection.count} members)</span>
+                    </a></li>`;
+                }).join('');
+            } else {
+                collectionsList.innerHTML = '<li class="no-related">No collections found.</li>';
             }
         }
 
@@ -1271,6 +1325,9 @@
                                allKeywords[Math.floor(Math.random() * allKeywords.length)].name;
             
             drawGraph(initialTopic);
+            
+            // Initialize collections list
+            updateCollectionsList();
             
             // Add resize listener
             window.addEventListener('resize', handleResize);
