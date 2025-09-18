@@ -1153,7 +1153,7 @@
                     if (currentData.type === 'collection') {
                         const members = currentData.members || [];
                         const memberCount = members.length;
-                        const displayText = `(${memberCount}) Members`;
+                        const displayText = `${memberCount} Members`;
                         
                         d3.select(this).append("text")
                             .text(displayText)
