@@ -1010,10 +1010,8 @@
             const keywordInfo = keywordData[keywordName];
             if (keywordInfo && keywordInfo.uri) {
                 // Manual encoding for CBV website compatibility
-                // Replace characters one by one to match CBV expected format
-                const encodedURI = keywordInfo.uri
-                    .replace(/:/g, '%3A')
-                    .replace(/\//g, '%2F');
+                // Based on your examples: https: stays as is, but // becomes %2F%2F and other / become %2F
+                const encodedURI = keywordInfo.uri.replace(/https:\/\//, 'https:%2F%2F').replace(/\//g, '%2F');
                 return `https://cbv.cwr.wto.org/showvoc/#/datasets/WTO_Thesaurus/data?resId=${encodedURI}`;
             }
             return null;
