@@ -67,11 +67,3 @@ For local development or data updates:
 2. **Local Testing**:
    - Open `index.html` directly in a modern browser, or
    - Use any local HTTP server (Python, Node.js, VS Code Live Server, etc.)
-
-## Performance Notes
-
-- All data loads client-side (no API calls during navigation)
-- Fast keyword switching and exploration
-- Responsive to window resizing
-- Optimized for smooth interactions
-- Works offline after initial load
