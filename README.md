@@ -39,11 +39,6 @@ CBV_Graph/
 - **◆ Related Topics**: Associated concepts
 - **◎ Translations**: Terms in other languages
 
-### Mobile Experience
-- Responsive layout for small screens
-- Toggle button (📋 Relations) to show/hide relationship panel
-- Close button (×) to dismiss panels
-
 ## Data Source
 
 The visualization uses the CBV (Common Business Vocabulary) thesaurus in SKOS RDF format, which contains multilingual trade terminology with hierarchical and associative relationships.
