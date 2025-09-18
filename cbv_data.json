@@ -56,10 +56,10 @@
     "broader": [],
     "narrower": [],
     "related": [
-      "harmonization work programme",
-      "transparency",
       "rules of origin",
       "contact points",
+      "harmonization work programme",
+      "transparency",
       "standardisation"
     ],
     "members": [],
@@ -97,20 +97,20 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "competent authority",
-      "bilateral relations",
       "multilateral trading system",
-      "economic integration agreement",
       "trade agreement",
-      "commodity agreement"
+      "economic integration agreement",
+      "commodity agreement",
+      "bilateral relations",
+      "competent authority"
     ],
     "related": [
       "customs",
+      "trade policy",
       "international cooperation",
-      "foreign trade policy",
-      "trade negotiations",
       "international trade",
-      "trade policy"
+      "foreign trade policy",
+      "trade negotiations"
     ],
     "members": [],
     "translations": {
@@ -159,23 +159,23 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "trade embargo",
-      "export restrictions",
       "export prohibition",
       "non-tariff measures",
+      "trade embargo",
       "tariff measures",
+      "export restrictions",
       "import restrictions",
       "import prohibition"
     ],
     "related": [
-      "licensing",
-      "protectionism",
-      "local content requirements",
-      "market access",
-      "trade liberalization",
-      "enforcement",
       "trade policy",
-      "unfair competition"
+      "protectionism",
+      "unfair competition",
+      "enforcement",
+      "market access",
+      "local content requirements",
+      "trade liberalization",
+      "licensing"
     ],
     "members": [],
     "translations": {
@@ -219,9 +219,9 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "injury",
       "serious prejudice",
-      "nullification or impairement"
+      "nullification or impairement",
+      "injury"
     ],
     "related": [
       "trade remedies"
@@ -267,8 +267,8 @@
     ],
     "related": [
       "fair competition",
-      "export financing",
-      "competition policy"
+      "competition policy",
+      "export financing"
     ],
     "members": [],
     "translations": {
@@ -313,17 +313,17 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "technical cooperation",
-      "international convention",
-      "international organisation",
       "international agreement",
-      "economic cooperation"
+      "international organisation",
+      "international convention",
+      "economic cooperation",
+      "technical cooperation"
     ],
     "related": [
-      "international law",
       "international trade",
-      "trade relations",
-      "foreign trade policy"
+      "international law",
+      "foreign trade policy",
+      "trade relations"
     ],
     "members": [],
     "translations": {
@@ -415,19 +415,19 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "small economies",
+      "observer status",
+      "net-food importing countries",
       "least developed countries",
       "developing countries",
-      "net-food importing countries",
+      "preference-granting member",
       "landlocked developing countries",
-      "observer status",
-      "preference-granting member"
+      "small economies"
     ],
     "related": [
+      "technical assistance",
       "GATT",
-      "aid for trade",
       "WTO accession",
-      "technical assistance"
+      "aid for trade"
     ],
     "members": [],
     "translations": {
@@ -475,15 +475,15 @@
     "broader": [],
     "narrower": [
       "fair competition",
-      "reciprocity",
       "non-discrimination",
-      "trade liberalization",
-      "transparency"
+      "transparency",
+      "reciprocity",
+      "trade liberalization"
     ],
     "related": [
-      "multilateral trading system",
-      "international trade",
       "dispute settlement",
+      "international trade",
+      "multilateral trading system",
       "WTO legal instruments"
     ],
     "members": [],
@@ -523,10 +523,10 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "capacity building",
       "dispute settlement",
-      "trade negotiations",
-      "trade monitoring"
+      "capacity building",
+      "trade monitoring",
+      "trade negotiations"
     ],
     "related": [],
     "members": [],
@@ -571,9 +571,9 @@
     "broader": [],
     "narrower": [],
     "related": [
-      "WTO working parties",
       "transition from GATT to WTO",
       "GATT accession",
+      "WTO working parties",
       "WTO membership"
     ],
     "members": [],
@@ -615,8 +615,8 @@
     "broader": [],
     "narrower": [],
     "related": [
-      "WTO working parties",
-      "WTO accession"
+      "WTO accession",
+      "WTO working parties"
     ],
     "members": [],
     "translations": {
@@ -742,16 +742,16 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "waiver",
-      "WTO schedules",
       "WTO clauses",
+      "WTO provisions",
       "notification obligation",
-      "WTO provisions"
+      "WTO schedules",
+      "waiver"
     ],
     "related": [
+      "international trade",
       "multilateral trading system",
       "trade agreement",
-      "international trade",
       "WTO principles"
     ],
     "members": [],
@@ -802,10 +802,10 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "functioning of WTO bodies",
-      "joint initiatives",
+      "WTO committees",
       "WTO working parties",
-      "WTO committees"
+      "functioning of WTO bodies",
+      "joint initiatives"
     ],
     "related": [],
     "members": [],
@@ -851,8 +851,8 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "trade dispute process",
-      "ministerial conference"
+      "ministerial conference",
+      "trade dispute process"
     ],
     "related": [],
     "members": [],
@@ -976,9 +976,9 @@
       "in-house committees"
     ],
     "related": [
-      "personnel management",
-      "DG appointment",
       "WTO budget",
+      "DG appointment",
+      "personnel management",
       "pension plan"
     ],
     "members": [],
@@ -1023,8 +1023,8 @@
       "innovation"
     ],
     "related": [
-      "research and development services",
-      "industrial property"
+      "industrial property",
+      "research and development services"
     ],
     "members": [],
     "translations": {
@@ -1070,13 +1070,13 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "food technology",
-      "biotechnology"
+      "biotechnology",
+      "food technology"
     ],
     "related": [
       "technology transfer",
-      "manufacturing",
-      "industry"
+      "industry",
+      "manufacturing"
     ],
     "members": [],
     "translations": {
@@ -1123,16 +1123,16 @@
     "type": "concept",
     "broader": [],
     "narrower": [
+      "ecodesign",
       "quality control",
-      "product inspection",
-      "ecodesign"
+      "product inspection"
     ],
     "related": [
-      "industry",
-      "counterfeiting",
-      "manufacturing services",
+      "industrial designs",
       "technology",
-      "industrial designs"
+      "manufacturing services",
+      "counterfeiting",
+      "industry"
     ],
     "members": [],
     "translations": {
@@ -1180,8 +1180,8 @@
     "broader": [],
     "narrower": [],
     "related": [
-      "supply and demand",
-      "food resources"
+      "food resources",
+      "supply and demand"
     ],
     "members": [],
     "translations": {
@@ -1231,9 +1231,9 @@
     "broader": [],
     "narrower": [],
     "related": [
-      "product life",
+      "maintenance services",
       "circular economy",
-      "maintenance services"
+      "product life"
     ],
     "members": [],
     "translations": {
@@ -1281,9 +1281,9 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "agricultural production",
       "domestic production",
-      "food production"
+      "food production",
+      "agricultural production"
     ],
     "related": [
       "production standards",
@@ -1329,14 +1329,14 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "market research",
-      "advertising"
+      "advertising",
+      "market research"
     ],
     "related": [
-      "marketing services",
+      "marketing standards",
       "consumer behaviour",
       "trade statistics",
-      "marketing standards"
+      "marketing services"
     ],
     "members": [],
     "translations": {
@@ -1374,13 +1374,13 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "purchasing",
       "sales",
-      "leasing"
+      "leasing",
+      "purchasing"
     ],
     "related": [
-      "commercial law",
-      "value added tax"
+      "value added tax",
+      "commercial law"
     ],
     "members": [],
     "translations": {
@@ -1417,17 +1417,17 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "energy labelling",
       "ecolabelling",
-      "food labelling"
+      "food labelling",
+      "energy labelling"
     ],
     "related": [
-      "trademarks",
+      "consumer information",
       "traceability",
-      "geographical indications",
-      "certification",
       "trade description",
-      "consumer information"
+      "certification",
+      "trademarks",
+      "geographical indications"
     ],
     "members": [],
     "translations": {
@@ -1580,19 +1580,19 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "land transport",
+      "traffic",
+      "transit",
       "air transport",
       "cargo",
-      "transit",
-      "public transport",
       "maritime transport",
-      "traffic"
+      "public transport",
+      "land transport"
     ],
     "related": [
       "transport safety",
-      "delivery of goods",
       "motor vehicle industry",
-      "transport services"
+      "transport services",
+      "delivery of goods"
     ],
     "members": [],
     "translations": {
@@ -1632,8 +1632,8 @@
     "broader": [],
     "narrower": [
       "retail trade",
-      "delivery of goods",
-      "wholesale trade"
+      "wholesale trade",
+      "delivery of goods"
     ],
     "related": [
       "distribution services"
@@ -1804,16 +1804,16 @@
     "type": "concept",
     "broader": [],
     "narrower": [
+      "quality requirements",
       "product life",
-      "electromagnetic compatibility (EMC)",
-      "quality requirements"
+      "electromagnetic compatibility (EMC)"
     ],
     "related": [
-      "product inspection",
-      "quality standards",
       "certification",
       "marketing standards",
-      "quality control"
+      "product inspection",
+      "quality control",
+      "quality standards"
     ],
     "members": [],
     "translations": {
@@ -1850,18 +1850,18 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "plant health",
       "human health",
-      "animal health",
-      "public health"
+      "plant health",
+      "public health",
+      "animal health"
     ],
     "related": [
-      "health policy",
       "nutrition information",
-      "health certificates",
       "food standards",
+      "health policy",
       "health and sanitary regulations",
-      "health legislation"
+      "health legislation",
+      "health certificates"
     ],
     "members": [],
     "translations": {
@@ -1915,15 +1915,15 @@
     "broader": [],
     "narrower": [
       "transport safety",
+      "maritime safety",
       "food safety",
-      "public safety",
-      "maritime safety"
+      "public safety"
     ],
     "related": [
-      "consumer protection",
       "radiation protection",
-      "risk assessment",
+      "consumer protection",
       "safety standards",
+      "risk assessment",
       "quality standards"
     ],
     "members": [],
@@ -1971,9 +1971,9 @@
       "food security"
     ],
     "related": [
-      "food industry",
+      "nutrition information",
       "food standards",
-      "nutrition information"
+      "food industry"
     ],
     "members": [],
     "translations": {
@@ -2015,8 +2015,8 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "degradation of the environment",
       "biosphere",
+      "degradation of the environment",
       "natural environment"
     ],
     "related": [
@@ -2060,16 +2060,16 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "pandemics",
-      "animal diseases",
-      "zoonoses",
       "human diseases",
+      "zoonoses",
+      "animal diseases",
+      "epidemics",
       "plant diseases",
-      "epidemics"
+      "pandemics"
     ],
     "related": [
-      "disease control",
       "health and sanitary regulations",
+      "disease control",
       "public health"
     ],
     "members": [],
@@ -2115,8 +2115,8 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "pathogens",
-      "allergens"
+      "allergens",
+      "pathogens"
     ],
     "related": [],
     "members": [],
@@ -2216,16 +2216,16 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "farming",
-      "organic agriculture",
+      "plant growing",
       "fishing",
-      "plant growing"
+      "farming",
+      "organic agriculture"
     ],
     "related": [
       "biotechnology",
-      "agricultural policy",
-      "agriculture (sector)",
       "agricultural development",
+      "agriculture (sector)",
+      "agricultural policy",
       "agricultural legislation"
     ],
     "members": [],
@@ -2322,13 +2322,13 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "renewable energy",
-      "electricity"
+      "electricity",
+      "renewable energy"
     ],
     "related": [
-      "coal mining industry",
       "energy efficiency",
       "energy conservation",
+      "coal mining industry",
       "energy services"
     ],
     "members": [],
@@ -2497,31 +2497,31 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "coal mining industry",
-      "aerospace industry",
-      "electronics industry",
+      "textile industry",
+      "electrical industry",
+      "glass industry",
       "nuclear industry",
+      "metallurgical industry",
       "shipbuilding",
       "oil industry",
-      "metallurgical industry",
-      "wood industry",
-      "footwear industry",
-      "glass industry",
       "motor vehicle industry",
-      "domestic industry",
-      "communication industry",
+      "footwear industry",
       "construction industry",
+      "aerospace industry",
+      "electronics industry",
+      "wood industry",
       "aircraft industry",
-      "textile industry",
-      "electrical industry"
+      "communication industry",
+      "domestic industry",
+      "coal mining industry"
     ],
     "related": [
-      "industrial statistics",
-      "industrial policy",
       "industrial development",
-      "industrial legislation",
-      "manufacturing services",
+      "industrial policy",
       "technology",
+      "industrial statistics",
+      "manufacturing services",
+      "industrial legislation",
       "manufacturing"
     ],
     "members": [],
@@ -2617,17 +2617,17 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "fisheries",
-      "agricultural trade",
       "forestry",
-      "food industry"
+      "fisheries",
+      "food industry",
+      "agricultural trade"
     ],
     "related": [
+      "aggregate measurement of support (amber box)",
+      "green box measures",
+      "agricultural development",
       "agricultural policy",
       "agriculture (activity)",
-      "agricultural development",
-      "green box measures",
-      "aggregate measurement of support (amber box)",
       "agricultural legislation"
     ],
     "members": [],
@@ -2714,28 +2714,28 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "business services",
-      "educational services",
-      "communication services",
       "social services",
-      "entertainment services",
-      "sporting services",
-      "tourism services",
-      "distribution services",
       "construction and related engineering services",
       "cultural services",
-      "transport services",
-      "financial services",
+      "educational services",
+      "environmental services",
       "energy services",
-      "environmental services"
+      "tourism services",
+      "business services",
+      "distribution services",
+      "communication services",
+      "sporting services",
+      "entertainment services",
+      "transport services",
+      "financial services"
     ],
     "related": [
       "schedules of specific commitments",
-      "services legislation",
+      "trade in services",
       "domestic regulations",
-      "services domestic regulation (joint initiative)",
       "services negotiations",
-      "trade in services"
+      "services legislation",
+      "services domestic regulation (joint initiative)"
     ],
     "members": [],
     "translations": {
@@ -2784,8 +2784,8 @@
     "narrower": [],
     "related": [
       "health legislation",
-      "health policy",
       "human diseases",
+      "health policy",
       "public health"
     ],
     "members": [],
@@ -2828,8 +2828,8 @@
     ],
     "narrower": [],
     "related": [
-      "social policy",
-      "social legislation"
+      "social legislation",
+      "social policy"
     ],
     "members": [],
     "translations": {
@@ -3112,8 +3112,8 @@
       "telecommunications"
     ],
     "related": [
-      "communication services",
-      "communication industry"
+      "communication industry",
+      "communication services"
     ],
     "members": [],
     "translations": {
@@ -3150,11 +3150,11 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "information networks",
       "information exchange",
-      "information analysis",
       "data processing",
-      "information processing"
+      "information processing",
+      "information networks",
+      "information analysis"
     ],
     "related": [
       "information services"
@@ -3312,9 +3312,9 @@
     "broader": [],
     "narrower": [],
     "related": [
-      "confidentiality",
       "data transmission",
       "data protection",
+      "confidentiality",
       "cybercrime"
     ],
     "members": [],
@@ -3401,16 +3401,16 @@
     "type": "concept",
     "broader": [],
     "narrower": [
+      "interest",
       "trade financing",
       "credit",
       "loans",
-      "export financing",
-      "interest"
+      "export financing"
     ],
     "related": [
-      "investment",
       "financial aid",
       "budget policy",
+      "investment",
       "financial services"
     ],
     "members": [],
@@ -3449,16 +3449,16 @@
     "type": "concept",
     "broader": [],
     "narrower": [
+      "auditing",
       "profit",
-      "costs",
-      "expenditure",
       "payments",
-      "auditing"
+      "expenditure",
+      "costs"
     ],
     "related": [
-      "accounting services",
+      "budget",
       "accounting standards",
-      "budget"
+      "accounting services"
     ],
     "members": [],
     "translations": {
@@ -3525,14 +3525,14 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "tax credit",
-      "tax"
+      "tax",
+      "tax credit"
     ],
     "related": [
+      "fiscal policy",
       "budgetary resources",
-      "fiscal law",
       "taxation services",
-      "fiscal policy"
+      "fiscal law"
     ],
     "members": [],
     "translations": {
@@ -3584,15 +3584,15 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "commodity prices",
-      "import prices",
       "export prices",
+      "import prices",
+      "commodity prices",
       "consumer prices"
     ],
     "related": [
-      "price policy",
       "interest charges",
-      "costs"
+      "costs",
+      "price policy"
     ],
     "members": [],
     "translations": {
@@ -3633,11 +3633,11 @@
       "trade balance"
     ],
     "related": [
-      "price policy",
       "exchange policy",
-      "capital movements",
       "import deposit",
+      "price policy",
       "import tax",
+      "capital movements",
       "currencies",
       "import restrictions"
     ],
@@ -3684,13 +3684,13 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "foreign investment",
-      "international investment"
+      "international investment",
+      "foreign investment"
     ],
     "related": [
-      "financing",
       "trade-related investment measures",
-      "capital"
+      "capital",
+      "financing"
     ],
     "members": [],
     "translations": {
@@ -3737,9 +3737,9 @@
     "type": "concept",
     "broader": [],
     "narrower": [
+      "WTO budget",
       "budgetary resources",
-      "WTO budgetary surplus",
-      "WTO budget"
+      "WTO budgetary surplus"
     ],
     "related": [
       "fiscal policy",
@@ -3793,10 +3793,10 @@
     "broader": [],
     "narrower": [],
     "related": [
-      "credit",
-      "financial services",
       "loans",
-      "electronic payments"
+      "credit",
+      "electronic payments",
+      "financial services"
     ],
     "members": [],
     "translations": {
@@ -3852,8 +3852,8 @@
       "capital"
     ],
     "related": [
-      "international finance",
       "balance of payments",
+      "international finance",
       "financial market",
       "financial services"
     ],
@@ -3899,9 +3899,9 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "reinsurance",
       "health insurance",
       "export insurance",
+      "reinsurance",
       "credit insurance"
     ],
     "related": [
@@ -3954,9 +3954,9 @@
     "broader": [],
     "narrower": [],
     "related": [
+      "balance of payments",
       "exchange policy",
-      "monetary policy",
-      "balance of payments"
+      "monetary policy"
     ],
     "members": [],
     "translations": {
@@ -4001,8 +4001,8 @@
     "narrower": [],
     "related": [
       "debt relief",
-      "credit",
-      "loans"
+      "loans",
+      "credit"
     ],
     "members": [],
     "translations": {
@@ -4048,9 +4048,9 @@
     "broader": [],
     "narrower": [],
     "related": [
-      "labour standards",
       "labour policy",
-      "labour legislation"
+      "labour legislation",
+      "labour standards"
     ],
     "members": [],
     "translations": {
@@ -4091,16 +4091,16 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "professional career",
-      "staff regulations",
-      "recruitment",
       "staff",
-      "work contract"
+      "recruitment",
+      "professional career",
+      "work contract",
+      "staff regulations"
     ],
     "related": [
-      "employment",
+      "WTO Secretariat",
       "staff movements",
-      "WTO Secretariat"
+      "employment"
     ],
     "members": [],
     "translations": {
@@ -4149,8 +4149,8 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "bonus payment",
       "allowances and expenses",
+      "bonus payment",
       "payrolls"
     ],
     "related": [],
@@ -4201,8 +4201,8 @@
       "staff movements"
     ],
     "related": [
-      "movement of natural persons (Mode 4)",
-      "recruitment"
+      "recruitment",
+      "movement of natural persons (Mode 4)"
     ],
     "members": [],
     "translations": {
@@ -4291,10 +4291,10 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "work-life balance",
-      "staff welfare",
       "teleworking",
-      "leave"
+      "leave",
+      "work-life balance",
+      "staff welfare"
     ],
     "related": [
       "labour policy"
@@ -4334,14 +4334,14 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "training programmes",
-      "experience sharing"
+      "experience sharing",
+      "training programmes"
     ],
     "related": [
-      "professional career",
-      "information exchange",
+      "technical assistance",
       "professional qualifications",
-      "technical assistance"
+      "professional career",
+      "information exchange"
     ],
     "members": [],
     "translations": {
@@ -4429,12 +4429,12 @@
     ],
     "narrower": [],
     "related": [
-      "statistical data",
+      "trade in services",
       "government procurement legislation",
-      "coverage schedules",
       "trade in goods",
       "services negotiations",
-      "trade in services"
+      "statistical data",
+      "coverage schedules"
     ],
     "members": [],
     "translations": {
@@ -4482,17 +4482,17 @@
       "licensing"
     ],
     "narrower": [
-      "automatic import licensing",
-      "non-automatic import licensing"
+      "non-automatic import licensing",
+      "automatic import licensing"
     ],
     "related": [
-      "import licensing legislation",
-      "trade concerns",
       "non-tariff measures",
-      "imports",
+      "import licences",
       "import regulations",
+      "trade concerns",
       "import policy",
-      "import licences"
+      "imports",
+      "import licensing legislation"
     ],
     "members": [],
     "translations": {
@@ -4629,13 +4629,13 @@
     ],
     "narrower": [],
     "related": [
-      "export regulations",
-      "export restrictions",
       "non-tariff measures",
-      "export policy",
-      "export quotas",
       "export licences",
-      "exports"
+      "export regulations",
+      "export quotas",
+      "exports",
+      "export policy",
+      "export restrictions"
     ],
     "members": [],
     "translations": {
@@ -4794,9 +4794,9 @@
     ],
     "narrower": [],
     "related": [
-      "export promotion",
+      "exports",
       "export incentives",
-      "exports"
+      "export promotion"
     ],
     "members": [],
     "translations": {
@@ -4920,8 +4920,8 @@
     ],
     "narrower": [],
     "related": [
-      "aid for trade",
       "safeguard measures",
+      "aid for trade",
       "short-term measures (SPS)"
     ],
     "members": [],
@@ -4971,25 +4971,25 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "tariffs",
       "tariff reductions",
-      "tariffication",
-      "tariff concessions",
-      "tariff quotas",
+      "tariffs",
       "tariff binding",
-      "tariff preferences",
+      "tariff concessions",
+      "tariff escalation",
+      "tariff quotas",
       "border measures",
-      "tariff escalation"
+      "tariffication",
+      "tariff preferences"
     ],
     "related": [
-      "protectionism",
-      "export policy",
       "customs regulations",
-      "import policy",
-      "tariff negotiations",
       "trade policy",
+      "protectionism",
+      "customs unions",
+      "tariff negotiations",
+      "import policy",
       "border tax adjustment",
-      "customs unions"
+      "export policy"
     ],
     "members": [],
     "translations": {
@@ -5038,13 +5038,13 @@
       "tariff policy"
     ],
     "narrower": [
-      "quota-free treatment",
-      "duty free treatment"
+      "duty free treatment",
+      "quota-free treatment"
     ],
     "related": [
-      "schedules of concessions",
       "Global System of Trade Preferences",
-      "reciprocity"
+      "reciprocity",
+      "schedules of concessions"
     ],
     "members": [],
     "translations": {
@@ -5188,8 +5188,8 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "economic recession",
-      "inflation"
+      "inflation",
+      "economic recession"
     ],
     "related": [],
     "members": [],
@@ -5231,21 +5231,21 @@
     "type": "concept",
     "broader": [],
     "narrower": [
+      "industrial development",
+      "women's empowerment",
       "economic growth",
       "regional development",
-      "agricultural development",
-      "industrial development",
-      "women's empowerment"
+      "agricultural development"
     ],
     "related": [
-      "development aid",
-      "investment facilitation",
       "capacity building",
-      "trade-related investment measures",
-      "economic policy",
+      "sustainable development",
       "aid for trade",
-      "development plans",
-      "sustainable development"
+      "economic policy",
+      "investment facilitation",
+      "trade-related investment measures",
+      "development aid",
+      "development plans"
     ],
     "members": [],
     "translations": {
@@ -5362,11 +5362,11 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "statistical data",
-      "trade statistics",
-      "fish catch data",
+      "economic statistics",
       "industrial statistics",
-      "economic statistics"
+      "statistical data",
+      "fish catch data",
+      "trade statistics"
     ],
     "related": [],
     "members": [],
@@ -5404,8 +5404,8 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "financial market",
       "common market",
+      "financial market",
       "domestic market"
     ],
     "related": [
@@ -5458,10 +5458,10 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "transnational corporations",
-      "private enterprises",
+      "public enterprises",
       "micro, small and medium-sized enterprises",
-      "public enterprises"
+      "transnational corporations",
+      "private enterprises"
     ],
     "related": [
       "business services"
@@ -5504,16 +5504,16 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "investment incentive",
       "tax incentive",
-      "export incentives"
+      "export incentives",
+      "investment incentive"
     ],
     "related": [
-      "aid policy",
+      "economic policy",
       "subsidies",
+      "aid policy",
       "technology transfer",
-      "foreign investment",
-      "economic policy"
+      "foreign investment"
     ],
     "members": [],
     "translations": {
@@ -5550,20 +5550,20 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "export subsidies",
-      "fisheries subsidies",
+      "fossil fuel subsidies",
       "import subsidies",
-      "domestic subsidies",
-      "fossil fuel subsidies"
+      "fisheries subsidies",
+      "export subsidies",
+      "domestic subsidies"
     ],
     "related": [
-      "peace clause",
       "tax incentive",
       "aid policy",
-      "incentives",
       "subsidization",
       "services negotiations",
-      "countervailing duty legislation"
+      "peace clause",
+      "countervailing duty legislation",
+      "incentives"
     ],
     "members": [],
     "translations": {
@@ -5840,18 +5840,18 @@
       "market access"
     ],
     "related": [
-      "international finance",
       "tariffs",
-      "WTO legal instruments",
+      "trade policy",
       "WTO principles",
-      "multilateral trading system",
-      "international cooperation",
       "international economy",
-      "GATT",
-      "trade relations",
-      "foreign trade policy",
+      "international cooperation",
+      "multilateral trading system",
+      "international finance",
       "harmonization work programme",
-      "trade policy"
+      "WTO legal instruments",
+      "foreign trade policy",
+      "trade relations",
+      "GATT"
     ],
     "members": [],
     "translations": {
@@ -5935,22 +5935,22 @@
       "trade"
     ],
     "narrower": [
-      "consumption abroad (Mode 2)",
       "commercial presence (Mode 3)",
       "movement of natural persons (Mode 4)",
+      "consumption abroad (Mode 2)",
       "cross-border supply (Mode 1)"
     ],
     "related": [
-      "services",
       "schedules of specific commitments",
-      "GATS",
-      "domestic regulations",
-      "enquiry points",
       "contact points",
+      "domestic regulations",
       "services negotiations",
       "services legislation",
+      "qualification requirements and procedures",
+      "GATS",
+      "enquiry points",
       "government procurement",
-      "qualification requirements and procedures"
+      "services"
     ],
     "members": [],
     "translations": {
@@ -5995,10 +5995,10 @@
     ],
     "narrower": [],
     "related": [
-      "schedules of concessions",
-      "trade balance",
+      "origin of goods",
       "government procurement",
-      "origin of goods"
+      "trade balance",
+      "schedules of concessions"
     ],
     "members": [],
     "translations": {
@@ -6047,9 +6047,9 @@
       "trade"
     ],
     "narrower": [
+      "exports",
       "countertrade",
       "trade volume",
-      "exports",
       "imports"
     ],
     "related": [
@@ -6097,11 +6097,11 @@
     ],
     "narrower": [],
     "related": [
-      "supply chain",
-      "market",
-      "market economy",
       "consumption",
-      "consumer demand"
+      "consumer demand",
+      "market economy",
+      "market",
+      "supply chain"
     ],
     "members": [],
     "translations": {
@@ -6152,9 +6152,9 @@
     ],
     "narrower": [],
     "related": [
-      "electronic commerce (joint initiative)",
       "electronic payments",
-      "digital economy"
+      "digital economy",
+      "electronic commerce (joint initiative)"
     ],
     "members": [],
     "translations": {
@@ -6201,28 +6201,28 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "licensing",
-      "export policy",
-      "market surveillance",
-      "trade preferences",
-      "trade-related investment measures",
-      "foreign trade policy",
       "trade promotion",
-      "import policy",
+      "trade preferences",
+      "market surveillance",
+      "foreign trade policy",
+      "trade-related investment measures",
       "state trading",
+      "import policy",
+      "export policy",
       "government procurement",
-      "export processing zones"
+      "export processing zones",
+      "licensing"
     ],
     "related": [
-      "trade financing",
       "trade barriers",
-      "tariff policy",
-      "trade liberalization",
-      "trade relations",
       "economic policy",
-      "trade policy review mechanism",
       "international trade",
-      "trade monitoring"
+      "trade financing",
+      "trade relations",
+      "trade monitoring",
+      "trade liberalization",
+      "trade policy review mechanism",
+      "tariff policy"
     ],
     "members": [],
     "translations": {
@@ -6276,10 +6276,10 @@
     ],
     "related": [
       "protectionism",
-      "export policy",
       "international cooperation",
+      "international trade",
       "trade relations",
-      "international trade"
+      "export policy"
     ],
     "members": [],
     "translations": {
@@ -6328,20 +6328,20 @@
       "tariff policy"
     ],
     "narrower": [
-      "MFN tariff",
       "nuisance tariff",
-      "applied tariff",
       "customs duties",
       "bound tariff",
-      "ad valorem tariff"
+      "applied tariff",
+      "ad valorem tariff",
+      "MFN tariff"
     ],
     "related": [
+      "customs unions",
+      "international trade",
       "schedules of concessions",
       "market access",
       "tariff measures",
-      "international trade",
-      "import restrictions",
-      "customs unions"
+      "import restrictions"
     ],
     "members": [],
     "translations": {
@@ -6444,11 +6444,11 @@
     ],
     "narrower": [],
     "related": [
-      "trade facilitation",
-      "trade negotiations",
-      "rules of origin",
       "certificates of origin",
-      "international trade"
+      "rules of origin",
+      "international trade",
+      "trade facilitation",
+      "trade negotiations"
     ],
     "members": [],
     "translations": {
@@ -6490,10 +6490,10 @@
     "narrower": [],
     "related": [
       "tariffs",
-      "schedules of concessions",
+      "non-tariff measures",
       "schedules of specific commitments",
       "trade barriers",
-      "non-tariff measures",
+      "schedules of concessions",
       "services negotiations"
     ],
     "members": [],
@@ -6539,13 +6539,13 @@
     ],
     "narrower": [],
     "related": [
-      "appellation of origin",
       "traceability",
-      "geographical indications",
-      "trade in goods",
       "trade description",
+      "certificates of origin",
+      "trade in goods",
+      "appellation of origin",
       "cumulation",
-      "certificates of origin"
+      "geographical indications"
     ],
     "members": [],
     "translations": {
@@ -6586,17 +6586,17 @@
       "international trade"
     ],
     "narrower": [
-      "preferential rules of origin",
-      "non-preferential rules of origin"
+      "non-preferential rules of origin",
+      "preferential rules of origin"
     ],
     "related": [
-      "appellation of origin",
-      "trade facilitation",
-      "cumulation",
-      "trade preferences",
-      "harmonization work programme",
       "certificates of origin",
-      "circumvention"
+      "harmonization work programme",
+      "trade preferences",
+      "trade facilitation",
+      "appellation of origin",
+      "circumvention",
+      "cumulation"
     ],
     "members": [],
     "translations": {
@@ -6650,15 +6650,15 @@
     "narrower": [],
     "related": [
       "tariffs",
-      "tariff concessions",
-      "export subsidies",
-      "market access",
-      "trade in goods",
       "tariff binding",
-      "tariff preferences",
       "MFN exemptions",
+      "tariff concessions",
+      "trade in goods",
+      "domestic support",
+      "export subsidies",
       "tariff negotiations",
-      "domestic support"
+      "market access",
+      "tariff preferences"
     ],
     "members": [],
     "translations": {
@@ -6706,19 +6706,19 @@
       "trade barriers"
     ],
     "narrower": [
+      "quantitative restrictions",
       "technical barriers to trade",
-      "tariff equivalents",
-      "quantitative restrictions"
+      "tariff equivalents"
     ],
     "related": [
       "import licensing",
+      "export licensing",
       "anti-dumping measures",
-      "export restrictions",
       "subsidies and countervailing measures",
       "market access",
-      "export licensing",
-      "import restrictions",
-      "safeguard measures"
+      "safeguard measures",
+      "export restrictions",
+      "import restrictions"
     ],
     "members": [],
     "translations": {
@@ -6780,14 +6780,14 @@
     ],
     "narrower": [],
     "related": [
-      "services",
-      "national treatment",
-      "market access",
-      "most-favoured nation treatment",
-      "domestic regulations",
-      "MFN exemptions",
       "trade in services",
-      "qualification requirements and procedures"
+      "MFN exemptions",
+      "domestic regulations",
+      "national treatment",
+      "qualification requirements and procedures",
+      "market access",
+      "services",
+      "most-favoured nation treatment"
     ],
     "members": [],
     "translations": {
@@ -6834,14 +6834,14 @@
     ],
     "narrower": [],
     "related": [
+      "trade in services",
       "subsidies",
-      "services",
+      "MFN exemptions",
+      "domestic regulations",
       "services legislation",
       "market access",
-      "domestic regulations",
-      "MFN exemptions",
-      "trade in services",
-      "government procurement"
+      "government procurement",
+      "services"
     ],
     "members": [],
     "translations": {
@@ -6881,12 +6881,12 @@
     ],
     "narrower": [],
     "related": [
-      "appellation of origin",
       "traceability",
-      "origin of goods",
       "certification",
+      "rules of origin",
+      "origin of goods",
       "harmonization work programme",
-      "rules of origin"
+      "appellation of origin"
     ],
     "members": [],
     "translations": {
@@ -6926,11 +6926,11 @@
     ],
     "narrower": [],
     "related": [
-      "consumer protection",
       "food safety",
-      "labelling",
+      "certificates of origin",
+      "consumer protection",
       "origin of goods",
-      "certificates of origin"
+      "labelling"
     ],
     "members": [],
     "translations": {
@@ -7020,8 +7020,8 @@
     "narrower": [],
     "related": [
       "rules of origin",
-      "certificates of origin",
-      "origin of goods"
+      "origin of goods",
+      "certificates of origin"
     ],
     "members": [],
     "translations": {
@@ -7119,8 +7119,8 @@
     "narrower": [],
     "related": [
       "rules of origin",
-      "countervailing duties",
       "anti-dumping duties",
+      "countervailing duties",
       "anti-circumvention"
     ],
     "members": [],
@@ -7167,11 +7167,11 @@
       "reciprocal trade preferences"
     ],
     "related": [
-      "national treatment",
-      "most-favoured nation treatment",
-      "tariff preferences",
       "preferential trade area",
-      "rules of origin"
+      "rules of origin",
+      "national treatment",
+      "tariff preferences",
+      "most-favoured nation treatment"
     ],
     "members": [],
     "translations": {
@@ -7211,12 +7211,12 @@
     ],
     "narrower": [],
     "related": [
-      "regional trade agreement",
+      "preferential trade area",
+      "customs unions",
+      "MFN exemptions",
       "reciprocal trade preferences",
       "preference-granting member",
-      "preferential trade area",
-      "MFN exemptions",
-      "customs unions"
+      "regional trade agreement"
     ],
     "members": [],
     "translations": {
@@ -7256,8 +7256,8 @@
     ],
     "narrower": [],
     "related": [
-      "most-favoured nation treatment",
-      "countervailing duties"
+      "countervailing duties",
+      "most-favoured nation treatment"
     ],
     "members": [],
     "translations": {
@@ -7305,13 +7305,13 @@
     ],
     "narrower": [],
     "related": [
+      "regional integration",
       "non-reciprocal trade preferences",
       "rendez-vous clause",
       "regional development",
-      "reciprocal trade preferences",
-      "preferential rules of origin",
       "enabling clause",
-      "regional integration"
+      "preferential rules of origin",
+      "reciprocal trade preferences"
     ],
     "members": [],
     "translations": {
@@ -7353,11 +7353,11 @@
     ],
     "narrower": [],
     "related": [
-      "tariffs",
       "customs",
+      "tariffs",
+      "preferential rules of origin",
       "reciprocal trade preferences",
-      "tariff policy",
-      "preferential rules of origin"
+      "tariff policy"
     ],
     "members": [],
     "translations": {
@@ -7414,13 +7414,13 @@
     ],
     "narrower": [],
     "related": [
-      "MFN tariff",
-      "schedules of concessions",
       "schedules of specific commitments",
+      "schedules of concessions",
+      "services negotiations",
+      "MFN tariff",
       "preferential rules of origin",
-      "most-favoured nation treatment",
       "trade liberalization",
-      "services negotiations"
+      "most-favoured nation treatment"
     ],
     "members": [],
     "translations": {
@@ -7508,9 +7508,9 @@
       "Global System of Trade Preferences"
     ],
     "related": [
+      "customs unions",
       "preferential rules of origin",
       "reciprocity",
-      "customs unions",
       "regional trade agreement"
     ],
     "members": [],
@@ -7569,12 +7569,12 @@
     ],
     "narrower": [],
     "related": [
-      "MFN tariff",
-      "schedules of specific commitments",
-      "trade preferences",
       "non-preferential rules of origin",
+      "schedules of specific commitments",
+      "MFN exemptions",
+      "trade preferences",
       "enabling clause",
-      "MFN exemptions"
+      "MFN tariff"
     ],
     "members": [],
     "translations": {
@@ -7667,8 +7667,8 @@
     ],
     "narrower": [],
     "related": [
-      "commodity trade",
-      "international agreement"
+      "international agreement",
+      "commodity trade"
     ],
     "members": [],
     "translations": {
@@ -7712,12 +7712,12 @@
     ],
     "narrower": [],
     "related": [
-      "licensing",
-      "technical standards",
       "schedules of specific commitments",
+      "trade in services",
       "government procurement legislation",
       "domestic regulations",
-      "trade in services"
+      "technical standards",
+      "licensing"
     ],
     "members": [],
     "translations": {
@@ -7758,9 +7758,9 @@
     ],
     "narrower": [],
     "related": [
+      "services negotiations",
       "services",
-      "trade in services",
-      "services negotiations"
+      "trade in services"
     ],
     "members": [],
     "translations": {
@@ -7841,10 +7841,10 @@
     "narrower": [],
     "related": [
       "information exchange",
+      "trade in services",
       "trade facilitation",
       "technical cooperation",
-      "trade-related aspects of intellectual property rights",
-      "trade in services"
+      "trade-related aspects of intellectual property rights"
     ],
     "members": [],
     "translations": {
@@ -7893,8 +7893,8 @@
     "narrower": [],
     "related": [
       "information exchange",
-      "trade in services",
-      "transparency"
+      "transparency",
+      "trade in services"
     ],
     "members": [],
     "translations": {
@@ -7936,8 +7936,8 @@
     ],
     "narrower": [],
     "related": [
-      "information management",
-      "information and communication technology"
+      "information and communication technology",
+      "information management"
     ],
     "members": [],
     "translations": {
@@ -8187,9 +8187,9 @@
     ],
     "narrower": [],
     "related": [
-      "trade flows",
       "economic indicators",
-      "trade in goods"
+      "trade in goods",
+      "trade flows"
     ],
     "members": [],
     "translations": {
@@ -8277,14 +8277,14 @@
     ],
     "narrower": [],
     "related": [
-      "export regulations",
       "export promotion",
-      "export tax",
-      "export restrictions",
-      "export policy",
-      "export financing",
       "export licensing",
-      "export processing zones"
+      "export regulations",
+      "export tax",
+      "export policy",
+      "export restrictions",
+      "export processing zones",
+      "export financing"
     ],
     "members": [],
     "translations": {
@@ -8334,10 +8334,10 @@
     "narrower": [],
     "related": [
       "import licensing",
-      "tariff escalation",
+      "import tax",
       "import subsidies",
       "import regulations",
-      "import tax",
+      "tariff escalation",
       "import policy",
       "import restrictions"
     ],
@@ -8479,20 +8479,20 @@
       "trade policy"
     ],
     "narrower": [
-      "export promotion",
       "export performance",
-      "circumvention"
+      "circumvention",
+      "export promotion"
     ],
     "related": [
-      "export tax",
-      "export restrictions",
       "export prices",
-      "tariff policy",
-      "foreign trade policy",
-      "export licensing",
-      "exports",
       "export licences",
-      "export credit"
+      "export licensing",
+      "export credit",
+      "foreign trade policy",
+      "export tax",
+      "exports",
+      "export restrictions",
+      "tariff policy"
     ],
     "members": [],
     "translations": {
@@ -8535,10 +8535,10 @@
     ],
     "narrower": [],
     "related": [
-      "export licences",
-      "export licensing",
       "exports",
-      "export restrictions"
+      "export restrictions",
+      "export licensing",
+      "export licences"
     ],
     "members": [],
     "translations": {
@@ -8582,8 +8582,8 @@
     ],
     "narrower": [],
     "related": [
-      "export policy",
-      "exports"
+      "exports",
+      "export policy"
     ],
     "members": [],
     "translations": {
@@ -8626,17 +8626,17 @@
       "trade barriers"
     ],
     "narrower": [
+      "orderly marketing arrangement",
       "voluntary export restraints",
-      "export quotas",
-      "orderly marketing arrangement"
+      "export quotas"
     ],
     "related": [
-      "export regulations",
       "non-tariff measures",
-      "export policy",
+      "export licences",
       "export licensing",
+      "export regulations",
       "exports",
-      "export licences"
+      "export policy"
     ],
     "members": [],
     "translations": {
@@ -8679,9 +8679,9 @@
     "related": [
       "export promotion",
       "export subsidies",
-      "export incentives",
+      "exports",
       "competition",
-      "exports"
+      "export incentives"
     ],
     "members": [],
     "translations": {
@@ -8722,11 +8722,11 @@
     "narrower": [],
     "related": [
       "export subsidies",
-      "export incentives",
-      "export financing",
-      "trade promotion",
       "exports",
-      "export processing zones"
+      "trade promotion",
+      "export incentives",
+      "export processing zones",
+      "export financing"
     ],
     "members": [],
     "translations": {
@@ -8765,22 +8765,22 @@
       "trade policy"
     ],
     "narrower": [
-      "anti-circumvention",
-      "import performance",
       "import promotion",
-      "import deposit"
+      "anti-circumvention",
+      "import deposit",
+      "import performance"
     ],
     "related": [
       "import licensing",
-      "import licensing legislation",
       "protectionism",
-      "import subsidies",
-      "imports",
-      "tariff policy",
-      "import prices",
       "import tax",
+      "import licensing legislation",
+      "import licences",
+      "import subsidies",
+      "import prices",
+      "imports",
       "import restrictions",
-      "import licences"
+      "tariff policy"
     ],
     "members": [],
     "translations": {
@@ -8823,10 +8823,10 @@
     ],
     "narrower": [],
     "related": [
-      "import licensing",
-      "import restrictions",
       "import licences",
-      "imports"
+      "import licensing",
+      "imports",
+      "import restrictions"
     ],
     "members": [],
     "translations": {
@@ -8884,10 +8884,10 @@
     ],
     "narrower": [],
     "related": [
-      "import policy",
       "balance of payments",
-      "import restrictions",
-      "imports"
+      "import policy",
+      "imports",
+      "import restrictions"
     ],
     "members": [],
     "translations": {
@@ -8933,8 +8933,8 @@
     ],
     "narrower": [],
     "related": [
-      "import policy",
       "import promotion",
+      "import policy",
       "imports"
     ],
     "members": [],
@@ -8981,16 +8981,16 @@
       "safeguards"
     ],
     "related": [
-      "tariffs",
       "balance of payments",
-      "tariffication",
-      "non-tariff measures",
-      "imports",
+      "tariffs",
       "import deposit",
-      "import regulations",
+      "non-tariff measures",
       "import tax",
-      "import policy",
       "import licences",
+      "import regulations",
+      "import policy",
+      "imports",
+      "tariffication",
       "safeguard measures"
     ],
     "members": [],
@@ -9223,9 +9223,9 @@
     ],
     "narrower": [],
     "related": [
-      "trade facilitation",
+      "standardizing bodies",
       "quality control",
-      "standardizing bodies"
+      "trade facilitation"
     ],
     "members": [],
     "translations": {
@@ -9273,11 +9273,11 @@
     ],
     "narrower": [],
     "related": [
-      "WTO schedules",
       "trade facilitation",
       "notification obligation",
-      "enquiry points",
-      "trade monitoring"
+      "trade monitoring",
+      "WTO schedules",
+      "enquiry points"
     ],
     "members": [],
     "translations": {
@@ -9325,8 +9325,8 @@
     ],
     "narrower": [],
     "related": [
-      "trade relations",
-      "customs unions"
+      "customs unions",
+      "trade relations"
     ],
     "members": [],
     "translations": {
@@ -9385,16 +9385,16 @@
       "WTO mandate"
     ],
     "narrower": [
-      "renegotiations",
+      "services negotiations",
       "tariff negotiations",
-      "services negotiations"
+      "renegotiations"
     ],
     "related": [
-      "non-discrimination",
       "ministerial conference",
+      "non-discrimination",
+      "trade agreement",
       "harmonization work programme",
-      "trade relations",
-      "trade agreement"
+      "trade relations"
     ],
     "members": [],
     "translations": {
@@ -9439,19 +9439,19 @@
       "trade relations"
     ],
     "narrower": [
-      "regional trade agreement",
-      "GATS",
       "MFA",
+      "free trade agreement",
       "GATT",
-      "free trade agreement"
+      "GATS",
+      "regional trade agreement"
     ],
     "related": [
-      "WTO legal instruments",
-      "economic agreement",
-      "common market",
-      "trade negotiations",
       "international agreement",
-      "standstill clause"
+      "standstill clause",
+      "WTO legal instruments",
+      "trade negotiations",
+      "common market",
+      "economic agreement"
     ],
     "members": [],
     "translations": {
@@ -9491,8 +9491,8 @@
     ],
     "narrower": [],
     "related": [
-      "economic agreement",
-      "economic integration"
+      "economic integration",
+      "economic agreement"
     ],
     "members": [],
     "translations": {
@@ -9602,8 +9602,8 @@
     "narrower": [],
     "related": [
       "international trade",
-      "WTO legal instruments",
-      "WTO principles"
+      "WTO principles",
+      "WTO legal instruments"
     ],
     "members": [],
     "translations": {
@@ -9646,11 +9646,11 @@
       "trade relations"
     ],
     "narrower": [
-      "certifying bodies",
-      "enquiry points",
-      "notification authority",
       "standardizing bodies",
-      "contact points"
+      "contact points",
+      "notification authority",
+      "certifying bodies",
+      "enquiry points"
     ],
     "related": [
       "trade remedies"
@@ -9737,8 +9737,8 @@
       "association agreement"
     ],
     "related": [
-      "international law",
       "trade agreement",
+      "international law",
       "commodity agreement"
     ],
     "members": [],
@@ -9781,10 +9781,10 @@
       "European Economic Area"
     ],
     "related": [
-      "trade agreement",
       "economic cooperation",
-      "economic integration agreement",
-      "economic policy"
+      "trade agreement",
+      "economic policy",
+      "economic integration agreement"
     ],
     "members": [],
     "translations": {
@@ -9965,8 +9965,8 @@
       "SAFTA"
     ],
     "related": [
-      "trade liberalization",
       "free trade area",
+      "trade liberalization",
       "European Economic Area"
     ],
     "members": [],
@@ -10049,9 +10049,9 @@
     ],
     "narrower": [],
     "related": [
+      "free trade agreement",
       "trade liberalization",
-      "tariff preferences",
-      "free trade agreement"
+      "tariff preferences"
     ],
     "members": [],
     "translations": {
@@ -10094,10 +10094,10 @@
     ],
     "narrower": [],
     "related": [
+      "trade policy",
       "trade barriers",
       "free trade area",
       "MFN exemptions",
-      "trade policy",
       "free trade agreement"
     ],
     "members": [],
@@ -10265,8 +10265,8 @@
     ],
     "narrower": [],
     "related": [
-      "regional trade agreement",
-      "regional integration"
+      "regional integration",
+      "regional trade agreement"
     ],
     "members": [],
     "translations": {
@@ -10396,15 +10396,15 @@
     ],
     "narrower": [],
     "related": [
-      "Global System of Trade Preferences",
-      "special and differential treatment",
       "non-reciprocal trade preferences",
-      "least developed countries",
-      "regional trade agreement",
-      "developing countries",
+      "Global System of Trade Preferences",
       "Generalized System of Preferences",
-      "most-favoured nation treatment",
-      "tariff preferences"
+      "special and differential treatment",
+      "least developed countries",
+      "tariff preferences",
+      "developing countries",
+      "regional trade agreement",
+      "most-favoured nation treatment"
     ],
     "members": [],
     "translations": {
@@ -10514,13 +10514,13 @@
     ],
     "narrower": [
       "free trade area",
+      "regional integration",
       "preferential trade area",
-      "customs unions",
-      "regional integration"
+      "customs unions"
     ],
     "related": [
-      "economic integration agreement",
-      "common market"
+      "common market",
+      "economic integration agreement"
     ],
     "members": [],
     "translations": {
@@ -10659,8 +10659,8 @@
     ],
     "narrower": [],
     "related": [
-      "standards",
       "code of good practice",
+      "standards",
       "standardisation"
     ],
     "members": [],
@@ -10718,11 +10718,11 @@
     ],
     "narrower": [],
     "related": [
-      "technical assistance",
-      "training",
+      "contact points",
       "technical cooperation",
       "enquiry points",
-      "contact points"
+      "technical assistance",
+      "training"
     ],
     "members": [],
     "translations": {
@@ -10774,10 +10774,10 @@
     ],
     "narrower": [],
     "related": [
-      "technology transfer",
-      "contact points",
       "innovation",
-      "counterfeiting"
+      "contact points",
+      "counterfeiting",
+      "technology transfer"
     ],
     "members": [],
     "translations": {
@@ -10819,9 +10819,9 @@
     ],
     "narrower": [],
     "related": [
-      "information exchange",
+      "technical assistance",
       "contact points",
-      "technical assistance"
+      "information exchange"
     ],
     "members": [],
     "translations": {
@@ -10869,15 +10869,15 @@
     ],
     "narrower": [],
     "related": [
-      "product quality",
+      "quality requirements",
+      "certificates of origin",
       "phytosanitary certificates",
+      "product quality",
       "ecolabelling",
+      "conformity assessment",
       "certifying bodies",
       "labelling",
-      "conformity assessment",
-      "quality requirements",
-      "health certificates",
-      "certificates of origin"
+      "health certificates"
     ],
     "members": [],
     "translations": {
@@ -10931,20 +10931,20 @@
       "technical regulations"
     ],
     "narrower": [
+      "production standards",
+      "accounting standards",
+      "marketing standards",
+      "food standards",
       "technical standards",
       "safety standards",
-      "food standards",
-      "marketing standards",
-      "labour standards",
-      "accounting standards",
       "ISPM 15",
-      "quality standards",
-      "production standards"
+      "labour standards",
+      "quality standards"
     ],
     "related": [
-      "technical barriers to trade",
+      "standardizing bodies",
       "code of good practice",
-      "standardizing bodies"
+      "technical barriers to trade"
     ],
     "members": [],
     "translations": {
@@ -10991,9 +10991,9 @@
     ],
     "narrower": [],
     "related": [
+      "standardizing bodies",
       "standards",
-      "technical barriers to trade",
-      "standardizing bodies"
+      "technical barriers to trade"
     ],
     "members": [],
     "translations": {
@@ -11035,11 +11035,11 @@
     "narrower": [],
     "related": [
       "fair competition",
-      "non-discrimination",
       "trade barriers",
-      "tariff policy",
+      "non-discrimination",
       "foreign trade policy",
-      "import policy"
+      "import policy",
+      "tariff policy"
     ],
     "members": [],
     "translations": {
@@ -11094,19 +11094,19 @@
       "trade policy"
     ],
     "narrower": [
-      "special compulsory licensing",
+      "voluntary licensing",
       "import licensing",
       "export licensing",
-      "voluntary licensing"
+      "special compulsory licensing"
     ],
     "related": [
-      "intellectual property legislation",
-      "patent law",
-      "tariff equivalents",
       "trade barriers",
-      "domestic regulations",
+      "patent law",
       "intellectual property",
+      "domestic regulations",
+      "intellectual property legislation",
       "qualification requirements and procedures",
+      "tariff equivalents",
       "licences"
     ],
     "members": [],
@@ -11173,10 +11173,10 @@
     ],
     "narrower": [],
     "related": [
-      "trade barriers",
-      "border measures",
+      "intellectual property",
       "sanctions",
-      "intellectual property"
+      "trade barriers",
+      "border measures"
     ],
     "members": [],
     "translations": {
@@ -11224,15 +11224,15 @@
     ],
     "narrower": [
       "dumping",
-      "restrictive business practices",
-      "trade discrimination",
+      "monopolies",
       "subsidization",
-      "monopolies"
+      "restrictive business practices",
+      "trade discrimination"
     ],
     "related": [
       "consumer protection",
-      "trade barriers",
-      "antitrust legislation"
+      "antitrust legislation",
+      "trade barriers"
     ],
     "members": [],
     "translations": {
@@ -11290,9 +11290,9 @@
     ],
     "narrower": [],
     "related": [
+      "domestic industry",
       "trade barriers",
-      "trade-related investment measures",
-      "domestic industry"
+      "trade-related investment measures"
     ],
     "members": [],
     "translations": {
@@ -11544,10 +11544,10 @@
     "narrower": [],
     "related": [
       "import licensing",
-      "import licensing legislation",
       "import regulations",
       "import policy",
-      "import restrictions"
+      "import restrictions",
+      "import licensing legislation"
     ],
     "members": [],
     "translations": {
@@ -11600,12 +11600,12 @@
     ],
     "narrower": [],
     "related": [
-      "emergency measures",
-      "safeguards",
       "sunset clause",
       "non-tariff measures",
-      "injury",
-      "import restrictions"
+      "emergency measures",
+      "safeguards",
+      "import restrictions",
+      "injury"
     ],
     "members": [],
     "translations": {
@@ -11698,8 +11698,8 @@
     ],
     "narrower": [],
     "related": [
-      "tariff equivalents",
-      "quantitative restrictions"
+      "quantitative restrictions",
+      "tariff equivalents"
     ],
     "members": [],
     "translations": {
@@ -11738,13 +11738,13 @@
       "import restrictions"
     ],
     "narrower": [
-      "special agriculture safeguard (SSG)",
-      "special safeguard mechanism (SSM)"
+      "special safeguard mechanism (SSM)",
+      "special agriculture safeguard (SSG)"
     ],
     "related": [
+      "safeguard measures",
       "safeguards legislation",
-      "injury",
-      "safeguard measures"
+      "injury"
     ],
     "members": [],
     "translations": {
@@ -11784,11 +11784,11 @@
     ],
     "narrower": [],
     "related": [
-      "tariff quotas",
       "international convention",
       "export quotas",
+      "import quotas",
       "non-automatic import licensing",
-      "import quotas"
+      "tariff quotas"
     ],
     "members": [],
     "translations": {
@@ -11869,10 +11869,10 @@
     ],
     "narrower": [],
     "related": [
-      "injury",
+      "domestic industry",
       "safeguard actions",
       "safeguards",
-      "domestic industry"
+      "injury"
     ],
     "members": [],
     "translations": {
@@ -11931,10 +11931,10 @@
     "narrower": [],
     "related": [
       "safeguards legislation",
-      "safeguards",
-      "subsidies and countervailing measures",
-      "domestic industry",
       "countervailing duty legislation",
+      "subsidies and countervailing measures",
+      "safeguards",
+      "domestic industry",
       "safeguard measures"
     ],
     "members": [],
@@ -12031,8 +12031,8 @@
     ],
     "narrower": [],
     "related": [
-      "developing countries",
-      "agricultural policy"
+      "agricultural policy",
+      "developing countries"
     ],
     "members": [],
     "translations": {
@@ -12072,26 +12072,26 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "public food stockholding (PSH)",
       "sanitary and phytosanitary measures",
-      "veterinary inspection",
       "phytosanitary inspection",
       "fisheries policy",
+      "public food stockholding (PSH)",
+      "veterinary inspection",
       "agricultural reform"
     ],
     "related": [
-      "peace clause",
-      "agricultural trade",
-      "special agriculture safeguard (SSG)",
       "agricultural production",
-      "agricultural services",
-      "agriculture (activity)",
-      "agriculture (sector)",
-      "food security",
-      "agricultural development",
       "special safeguard mechanism (SSM)",
       "aggregate measurement of support (amber box)",
-      "agricultural legislation"
+      "food security",
+      "agricultural services",
+      "agricultural development",
+      "peace clause",
+      "agriculture (sector)",
+      "agriculture (activity)",
+      "agricultural legislation",
+      "special agriculture safeguard (SSG)",
+      "agricultural trade"
     ],
     "members": [],
     "translations": {
@@ -12132,12 +12132,12 @@
     ],
     "narrower": [],
     "related": [
-      "Global System of Trade Preferences",
       "financial aid",
-      "special and differential treatment",
-      "Generalized System of Preferences",
       "capacity building",
+      "Global System of Trade Preferences",
       "special safeguard mechanism (SSM)",
+      "Generalized System of Preferences",
+      "special and differential treatment",
       "enabling clause"
     ],
     "members": [],
@@ -12190,10 +12190,10 @@
     ],
     "narrower": [],
     "related": [
+      "export policy",
       "export restrictions",
-      "export regulations",
       "export licensing",
-      "export policy"
+      "export regulations"
     ],
     "members": [],
     "translations": {
@@ -12237,8 +12237,8 @@
     ],
     "narrower": [],
     "related": [
-      "export licensing",
-      "quantitative restrictions"
+      "quantitative restrictions",
+      "export licensing"
     ],
     "members": [],
     "translations": {
@@ -12361,8 +12361,8 @@
       "anti-dumping duties"
     ],
     "related": [
-      "non-tariff measures",
-      "dumping"
+      "dumping",
+      "non-tariff measures"
     ],
     "members": [],
     "translations": {
@@ -12461,9 +12461,9 @@
       "countervailing duties"
     ],
     "related": [
-      "injury",
       "subsidization",
-      "non-tariff measures"
+      "non-tariff measures",
+      "injury"
     ],
     "members": [],
     "translations": {
@@ -12511,13 +12511,13 @@
     ],
     "narrower": [],
     "related": [
-      "code of good practice",
+      "domestic regulations",
       "trade concerns",
+      "environmental protection",
+      "standards",
       "conformity assessment",
       "technical regulations",
-      "domestic regulations",
-      "environmental protection",
-      "standards"
+      "code of good practice"
     ],
     "members": [],
     "translations": {
@@ -12562,8 +12562,8 @@
     ],
     "narrower": [],
     "related": [
-      "Generalized System of Preferences",
-      "quantitative restrictions"
+      "quantitative restrictions",
+      "Generalized System of Preferences"
     ],
     "members": [],
     "translations": {
@@ -12614,12 +12614,12 @@
       "international cooperation"
     ],
     "narrower": [
-      "Lome convention",
-      "Rotterdam convention",
       "United Nations Convention against Illicit Traffic in Narcotic Drugs and Psychotropic Substances",
       "Basel convention",
       "Convention on International Trade in Endangered Species of Wild Fauna and Flora (CITES)",
-      "Stockholm Convention on Persistent Organic Pollutants"
+      "Stockholm Convention on Persistent Organic Pollutants",
+      "Rotterdam convention",
+      "Lome convention"
     ],
     "related": [
       "quantitative restrictions"
@@ -12665,12 +12665,12 @@
       "regulations"
     ],
     "narrower": [
-      "code of good practice",
+      "certification",
+      "standardisation",
       "qualification requirements and procedures",
       "conformity assessment",
-      "certification",
       "standards",
-      "standardisation"
+      "code of good practice"
     ],
     "related": [
       "technical barriers to trade"
@@ -12722,15 +12722,15 @@
     "narrower": [
       "plant protection",
       "radiation protection",
-      "territory protection",
       "animal protection",
-      "fire protection"
+      "fire protection",
+      "territory protection"
     ],
     "related": [
-      "degradation of the environment",
       "sanitary and phytosanitary measures",
-      "technical barriers to trade",
-      "ecolabelling"
+      "ecolabelling",
+      "degradation of the environment",
+      "technical barriers to trade"
     ],
     "members": [],
     "translations": {
@@ -12785,17 +12785,17 @@
     ],
     "narrower": [],
     "related": [
-      "licensing",
-      "technical standards",
-      "services",
       "schedules of specific commitments",
-      "sunset clause",
-      "national treatment",
-      "technical barriers to trade",
-      "services domestic regulation (joint initiative)",
-      "services negotiations",
       "trade in services",
-      "qualification requirements and procedures"
+      "technical barriers to trade",
+      "technical standards",
+      "licensing",
+      "services negotiations",
+      "national treatment",
+      "qualification requirements and procedures",
+      "services",
+      "sunset clause",
+      "services domestic regulation (joint initiative)"
     ],
     "members": [],
     "translations": {
@@ -12965,12 +12965,12 @@
     "narrower": [],
     "related": [
       "safeguards legislation",
-      "local content requirements",
-      "domestic subsidies",
-      "domestic production",
       "injury",
+      "tariff escalation",
+      "domestic production",
+      "domestic subsidies",
       "countervailing duty legislation",
-      "tariff escalation"
+      "local content requirements"
     ],
     "members": [],
     "translations": {
@@ -13010,10 +13010,10 @@
     ],
     "narrower": [],
     "related": [
-      "injury",
+      "domestic industry",
       "countervailing actions",
       "subsidies",
-      "domestic industry"
+      "injury"
     ],
     "members": [],
     "translations": {
@@ -13229,18 +13229,18 @@
       "consumption"
     ],
     "narrower": [
-      "trade description",
-      "consumer information"
+      "consumer information",
+      "trade description"
     ],
     "related": [
-      "food contamination",
       "traceability",
-      "safety",
+      "food contamination",
+      "unfair competition",
+      "advertising",
       "public health",
       "commercial law",
       "counterfeiting",
-      "advertising",
-      "unfair competition"
+      "safety"
     ],
     "members": [],
     "translations": {
@@ -13280,9 +13280,9 @@
     ],
     "narrower": [],
     "related": [
+      "export prices",
       "zeroing",
       "anti-dumping measures",
-      "export prices",
       "anti-dumping legislation"
     ],
     "members": [],
@@ -13323,8 +13323,8 @@
     ],
     "narrower": [],
     "related": [
-      "subsidies",
-      "subsidies and countervailing measures"
+      "subsidies and countervailing measures",
+      "subsidies"
     ],
     "members": [],
     "translations": {
@@ -13555,9 +13555,9 @@
     ],
     "narrower": [],
     "related": [
+      "dumping",
       "anti-dumping actions",
-      "competition policy",
-      "dumping"
+      "competition policy"
     ],
     "members": [],
     "translations": {
@@ -13697,13 +13697,13 @@
       "WTO principles"
     ],
     "narrower": [
-      "most-favoured nation treatment",
-      "national treatment"
+      "national treatment",
+      "most-favoured nation treatment"
     ],
     "related": [
       "protectionism",
-      "trade negotiations",
-      "trade discrimination"
+      "trade discrimination",
+      "trade negotiations"
     ],
     "members": [],
     "translations": {
@@ -13788,8 +13788,8 @@
     "narrower": [],
     "related": [
       "state aid",
-      "export insurance",
       "export competition",
+      "export insurance",
       "export policy",
       "export incentives"
     ],
@@ -13831,9 +13831,9 @@
     ],
     "narrower": [],
     "related": [
+      "international agreement",
       "international sanctions",
-      "international cooperation",
-      "international agreement"
+      "international cooperation"
     ],
     "members": [],
     "translations": {
@@ -13958,30 +13958,30 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "state aid",
-      "monetary policy",
-      "price policy",
-      "protectionism",
-      "structural adjustment",
-      "support policy",
-      "local content requirements",
-      "economic reform",
-      "state ownership",
-      "development plans",
       "sustainable development",
-      "privatization"
+      "protectionism",
+      "support policy",
+      "price policy",
+      "economic reform",
+      "state aid",
+      "state ownership",
+      "privatization",
+      "monetary policy",
+      "development plans",
+      "local content requirements",
+      "structural adjustment"
     ],
     "related": [
-      "economic development",
       "fiscal policy",
-      "economic agreement",
-      "industrial policy",
-      "economic sanctions",
+      "trade policy",
       "budget policy",
-      "economic legislation",
-      "incentives",
+      "economic development",
+      "industrial policy",
       "economic cooperation",
-      "trade policy"
+      "economic agreement",
+      "economic sanctions",
+      "economic legislation",
+      "incentives"
     ],
     "members": [],
     "translations": {
@@ -14024,8 +14024,8 @@
     ],
     "narrower": [],
     "related": [
-      "preferential rules of origin",
       "trade preferences",
+      "preferential rules of origin",
       "tariff preferences",
       "Generalized System of Preferences"
     ],
@@ -14078,13 +14078,13 @@
     ],
     "narrower": [],
     "related": [
-      "MFN tariff",
-      "schedules of concessions",
-      "Generalized System of Preferences",
-      "trade preferences",
-      "free trade area",
       "preferential trade area",
-      "enabling clause"
+      "free trade area",
+      "trade preferences",
+      "Generalized System of Preferences",
+      "schedules of concessions",
+      "enabling clause",
+      "MFN tariff"
     ],
     "members": [],
     "translations": {
@@ -14487,10 +14487,10 @@
     ],
     "narrower": [],
     "related": [
+      "plant protection",
       "endangered species",
-      "Convention on International Trade in Endangered Species of Wild Fauna and Flora (CITES)",
       "animal protection",
-      "plant protection"
+      "Convention on International Trade in Endangered Species of Wild Fauna and Flora (CITES)"
     ],
     "members": [],
     "translations": {
@@ -14535,8 +14535,8 @@
     ],
     "narrower": [],
     "related": [
-      "pollution",
-      "Stockholm Convention on Persistent Organic Pollutants"
+      "Stockholm Convention on Persistent Organic Pollutants",
+      "pollution"
     ],
     "members": [],
     "translations": {
@@ -14576,11 +14576,11 @@
     ],
     "narrower": [],
     "related": [
-      "training",
       "information exchange",
       "training programmes",
       "technical cooperation",
-      "WTO membership"
+      "WTO membership",
+      "training"
     ],
     "members": [],
     "translations": {
@@ -14827,22 +14827,22 @@
     "broader": [],
     "narrower": [
       "safeguards legislation",
-      "antitrust legislation",
-      "health legislation",
-      "import licensing legislation",
-      "intellectual property legislation",
-      "preshipment inspection legislation",
-      "customs valuation legislation",
-      "government procurement legislation",
-      "social legislation",
-      "economic legislation",
-      "industrial legislation",
-      "anti-dumping legislation",
       "labour legislation",
-      "environmental legislation",
+      "antitrust legislation",
+      "preshipment inspection legislation",
+      "social legislation",
+      "government procurement legislation",
+      "agricultural legislation",
+      "anti-dumping legislation",
       "services legislation",
+      "intellectual property legislation",
+      "environmental legislation",
+      "customs valuation legislation",
       "countervailing duty legislation",
-      "agricultural legislation"
+      "industrial legislation",
+      "economic legislation",
+      "health legislation",
+      "import licensing legislation"
     ],
     "related": [
       "law",
@@ -14989,8 +14989,8 @@
     ],
     "narrower": [],
     "related": [
-      "special and differential treatment",
-      "food aid"
+      "food aid",
+      "special and differential treatment"
     ],
     "members": [],
     "translations": {
@@ -15051,12 +15051,12 @@
     "narrower": [],
     "related": [
       "financial aid",
-      "special and differential treatment",
+      "capacity building",
+      "LDC graduation",
       "non-reciprocal trade preferences",
       "Generalized System of Preferences",
-      "capacity building",
-      "enabling clause",
-      "LDC graduation"
+      "special and differential treatment",
+      "enabling clause"
     ],
     "members": [],
     "translations": {
@@ -15207,10 +15207,10 @@
     "narrower": [],
     "related": [
       "food stocks",
-      "food security",
       "net-food importing countries",
       "public food stockholding (PSH)",
-      "food resources"
+      "food resources",
+      "food security"
     ],
     "members": [],
     "translations": {
@@ -15271,11 +15271,11 @@
     ],
     "narrower": [],
     "related": [
-      "least developed countries",
-      "developing countries",
-      "Generalized System of Preferences",
       "net-food importing countries",
-      "enabling clause"
+      "Generalized System of Preferences",
+      "least developed countries",
+      "enabling clause",
+      "developing countries"
     ],
     "members": [],
     "translations": {
@@ -15343,15 +15343,15 @@
     ],
     "narrower": [],
     "related": [
-      "special and differential treatment",
-      "least developed countries",
-      "duty free treatment",
-      "developing countries",
-      "quota-free treatment",
-      "tariff quotas",
-      "tariff preferences",
       "preferential trade area",
-      "enabling clause"
+      "quota-free treatment",
+      "special and differential treatment",
+      "tariff quotas",
+      "least developed countries",
+      "enabling clause",
+      "tariff preferences",
+      "developing countries",
+      "duty free treatment"
     ],
     "members": [],
     "translations": {
@@ -15398,9 +15398,9 @@
     ],
     "narrower": [],
     "related": [
+      "least developed countries",
       "developing countries",
-      "financing",
-      "least developed countries"
+      "financing"
     ],
     "members": [],
     "translations": {
@@ -15538,10 +15538,10 @@
     ],
     "narrower": [],
     "related": [
-      "internal taxes",
       "schedules of specific commitments",
       "domestic regulations",
       "trade preferences",
+      "internal taxes",
       "trade-related investment measures"
     ],
     "members": [],
@@ -15585,9 +15585,9 @@
     ],
     "narrower": [],
     "related": [
-      "most-favoured nation treatment",
       "MFN exemptions",
-      "tariff preferences"
+      "tariff preferences",
+      "most-favoured nation treatment"
     ],
     "members": [],
     "translations": {
@@ -15636,10 +15636,10 @@
     ],
     "narrower": [],
     "related": [
-      "investment",
-      "economic development",
       "national treatment",
-      "local content requirements"
+      "local content requirements",
+      "investment",
+      "economic development"
     ],
     "members": [],
     "translations": {
@@ -15732,9 +15732,9 @@
       "WTO legal instruments"
     ],
     "narrower": [
-      "schedules of concessions",
+      "coverage schedules",
       "schedules of specific commitments",
-      "coverage schedules"
+      "schedules of concessions"
     ],
     "related": [
       "transparency"
@@ -15778,13 +15778,13 @@
       "WTO mandate"
     ],
     "narrower": [
-      "trade policy review mechanism",
+      "trade concerns mechanism",
       "surveillance mechanism",
-      "trade concerns mechanism"
+      "trade policy review mechanism"
     ],
     "related": [
-      "trade policy",
       "market surveillance",
+      "trade policy",
       "transparency"
     ],
     "members": [],
@@ -15892,11 +15892,11 @@
     ],
     "narrower": [],
     "related": [
-      "trade dispute process",
-      "dispute settlement reform",
-      "WTO principles",
       "surveillance mechanism",
-      "trade concerns mechanism"
+      "WTO principles",
+      "trade concerns mechanism",
+      "dispute settlement reform",
+      "trade dispute process"
     ],
     "members": [],
     "translations": {
@@ -15954,17 +15954,17 @@
       "WTO mandate"
     ],
     "narrower": [
-      "LDC graduation",
       "technical assistance",
+      "LDC graduation",
       "aid for trade"
     ],
     "related": [
+      "investment facilitation",
       "economic development",
-      "small economies",
       "least developed countries",
       "developing countries",
-      "investment facilitation",
-      "trade promotion"
+      "trade promotion",
+      "small economies"
     ],
     "members": [],
     "translations": {
@@ -16013,8 +16013,8 @@
     ],
     "narrower": [],
     "related": [
-      "counterfeiting",
-      "trade monitoring"
+      "trade monitoring",
+      "counterfeiting"
     ],
     "members": [],
     "translations": {
@@ -16112,9 +16112,9 @@
       "trade concerns"
     ],
     "related": [
-      "arbitration",
       "dispute settlement",
-      "trade dispute process"
+      "trade dispute process",
+      "arbitration"
     ],
     "members": [],
     "translations": {
@@ -16320,9 +16320,9 @@
     ],
     "narrower": [],
     "related": [
+      "sanitary and phytosanitary measures",
       "import licensing",
-      "technical barriers to trade",
-      "sanitary and phytosanitary measures"
+      "technical barriers to trade"
     ],
     "members": [],
     "translations": {
@@ -16366,25 +16366,25 @@
       "agricultural policy"
     ],
     "narrower": [
-      "regionalisation",
-      "maximum residue limits (MRL)",
       "short-term measures (SPS)",
-      "exemption from the requirement of a tolerance",
-      "equivalence"
+      "equivalence",
+      "maximum residue limits (MRL)",
+      "regionalisation",
+      "exemption from the requirement of a tolerance"
     ],
     "related": [
       "plant protection",
-      "health and sanitary regulations",
       "food safety",
-      "trade concerns",
-      "human health",
+      "plant health",
       "animal health",
-      "territory protection",
+      "trade concerns",
       "public health",
       "environmental protection",
       "animal protection",
-      "plant health",
-      "ISPM 15"
+      "ISPM 15",
+      "health and sanitary regulations",
+      "human health",
+      "territory protection"
     ],
     "members": [],
     "translations": {
@@ -16431,18 +16431,18 @@
       "WTO decision-making process"
     ],
     "narrower": [
-      "appellate review",
-      "arbitration",
-      "report by the panel",
+      "constitution of a panel",
       "request for consultations",
+      "appellate review",
+      "report by the panel",
       "establishment of a panel",
-      "constitution of a panel"
+      "arbitration"
     ],
     "related": [
-      "surveillance mechanism",
       "dispute settlement",
       "trade concerns mechanism",
-      "dispute settlement reform"
+      "dispute settlement reform",
+      "surveillance mechanism"
     ],
     "members": [],
     "translations": {
@@ -16534,8 +16534,8 @@
     "narrower": [],
     "related": [
       "capacity building",
-      "economic development",
-      "investment facilitation for development (joint initiative)"
+      "investment facilitation for development (joint initiative)",
+      "economic development"
     ],
     "members": [],
     "translations": {
@@ -16620,10 +16620,10 @@
     ],
     "narrower": [],
     "related": [
-      "trade financing",
       "capacity building",
-      "export promotion",
-      "import promotion"
+      "import promotion",
+      "trade financing",
+      "export promotion"
     ],
     "members": [],
     "translations": {
@@ -16665,9 +16665,9 @@
     "narrower": [],
     "related": [
       "emergency measures",
-      "economic development",
       "aid policy",
-      "WTO membership"
+      "WTO membership",
+      "economic development"
     ],
     "members": [],
     "translations": {
@@ -16704,17 +16704,17 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "foreign aid",
       "financial aid",
-      "development aid",
-      "food aid"
+      "foreign aid",
+      "food aid",
+      "development aid"
     ],
     "related": [
-      "state aid",
-      "subsidies",
+      "aid for trade",
       "support policy",
-      "incentives",
-      "aid for trade"
+      "subsidies",
+      "state aid",
+      "incentives"
     ],
     "members": [],
     "translations": {
@@ -16891,16 +16891,16 @@
     "narrower": [
       "Torquay Round",
       "Tokyo Round",
-      "Geneva Round",
+      "Kennedy Round",
+      "Doha Round",
       "Dillon Round",
       "Uruguay Round",
-      "Annecy Round",
-      "Doha Round",
-      "Kennedy Round"
+      "Geneva Round",
+      "Annecy Round"
     ],
     "related": [
-      "tariff policy",
-      "schedules of concessions"
+      "schedules of concessions",
+      "tariff policy"
     ],
     "members": [],
     "translations": {
@@ -17253,9 +17253,9 @@
       "WTO legal instruments"
     ],
     "narrower": [
+      "cumulation",
       "MFN exemptions",
-      "special and differential treatment",
-      "cumulation"
+      "special and differential treatment"
     ],
     "related": [],
     "members": [],
@@ -17296,12 +17296,12 @@
       "WTO legal instruments"
     ],
     "narrower": [
-      "peace clause",
-      "sunset clause",
+      "standstill clause",
       "rendez-vous clause",
-      "grandfather clause",
       "enabling clause",
-      "standstill clause"
+      "grandfather clause",
+      "peace clause",
+      "sunset clause"
     ],
     "related": [],
     "members": [],
@@ -17502,8 +17502,8 @@
     ],
     "narrower": [],
     "related": [
-      "schedules of concessions",
-      "bound tariff"
+      "bound tariff",
+      "schedules of concessions"
     ],
     "members": [],
     "translations": {
@@ -17546,8 +17546,8 @@
       "support policy"
     ],
     "narrower": [
-      "aggregate measurement of support (amber box)",
-      "green box measures"
+      "green box measures",
+      "aggregate measurement of support (amber box)"
     ],
     "related": [
       "schedules of concessions",
@@ -17704,8 +17704,8 @@
     "narrower": [],
     "related": [
       "tariff concessions",
-      "enabling clause",
-      "developing countries"
+      "developing countries",
+      "enabling clause"
     ],
     "members": [],
     "translations": {
@@ -17759,10 +17759,10 @@
       "WTO bodies"
     ],
     "narrower": [
-      "services domestic regulation (joint initiative)",
+      "MSMEs (joint initiative)",
       "investment facilitation for development (joint initiative)",
       "electronic commerce (joint initiative)",
-      "MSMEs (joint initiative)"
+      "services domestic regulation (joint initiative)"
     ],
     "related": [],
     "members": [],
@@ -17847,9 +17847,9 @@
     ],
     "narrower": [],
     "related": [
-      "election of chairperson",
+      "GATT accession",
       "WTO accession",
-      "GATT accession"
+      "election of chairperson"
     ],
     "members": [],
     "translations": {
@@ -17896,12 +17896,12 @@
       "WTO bodies"
     ],
     "narrower": [
-      "meetings",
-      "rules of procedure",
-      "election of officer",
       "questions and replies",
-      "work programmes",
-      "election of chairperson"
+      "rules of procedure",
+      "meetings",
+      "election of chairperson",
+      "election of officer",
+      "work programmes"
     ],
     "related": [
       "experience sharing"
@@ -18008,8 +18008,8 @@
     ],
     "narrower": [],
     "related": [
-      "services",
-      "domestic regulations"
+      "domestic regulations",
+      "services"
     ],
     "members": [],
     "translations": {
@@ -18254,8 +18254,8 @@
     ],
     "narrower": [],
     "related": [
-      "WTO working parties",
-      "WTO committees"
+      "WTO committees",
+      "WTO working parties"
     ],
     "members": [],
     "translations": {
@@ -18411,8 +18411,8 @@
       "functioning of WTO bodies"
     ],
     "narrower": [
-      "informal meeting",
-      "formal meeting"
+      "formal meeting",
+      "informal meeting"
     ],
     "related": [],
     "members": [],
@@ -19134,9 +19134,9 @@
     ],
     "narrower": [],
     "related": [
-      "pension plan",
+      "WTO Secretariat",
       "WTO reform",
-      "WTO Secretariat"
+      "pension plan"
     ],
     "members": [],
     "translations": {
@@ -19188,10 +19188,10 @@
     ],
     "narrower": [],
     "related": [
-      "WTO budget",
+      "WTO Secretariat",
       "health insurance",
       "WTO reform",
-      "WTO Secretariat"
+      "WTO budget"
     ],
     "members": [],
     "translations": {
@@ -19320,8 +19320,8 @@
       "business services"
     ],
     "narrower": [
-      "research services",
-      "biotechnology services"
+      "biotechnology services",
+      "research services"
     ],
     "related": [
       "research and development"
@@ -19365,18 +19365,18 @@
       "intellectual property"
     ],
     "narrower": [
-      "trademarks",
-      "patents",
       "geographical indications",
+      "trademarks",
       "undisclosed information",
       "layout designs",
-      "industrial designs"
+      "industrial designs",
+      "patents"
     ],
     "related": [
-      "industrial policy",
       "innovation",
+      "research and development",
       "competition policy",
-      "research and development"
+      "industrial policy"
     ],
     "members": [],
     "translations": {
@@ -19416,11 +19416,11 @@
     ],
     "narrower": [],
     "related": [
-      "special compulsory licensing",
       "industrial property",
+      "voluntary licensing",
       "intellectual property",
       "trade-related aspects of intellectual property rights",
-      "voluntary licensing"
+      "special compulsory licensing"
     ],
     "members": [],
     "translations": {
@@ -19460,12 +19460,12 @@
     ],
     "narrower": [],
     "related": [
-      "special compulsory licensing",
-      "incentives",
-      "trade-related aspects of intellectual property rights",
-      "technology",
+      "voluntary licensing",
       "intellectual property",
-      "voluntary licensing"
+      "technology",
+      "trade-related aspects of intellectual property rights",
+      "special compulsory licensing",
+      "incentives"
     ],
     "members": [],
     "translations": {
@@ -19510,21 +19510,21 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "neighbouring rights",
       "industrial property",
       "plant variety protection",
-      "copyright",
-      "trade-related aspects of intellectual property rights"
+      "neighbouring rights",
+      "trade-related aspects of intellectual property rights",
+      "copyright"
     ],
     "related": [
-      "licensing",
-      "intellectual property legislation",
-      "technology transfer",
+      "voluntary licensing",
       "traditional knowledge and folklore",
-      "innovation",
-      "plant variety protection",
       "enforcement",
-      "voluntary licensing"
+      "innovation",
+      "technology transfer",
+      "plant variety protection",
+      "intellectual property legislation",
+      "licensing"
     ],
     "members": [],
     "translations": {
@@ -19576,8 +19576,8 @@
       "genetic engineering"
     ],
     "related": [
-      "agriculture (activity)",
-      "biotechnology services"
+      "biotechnology services",
+      "agriculture (activity)"
     ],
     "members": [],
     "translations": {
@@ -19667,8 +19667,8 @@
     ],
     "narrower": [],
     "related": [
-      "biological pest control",
-      "biotechnology"
+      "biotechnology",
+      "biological pest control"
     ],
     "members": [],
     "translations": {
@@ -19773,10 +19773,10 @@
       "catering"
     ],
     "related": [
-      "food standards",
-      "food technology",
+      "nutrition",
       "food production",
-      "nutrition"
+      "food technology",
+      "food standards"
     ],
     "members": [],
     "translations": {
@@ -19831,8 +19831,8 @@
       "irradiation"
     ],
     "related": [
-      "HACCP plan requirements",
-      "food safety"
+      "food safety",
+      "HACCP plan requirements"
     ],
     "members": [],
     "translations": {
@@ -19884,8 +19884,8 @@
     ],
     "narrower": [],
     "related": [
-      "HACCP plan requirements",
-      "food safety"
+      "food safety",
+      "HACCP plan requirements"
     ],
     "members": [],
     "translations": {
@@ -19987,18 +19987,18 @@
     ],
     "narrower": [],
     "related": [
-      "food contamination",
-      "food processing",
-      "HACCP plan requirements",
-      "food preserving",
-      "maximum residue limits (MRL)",
-      "traceability",
-      "human health",
-      "exemption from the requirement of a tolerance",
-      "food standards",
       "sanitary and phytosanitary measures",
+      "traceability",
+      "food contamination",
       "pesticide residues",
-      "food inspection"
+      "food processing",
+      "food standards",
+      "food preserving",
+      "food inspection",
+      "HACCP plan requirements",
+      "maximum residue limits (MRL)",
+      "human health",
+      "exemption from the requirement of a tolerance"
     ],
     "members": [],
     "translations": {
@@ -20045,10 +20045,10 @@
     "narrower": [],
     "related": [
       "food contamination",
-      "food processing",
       "food safety",
-      "food preserving",
-      "food inspection"
+      "food processing",
+      "food inspection",
+      "food preserving"
     ],
     "members": [],
     "translations": {
@@ -20137,14 +20137,14 @@
     ],
     "narrower": [],
     "related": [
-      "endangered species",
+      "sanitary and phytosanitary measures",
       "slaughter of animals",
       "animal health",
-      "animal diseases",
-      "sanitary and phytosanitary measures",
-      "veterinary inspection",
       "biodiversity",
-      "veterinary services"
+      "endangered species",
+      "veterinary services",
+      "animal diseases",
+      "veterinary inspection"
     ],
     "members": [],
     "translations": {
@@ -20197,9 +20197,9 @@
     "narrower": [],
     "related": [
       "industrial legislation",
-      "manufacturing",
+      "industry",
       "industrial policy",
-      "industry"
+      "manufacturing"
     ],
     "members": [],
     "translations": {
@@ -20340,16 +20340,16 @@
       "manufacturing"
     ],
     "narrower": [
+      "testing",
       "traceability",
       "HACCP plan requirements",
-      "metrology",
-      "testing"
+      "metrology"
     ],
     "related": [
-      "product quality",
-      "preshipment inspection",
       "quality standards",
-      "standardisation"
+      "preshipment inspection",
+      "standardisation",
+      "product quality"
     ],
     "members": [],
     "translations": {
@@ -20397,9 +20397,9 @@
     ],
     "narrower": [],
     "related": [
-      "product quality",
+      "production",
       "production standards",
-      "production"
+      "product quality"
     ],
     "members": [],
     "translations": {
@@ -20441,9 +20441,9 @@
     ],
     "narrower": [],
     "related": [
-      "product life",
       "energy efficiency",
       "circular economy",
+      "product life",
       "energy labelling"
     ],
     "members": [],
@@ -20484,10 +20484,10 @@
     ],
     "narrower": [],
     "related": [
-      "product quality",
       "quality requirements",
       "quality control",
-      "safety"
+      "safety",
+      "product quality"
     ],
     "members": [],
     "translations": {
@@ -20676,8 +20676,8 @@
     "narrower": [],
     "related": [
       "food contamination",
-      "HACCP plan requirements",
-      "food safety"
+      "food safety",
+      "HACCP plan requirements"
     ],
     "members": [],
     "translations": {
@@ -20736,12 +20736,12 @@
     ],
     "narrower": [],
     "related": [
-      "consumer protection",
-      "HACCP plan requirements",
       "food safety",
-      "food standards",
       "pesticide residues",
-      "food inspection"
+      "consumer protection",
+      "food standards",
+      "food inspection",
+      "HACCP plan requirements"
     ],
     "members": [],
     "translations": {
@@ -20786,9 +20786,9 @@
     ],
     "narrower": [],
     "related": [
-      "technical barriers to trade",
+      "testing",
       "certification",
-      "testing"
+      "technical barriers to trade"
     ],
     "members": [],
     "translations": {
@@ -20869,13 +20869,13 @@
     ],
     "narrower": [],
     "related": [
-      "maintenance and repair",
+      "sustainable development",
       "product life",
-      "industrial policy",
-      "ecodesign",
       "waste recycling",
+      "industrial policy",
       "environmental sustainability",
-      "sustainable development"
+      "maintenance and repair",
+      "ecodesign"
     ],
     "members": [],
     "translations": {
@@ -20921,9 +20921,9 @@
     ],
     "narrower": [],
     "related": [
+      "ecodesign",
       "energy",
-      "energy labelling",
-      "ecodesign"
+      "energy labelling"
     ],
     "members": [],
     "translations": {
@@ -21009,11 +21009,11 @@
     ],
     "narrower": [],
     "related": [
-      "maintenance and repair",
-      "ecodesign",
+      "environmental measures",
       "waste management",
       "circular economy",
-      "environmental measures"
+      "maintenance and repair",
+      "ecodesign"
     ],
     "members": [],
     "translations": {
@@ -21066,9 +21066,9 @@
     "narrower": [],
     "related": [
       "agricultural production",
+      "food production",
       "food aid",
-      "supply chain",
-      "food production"
+      "supply chain"
     ],
     "members": [],
     "translations": {
@@ -21167,9 +21167,9 @@
     ],
     "narrower": [],
     "related": [
-      "domestic market",
       "domestic consumption",
-      "domestic industry"
+      "domestic industry",
+      "domestic market"
     ],
     "members": [],
     "translations": {
@@ -21213,9 +21213,9 @@
     ],
     "narrower": [],
     "related": [
-      "food security",
+      "food resources",
       "food industry",
-      "food resources"
+      "food security"
     ],
     "members": [],
     "translations": {
@@ -21259,8 +21259,8 @@
     ],
     "narrower": [],
     "related": [
-      "agricultural policy",
       "food resources",
+      "agricultural policy",
       "food security"
     ],
     "members": [],
@@ -21305,8 +21305,8 @@
     ],
     "narrower": [],
     "related": [
-      "domestic market",
       "domestic production",
+      "domestic market",
       "consumer prices"
     ],
     "members": [],
@@ -21406,15 +21406,15 @@
     ],
     "narrower": [],
     "related": [
-      "agricultural legislation",
+      "crisis preparedness",
+      "food aid",
+      "agricultural reform",
+      "public food stockholding (PSH)",
+      "agricultural development",
       "agricultural production",
       "agricultural policy",
       "food production",
-      "agricultural development",
-      "public food stockholding (PSH)",
-      "food aid",
-      "crisis preparedness",
-      "agricultural reform"
+      "agricultural legislation"
     ],
     "members": [],
     "translations": {
@@ -21456,8 +21456,8 @@
     ],
     "narrower": [],
     "related": [
-      "product quality",
-      "marketing"
+      "marketing",
+      "product quality"
     ],
     "members": [],
     "translations": {
@@ -21590,8 +21590,8 @@
     "narrower": [],
     "related": [
       "opinion-polling services",
-      "polling services",
-      "consumer behaviour"
+      "consumer behaviour",
+      "polling services"
     ],
     "members": [],
     "translations": {
@@ -21768,9 +21768,9 @@
       "consumer demand"
     ],
     "related": [
-      "marketing services",
       "market research",
-      "marketing"
+      "marketing",
+      "marketing services"
     ],
     "members": [],
     "translations": {
@@ -21818,9 +21818,9 @@
     ],
     "narrower": [],
     "related": [
+      "commercial transaction",
       "consumer protection",
-      "patent law",
-      "commercial transaction"
+      "patent law"
     ],
     "members": [],
     "translations": {
@@ -22154,8 +22154,8 @@
     "narrower": [],
     "related": [
       "trademarks",
-      "labelling",
-      "nutrition information"
+      "nutrition information",
+      "labelling"
     ],
     "members": [],
     "translations": {
@@ -22197,8 +22197,8 @@
     ],
     "narrower": [],
     "related": [
-      "trade description",
       "consumer information",
+      "trade description",
       "counterfeiting",
       "labelling"
     ],
@@ -22340,9 +22340,9 @@
     ],
     "narrower": [],
     "related": [
-      "environmental protection",
+      "environmental sustainability",
       "certification",
-      "environmental sustainability"
+      "environmental protection"
     ],
     "members": [],
     "translations": {
@@ -22384,14 +22384,14 @@
     ],
     "narrower": [],
     "related": [
+      "food labelling",
       "food contamination",
       "food safety",
-      "maximum residue limits (MRL)",
-      "food labelling",
-      "health",
-      "exemption from the requirement of a tolerance",
       "nutrition",
-      "food industry"
+      "food industry",
+      "maximum residue limits (MRL)",
+      "health",
+      "exemption from the requirement of a tolerance"
     ],
     "members": [],
     "translations": {
@@ -22480,10 +22480,10 @@
     ],
     "narrower": [],
     "related": [
-      "waste recycling",
-      "circular economy",
       "ecolabelling",
-      "sustainable development"
+      "sustainable development",
+      "circular economy",
+      "waste recycling"
     ],
     "members": [],
     "translations": {
@@ -22524,8 +22524,8 @@
     ],
     "narrower": [],
     "related": [
-      "ISPM 15",
-      "wood industry"
+      "wood industry",
+      "ISPM 15"
     ],
     "members": [],
     "translations": {
@@ -22565,8 +22565,8 @@
     ],
     "narrower": [],
     "related": [
-      "pest control",
       "sanitary and phytosanitary measures",
+      "pest control",
       "wood packaging"
     ],
     "members": [],
@@ -22713,16 +22713,16 @@
       "services"
     ],
     "narrower": [
-      "freight transport services",
-      "air transport services",
-      "water transport services",
       "land transport services",
+      "water transport services",
       "space transport services",
-      "maritime transport services"
+      "freight transport services",
+      "maritime transport services",
+      "air transport services"
     ],
     "related": [
-      "transport",
       "transport safety",
+      "transport",
       "delivery of goods"
     ],
     "members": [],
@@ -22773,8 +22773,8 @@
     ],
     "narrower": [],
     "related": [
-      "transport",
       "dangerous substances",
+      "transport",
       "transport services"
     ],
     "members": [],
@@ -22821,10 +22821,10 @@
     ],
     "narrower": [],
     "related": [
-      "transport",
-      "freight transport services",
       "delivery services",
-      "transport services"
+      "transport",
+      "transport services",
+      "freight transport services"
     ],
     "members": [],
     "translations": {
@@ -23004,9 +23004,9 @@
     ],
     "narrower": [],
     "related": [
-      "law of the sea",
-      "maritime transport services",
       "shipbuilding",
+      "maritime transport services",
+      "law of the sea",
       "maritime safety"
     ],
     "members": [],
@@ -23049,8 +23049,8 @@
     ],
     "narrower": [],
     "related": [
-      "aircraft industry",
-      "air transport services"
+      "air transport services",
+      "aircraft industry"
     ],
     "members": [],
     "translations": {
@@ -23188,8 +23188,8 @@
     ],
     "narrower": [],
     "related": [
-      "delivery of goods",
-      "cargo"
+      "cargo",
+      "delivery of goods"
     ],
     "members": [],
     "translations": {
@@ -23238,8 +23238,8 @@
       "transport services"
     ],
     "narrower": [
-      "pipeline transport services",
       "road transport services",
+      "pipeline transport services",
       "rail transport services"
     ],
     "related": [
@@ -23434,9 +23434,9 @@
     ],
     "narrower": [],
     "related": [
-      "law of the sea",
+      "maritime transport",
       "maritime transport services",
-      "maritime transport"
+      "law of the sea"
     ],
     "members": [],
     "translations": {
@@ -23476,9 +23476,9 @@
     ],
     "narrower": [],
     "related": [
+      "maritime transport",
       "pollution",
       "marine resources",
-      "maritime transport",
       "maritime safety"
     ],
     "members": [],
@@ -23687,8 +23687,8 @@
       "services"
     ],
     "narrower": [
-      "retail trade services",
-      "delivery services"
+      "delivery services",
+      "retail trade services"
     ],
     "related": [
       "distribution"
@@ -23906,8 +23906,8 @@
     ],
     "narrower": [],
     "related": [
-      "public food stockholding (PSH)",
-      "food aid"
+      "food aid",
+      "public food stockholding (PSH)"
     ],
     "members": [],
     "translations": {
@@ -23953,9 +23953,9 @@
     ],
     "narrower": [],
     "related": [
+      "food aid",
       "food stocks",
-      "food security",
-      "food aid"
+      "food security"
     ],
     "members": [],
     "translations": {
@@ -23999,10 +23999,10 @@
       "tax"
     ],
     "narrower": [
-      "stamp duty",
+      "import tax",
       "export tax",
       "excise duty",
-      "import tax",
+      "stamp duty",
       "value added tax"
     ],
     "related": [
@@ -24102,8 +24102,8 @@
       "polling services"
     ],
     "related": [
-      "consumer behaviour",
-      "marketing"
+      "marketing",
+      "consumer behaviour"
     ],
     "members": [],
     "translations": {
@@ -24145,12 +24145,12 @@
     ],
     "narrower": [],
     "related": [
-      "social policy",
-      "consumer protection",
-      "diseases",
-      "health services",
+      "sanitary and phytosanitary measures",
       "disease control",
-      "sanitary and phytosanitary measures"
+      "health services",
+      "consumer protection",
+      "social policy",
+      "diseases"
     ],
     "members": [],
     "translations": {
@@ -24196,8 +24196,8 @@
     ],
     "narrower": [],
     "related": [
-      "quality standards",
-      "certification"
+      "certification",
+      "quality standards"
     ],
     "members": [],
     "translations": {
@@ -24396,9 +24396,9 @@
     ],
     "narrower": [],
     "related": [
-      "electromagnetic compatibility (EMC)",
+      "domestic regulations",
       "qualification requirements and procedures",
-      "domestic regulations"
+      "electromagnetic compatibility (EMC)"
     ],
     "members": [],
     "translations": {
@@ -24446,15 +24446,15 @@
       "communication"
     ],
     "narrower": [
-      "data transmission",
-      "radiocommunications"
+      "radiocommunications",
+      "data transmission"
     ],
     "related": [
-      "information and communication technology",
       "electromagnetic compatibility (EMC)",
       "broadcasting",
-      "audiovisual services",
       "teleworking",
+      "information and communication technology",
+      "audiovisual services",
       "telecommunication services"
     ],
     "members": [],
@@ -24540,9 +24540,9 @@
     "narrower": [],
     "related": [
       "health and sanitary regulations",
-      "health legislation",
+      "certification",
       "health",
-      "certification"
+      "health legislation"
     ],
     "members": [],
     "translations": {
@@ -24583,8 +24583,8 @@
     "narrower": [],
     "related": [
       "sanitary and phytosanitary measures",
-      "diseases",
       "health",
+      "diseases",
       "health certificates"
     ],
     "members": [],
@@ -24625,12 +24625,12 @@
     ],
     "narrower": [],
     "related": [
-      "social policy",
-      "health policy",
-      "health",
-      "health certificates",
       "health services",
-      "social legislation"
+      "social legislation",
+      "health policy",
+      "social policy",
+      "health",
+      "health certificates"
     ],
     "members": [],
     "translations": {
@@ -24677,10 +24677,10 @@
       "food inspection"
     ],
     "related": [
-      "social policy",
-      "health",
       "health services",
       "health insurance",
+      "social policy",
+      "health",
       "health legislation"
     ],
     "members": [],
@@ -24724,8 +24724,8 @@
     "narrower": [],
     "related": [
       "sanitary and phytosanitary measures",
-      "food safety",
-      "human diseases"
+      "human diseases",
+      "food safety"
     ],
     "members": [],
     "translations": {
@@ -24767,12 +24767,12 @@
       "animal welfare"
     ],
     "related": [
-      "animal diseases",
-      "pests",
       "sanitary and phytosanitary measures",
-      "veterinary inspection",
+      "animal diseases",
+      "veterinary services",
       "animal protection",
-      "veterinary services"
+      "veterinary inspection",
+      "pests"
     ],
     "members": [],
     "translations": {
@@ -24820,11 +24820,11 @@
     ],
     "narrower": [],
     "related": [
-      "plant protection",
-      "pests",
       "sanitary and phytosanitary measures",
+      "plant protection",
       "phytosanitary inspection",
-      "plant diseases"
+      "plant diseases",
+      "pests"
     ],
     "members": [],
     "translations": {
@@ -24864,18 +24864,18 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "crime protection",
-      "disabled persons",
       "social protection",
-      "gender equality"
+      "gender equality",
+      "crime protection",
+      "disabled persons"
     ],
     "related": [
-      "health policy",
       "social services",
       "social legislation",
       "public health",
-      "health legislation",
-      "educational services"
+      "health policy",
+      "educational services",
+      "health legislation"
     ],
     "members": [],
     "translations": {
@@ -24960,8 +24960,8 @@
     ],
     "narrower": [
       "cholera",
-      "AIDS",
-      "covid-19"
+      "covid-19",
+      "AIDS"
     ],
     "related": [
       "human health",
@@ -25009,9 +25009,9 @@
     "narrower": [],
     "related": [
       "veterinary inspection",
+      "animal diseases",
       "animal protection",
-      "animal health",
-      "animal diseases"
+      "animal health"
     ],
     "members": [],
     "translations": {
@@ -25052,10 +25052,10 @@
     ],
     "narrower": [],
     "related": [
-      "animal protection",
-      "animal health",
+      "animal diseases",
       "veterinary services",
-      "animal diseases"
+      "animal protection",
+      "animal health"
     ],
     "members": [],
     "translations": {
@@ -25104,21 +25104,21 @@
       "diseases"
     ],
     "narrower": [
-      "bluetongue",
       "avian Influenza",
-      "classical Swine fever",
-      "transmissible Spongiform Encephalopathy (TSE)",
       "foot and mouth disease",
-      "swine Influenza",
+      "african swine fever",
       "newcastle disease",
-      "african swine fever"
+      "bluetongue",
+      "transmissible Spongiform Encephalopathy (TSE)",
+      "classical Swine fever",
+      "swine Influenza"
     ],
     "related": [
-      "regionalisation",
       "animal health",
-      "veterinary inspection",
+      "veterinary services",
       "animal protection",
-      "veterinary services"
+      "veterinary inspection",
+      "regionalisation"
     ],
     "members": [],
     "translations": {
@@ -25164,8 +25164,8 @@
       "biosphere"
     ],
     "narrower": [
-      "fruit fly",
-      "nematode"
+      "nematode",
+      "fruit fly"
     ],
     "related": [
       "pest control",
@@ -25260,12 +25260,12 @@
       "pest control"
     ],
     "related": [
-      "territory protection",
       "sanitary and phytosanitary measures",
-      "phytosanitary inspection",
       "plant health",
       "biodiversity",
+      "phytosanitary inspection",
       "invasive species",
+      "territory protection",
       "plant diseases"
     ],
     "members": [],
@@ -25320,14 +25320,14 @@
       "diseases"
     ],
     "narrower": [
-      "citrus canker",
-      "sudden oak death"
+      "sudden oak death",
+      "citrus canker"
     ],
     "related": [
-      "phytosanitary inspection",
       "plant protection",
       "regionalisation",
-      "plant health"
+      "plant health",
+      "phytosanitary inspection"
     ],
     "members": [],
     "translations": {
@@ -25372,8 +25372,8 @@
     ],
     "narrower": [],
     "related": [
-      "safety",
-      "fire protection"
+      "fire protection",
+      "safety"
     ],
     "members": [],
     "translations": {
@@ -25472,9 +25472,9 @@
     ],
     "narrower": [],
     "related": [
-      "pesticide residues",
       "food safety",
-      "food standards"
+      "food standards",
+      "pesticide residues"
     ],
     "members": [],
     "translations": {
@@ -25524,10 +25524,10 @@
     ],
     "narrower": [],
     "related": [
-      "pesticide residues",
-      "toxic substances",
       "food safety",
-      "food standards"
+      "food standards",
+      "pesticide residues",
+      "toxic substances"
     ],
     "members": [],
     "translations": {
@@ -25571,8 +25571,8 @@
     "related": [
       "food contamination",
       "food safety",
-      "maximum residue limits (MRL)",
-      "exemption from the requirement of a tolerance"
+      "exemption from the requirement of a tolerance",
+      "maximum residue limits (MRL)"
     ],
     "members": [],
     "translations": {
@@ -25627,15 +25627,15 @@
       "law"
     ],
     "narrower": [
-      "judicial system",
-      "counterfeiting",
       "fraud",
+      "counterfeiting",
+      "judicial system",
       "cybercrime"
     ],
     "related": [
       "crime protection",
-      "public safety",
-      "criminal law"
+      "criminal law",
+      "public safety"
     ],
     "members": [],
     "translations": {
@@ -25684,9 +25684,9 @@
       "degradation of the environment"
     ],
     "narrower": [
+      "persistant organic pollutants",
       "pesticide residues",
-      "toxic substances",
-      "persistant organic pollutants"
+      "toxic substances"
     ],
     "related": [
       "transport safety"
@@ -25733,12 +25733,12 @@
     ],
     "narrower": [],
     "related": [
-      "agricultural policy",
-      "food security",
-      "agriculture (activity)",
-      "agriculture (sector)",
       "aggregate measurement of support (amber box)",
-      "agricultural reform"
+      "agriculture (sector)",
+      "agricultural policy",
+      "agricultural reform",
+      "agriculture (activity)",
+      "food security"
     ],
     "members": [],
     "translations": {
@@ -25785,8 +25785,8 @@
     ],
     "narrower": [],
     "related": [
-      "food security",
-      "agricultural development"
+      "agricultural development",
+      "food security"
     ],
     "members": [],
     "translations": {
@@ -25832,10 +25832,10 @@
     "narrower": [],
     "related": [
       "agricultural services",
+      "agriculture (sector)",
       "agricultural policy",
-      "food security",
       "agriculture (activity)",
-      "agriculture (sector)"
+      "food security"
     ],
     "members": [],
     "translations": {
@@ -25935,19 +25935,19 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "pollution control",
+      "environmental measures",
       "waste management",
-      "environmental protection",
       "decarbonization",
       "environmental sustainability",
-      "environmental measures"
+      "environmental protection",
+      "pollution control"
     ],
     "related": [
-      "environment",
-      "environmental legislation",
-      "energy policy",
       "sustainable development",
-      "green box measures"
+      "green box measures",
+      "environmental legislation",
+      "environment",
+      "energy policy"
     ],
     "members": [],
     "translations": {
@@ -25999,8 +25999,8 @@
     ],
     "narrower": [],
     "related": [
-      "environmental policy",
-      "environment"
+      "environment",
+      "environmental policy"
     ],
     "members": [],
     "translations": {
@@ -26048,8 +26048,8 @@
       "environment"
     ],
     "narrower": [
-      "endangered species",
-      "natural resources"
+      "natural resources",
+      "endangered species"
     ],
     "related": [],
     "members": [],
@@ -26092,9 +26092,9 @@
       "environment"
     ],
     "narrower": [
-      "pests",
       "biodiversity",
-      "invasive species"
+      "invasive species",
+      "pests"
     ],
     "related": [],
     "members": [],
@@ -26137,16 +26137,16 @@
       "environment"
     ],
     "narrower": [
-      "deforestation",
       "natural disaster",
       "pollution",
-      "overcapacity and overfishing (OCOF)",
       "dangerous substances",
-      "climate change"
+      "overcapacity and overfishing (OCOF)",
+      "climate change",
+      "deforestation"
     ],
     "related": [
-      "environmental protection",
-      "invasive species"
+      "invasive species",
+      "environmental protection"
     ],
     "members": [],
     "translations": {
@@ -26190,8 +26190,8 @@
       "marine resources"
     ],
     "related": [
-      "fossil fuel subsidies",
-      "renewable energy"
+      "renewable energy",
+      "fossil fuel subsidies"
     ],
     "members": [],
     "translations": {
@@ -26283,8 +26283,8 @@
     "narrower": [],
     "related": [
       "natural resources",
-      "sustainable development",
-      "climate change"
+      "climate change",
+      "sustainable development"
     ],
     "members": [],
     "translations": {
@@ -26378,9 +26378,9 @@
     ],
     "related": [
       "overcapacity and overfishing (OCOF)",
-      "fisheries policy",
       "fisheries",
-      "fishing"
+      "fishing",
+      "fisheries policy"
     ],
     "members": [],
     "translations": {
@@ -26503,12 +26503,12 @@
       "agriculture (activity)"
     ],
     "narrower": [
+      "sustainable fishing",
+      "fishing capacities",
       "large-scale industrial fishing",
       "distant water fishing (dwf)",
-      "small-scale fishing",
       "marine fishing",
-      "sustainable fishing",
-      "fishing capacities"
+      "small-scale fishing"
     ],
     "related": [
       "fisheries",
@@ -26580,12 +26580,12 @@
     ],
     "narrower": [],
     "related": [
-      "fisheries subsidies",
-      "overcapacity and overfishing (OCOF)",
-      "fisheries policy",
       "fishery services",
-      "fishing resources",
-      "fishing"
+      "fishing",
+      "fisheries subsidies",
+      "fisheries policy",
+      "overcapacity and overfishing (OCOF)",
+      "fishing resources"
     ],
     "members": [],
     "translations": {
@@ -26670,9 +26670,9 @@
     ],
     "narrower": [],
     "related": [
-      "degradation of the environment",
       "plant protection",
-      "territory protection"
+      "territory protection",
+      "degradation of the environment"
     ],
     "members": [],
     "translations": {
@@ -26754,9 +26754,9 @@
     ],
     "narrower": [],
     "related": [
-      "pests",
-      "plant diseases",
       "pest control",
+      "plant diseases",
+      "pests",
       "animal diseases"
     ],
     "members": [],
@@ -26804,10 +26804,10 @@
       "biological pest control"
     ],
     "related": [
-      "pests",
-      "ISPM 15",
+      "phytosanitary inspection",
       "regionalisation",
-      "phytosanitary inspection"
+      "pests",
+      "ISPM 15"
     ],
     "members": [],
     "translations": {
@@ -26925,9 +26925,9 @@
     ],
     "narrower": [],
     "related": [
-      "fossil fuel subsidies",
+      "decarbonization",
       "emissions control",
-      "decarbonization"
+      "fossil fuel subsidies"
     ],
     "members": [],
     "translations": {
@@ -26967,15 +26967,15 @@
     ],
     "narrower": [
       "food contamination",
-      "acoustic pollution",
       "radioactive pollution",
       "air pollution",
+      "acoustic pollution",
       "plastics pollution"
     ],
     "related": [
+      "persistant organic pollutants",
       "law of the sea",
-      "pollution control",
-      "persistant organic pollutants"
+      "pollution control"
     ],
     "members": [],
     "translations": {
@@ -27100,10 +27100,10 @@
     ],
     "narrower": [],
     "related": [
-      "emissions control",
-      "renewable energy",
+      "climate change",
       "energy conservation",
-      "climate change"
+      "renewable energy",
+      "emissions control"
     ],
     "members": [],
     "translations": {
@@ -27143,9 +27143,9 @@
     ],
     "narrower": [],
     "related": [
+      "climate change",
       "decarbonization",
-      "air pollution",
-      "climate change"
+      "air pollution"
     ],
     "members": [],
     "translations": {
@@ -27461,8 +27461,8 @@
     ],
     "narrower": [],
     "related": [
-      "radiation protection",
-      "radioactive pollution"
+      "radioactive pollution",
+      "radiation protection"
     ],
     "members": [],
     "translations": {
@@ -27651,11 +27651,11 @@
     ],
     "narrower": [],
     "related": [
+      "fishing",
       "fisheries subsidies",
-      "overcapacity and overfishing (OCOF)",
       "fisheries",
-      "fishing resources",
-      "fishing"
+      "overcapacity and overfishing (OCOF)",
+      "fishing resources"
     ],
     "members": [],
     "translations": {
@@ -27794,9 +27794,9 @@
     ],
     "narrower": [],
     "related": [
+      "bovine spongiform encephalopathy (BSE)",
       "transmissible Spongiform Encephalopathy (TSE)",
-      "avian Influenza",
-      "bovine spongiform encephalopathy (BSE)"
+      "avian Influenza"
     ],
     "members": [],
     "translations": {
@@ -28496,9 +28496,9 @@
       "disease cause"
     ],
     "narrower": [
-      "viruses",
       "fungi",
-      "bacteria"
+      "bacteria",
+      "viruses"
     ],
     "related": [],
     "members": [],
@@ -28576,9 +28576,9 @@
       "pathogens"
     ],
     "narrower": [
-      "salmonella",
+      "escherichia coli",
       "listeria monocytogenes",
-      "escherichia coli"
+      "salmonella"
     ],
     "related": [],
     "members": [],
@@ -29004,9 +29004,9 @@
     "narrower": [],
     "related": [
       "fisheries",
+      "fishing",
       "fisheries policy",
-      "fishery services",
-      "fishing"
+      "fishery services"
     ],
     "members": [],
     "translations": {
@@ -29523,8 +29523,8 @@
     ],
     "narrower": [],
     "related": [
-      "hydroelectric power",
-      "electrical industry"
+      "electrical industry",
+      "hydroelectric power"
     ],
     "members": [],
     "translations": {
@@ -29579,13 +29579,13 @@
       "energy"
     ],
     "narrower": [
-      "hydroelectric power",
       "wind energy",
-      "solar energy"
+      "solar energy",
+      "hydroelectric power"
     ],
     "related": [
-      "decarbonization",
-      "natural resources"
+      "natural resources",
+      "decarbonization"
     ],
     "members": [],
     "translations": {
@@ -29633,8 +29633,8 @@
     ],
     "narrower": [],
     "related": [
-      "hydroelectric power",
-      "electricity"
+      "electricity",
+      "hydroelectric power"
     ],
     "members": [],
     "translations": {
@@ -29791,14 +29791,14 @@
     "narrower": [],
     "related": [
       "tax incentive",
-      "industrial property",
-      "industry",
       "industrial development",
-      "circular economy",
-      "manufacturing services",
-      "economic policy",
       "industrial legislation",
-      "industrial statistics"
+      "industrial property",
+      "economic policy",
+      "circular economy",
+      "industrial statistics",
+      "manufacturing services",
+      "industry"
     ],
     "members": [],
     "translations": {
@@ -29838,9 +29838,9 @@
     ],
     "narrower": [],
     "related": [
-      "industrial policy",
       "manufacturing services",
-      "industry"
+      "industry",
+      "industrial policy"
     ],
     "members": [],
     "translations": {
@@ -29880,8 +29880,8 @@
     ],
     "narrower": [],
     "related": [
-      "industrial policy",
-      "industry"
+      "industry",
+      "industrial policy"
     ],
     "members": [],
     "translations": {
@@ -29921,8 +29921,8 @@
     ],
     "narrower": [],
     "related": [
-      "industrial policy",
-      "industry"
+      "industry",
+      "industrial policy"
     ],
     "members": [],
     "translations": {
@@ -30320,11 +30320,11 @@
       "industry"
     ],
     "narrower": [
-      "communication networks",
-      "film industry",
+      "publishing",
       "broadcasting",
       "printing",
-      "publishing"
+      "communication networks",
+      "film industry"
     ],
     "related": [
       "communication services",
@@ -30414,10 +30414,10 @@
     ],
     "narrower": [],
     "related": [
-      "state aid",
+      "domestic industry",
       "domestic market",
       "domestic support",
-      "domestic industry"
+      "state aid"
     ],
     "members": [],
     "translations": {
@@ -30707,11 +30707,11 @@
       "services"
     ],
     "narrower": [
-      "courier services",
-      "postal services",
       "interpreter services",
-      "information services",
       "audiovisual services",
+      "postal services",
+      "courier services",
+      "information services",
       "telecommunication services"
     ],
     "related": [
@@ -31076,8 +31076,8 @@
     ],
     "narrower": [],
     "related": [
-      "communication networks",
-      "data transmission"
+      "data transmission",
+      "communication networks"
     ],
     "members": [],
     "translations": {
@@ -31216,8 +31216,8 @@
     "narrower": [],
     "related": [
       "price support",
-      "agricultural policy",
       "agriculture (sector)",
+      "agricultural policy",
       "agricultural development"
     ],
     "members": [],
@@ -31320,8 +31320,8 @@
     ],
     "narrower": [],
     "related": [
-      "forestry services",
-      "fire protection"
+      "fire protection",
+      "forestry services"
     ],
     "members": [],
     "translations": {
@@ -31481,8 +31481,8 @@
     "narrower": [],
     "related": [
       "forestry",
-      "safety standards",
-      "natural disaster"
+      "natural disaster",
+      "safety standards"
     ],
     "members": [],
     "translations": {
@@ -31597,30 +31597,30 @@
       "services"
     ],
     "narrower": [
-      "rental/leasing services",
-      "agricultural services",
-      "water distribution services",
-      "inspection services",
-      "manufacturing services",
       "fishery services",
-      "mining services",
-      "marketing services",
-      "legal services",
-      "real estate services",
-      "convention services",
+      "advertising services",
       "consultancy services",
-      "architectural services",
-      "technical services",
-      "veterinary services",
+      "manufacturing services",
       "accountancy services",
-      "management services",
       "administrative services",
       "forestry services",
+      "inspection services",
+      "technical services",
+      "management services",
+      "legal services",
+      "agricultural services",
+      "maintenance services",
       "security services",
+      "rental/leasing services",
+      "marketing services",
+      "convention services",
+      "architectural services",
+      "water distribution services",
+      "veterinary services",
       "computer and related services",
-      "advertising services",
-      "research and development services",
-      "maintenance services"
+      "real estate services",
+      "mining services",
+      "research and development services"
     ],
     "related": [
       "enterprises"
@@ -31664,8 +31664,8 @@
       "services"
     ],
     "narrower": [
-      "engineering services",
-      "construction services"
+      "construction services",
+      "engineering services"
     ],
     "related": [],
     "members": [],
@@ -31712,8 +31712,8 @@
     ],
     "narrower": [],
     "related": [
-      "social policy",
-      "social legislation"
+      "social legislation",
+      "social policy"
     ],
     "members": [],
     "translations": {
@@ -31754,15 +31754,15 @@
       "services"
     ],
     "narrower": [
-      "securities-related services",
       "insurance services",
+      "securities-related services",
       "remittance services"
     ],
     "related": [
-      "financing",
       "financial market",
       "capital movements",
-      "banking"
+      "banking",
+      "financing"
     ],
     "members": [],
     "translations": {
@@ -31884,9 +31884,9 @@
       "business services"
     ],
     "narrower": [
-      "accounting services",
       "taxation services",
-      "auditing services"
+      "auditing services",
+      "accounting services"
     ],
     "related": [],
     "members": [],
@@ -32411,19 +32411,19 @@
     "narrower": [
       "domestic law",
       "patent law",
+      "enforcement",
+      "international law",
+      "law of the sea",
+      "commercial law",
+      "sanctions",
       "crime",
       "criminal law",
-      "international law",
-      "commercial law",
-      "fiscal law",
-      "enforcement",
-      "sanctions",
-      "law of the sea"
+      "fiscal law"
     ],
     "related": [
-      "legislation",
       "legal services",
-      "regulations"
+      "regulations",
+      "legislation"
     ],
     "members": [],
     "translations": {
@@ -32466,8 +32466,8 @@
     ],
     "narrower": [],
     "related": [
-      "penal sanctions",
-      "legal services"
+      "legal services",
+      "penal sanctions"
     ],
     "members": [],
     "translations": {
@@ -32550,8 +32550,8 @@
     ],
     "narrower": [],
     "related": [
-      "taxation",
-      "fiscal policy"
+      "fiscal policy",
+      "taxation"
     ],
     "members": [],
     "translations": {
@@ -32649,11 +32649,11 @@
     ],
     "related": [
       "tax incentive",
-      "taxation",
       "taxation services",
-      "fiscal law",
       "economic policy",
-      "budget"
+      "budget",
+      "taxation",
+      "fiscal law"
     ],
     "members": [],
     "translations": {
@@ -32694,9 +32694,9 @@
       "debt relief"
     ],
     "related": [
-      "financing",
       "budget",
-      "economic policy"
+      "economic policy",
+      "financing"
     ],
     "members": [],
     "translations": {
@@ -32765,11 +32765,11 @@
     "narrower": [],
     "related": [
       "cybersecurity",
-      "computer and related services",
+      "cross-border data flow",
       "confidentiality",
+      "computer and related services",
       "derestriction and circulation",
       "copyright",
-      "cross-border data flow",
       "cybercrime"
     ],
     "members": [],
@@ -33153,9 +33153,9 @@
     ],
     "narrower": [],
     "related": [
-      "social policy",
-      "social services",
       "health legislation",
+      "social services",
+      "social policy",
       "educational services"
     ],
     "members": [],
@@ -33757,8 +33757,8 @@
     ],
     "related": [
       "cybersecurity",
-      "information networks",
-      "data processing"
+      "data processing",
+      "information networks"
     ],
     "members": [],
     "translations": {
@@ -33813,8 +33813,8 @@
       "information management"
     ],
     "narrower": [
-      "data storage",
-      "database"
+      "database",
+      "data storage"
     ],
     "related": [
       "data transmission"
@@ -34373,9 +34373,9 @@
     "narrower": [],
     "related": [
       "undisclosed information",
-      "trade secrets",
       "cybersecurity",
-      "data protection"
+      "data protection",
+      "trade secrets"
     ],
     "members": [],
     "translations": {
@@ -34430,8 +34430,8 @@
     ],
     "narrower": [],
     "related": [
-      "trade policy",
-      "trade promotion"
+      "trade promotion",
+      "trade policy"
     ],
     "members": [],
     "translations": {
@@ -34602,10 +34602,10 @@
     "narrower": [],
     "related": [
       "export promotion",
-      "export subsidies",
-      "export financing",
       "export credit",
-      "export processing zones"
+      "export subsidies",
+      "export processing zones",
+      "export financing"
     ],
     "members": [],
     "translations": {
@@ -34659,9 +34659,9 @@
     ],
     "narrower": [],
     "related": [
+      "aid policy",
       "export credit",
       "competition policy",
-      "aid policy",
       "domestic subsidies"
     ],
     "members": [],
@@ -34799,8 +34799,8 @@
     ],
     "narrower": [],
     "related": [
-      "prices",
-      "customs valuation"
+      "customs valuation",
+      "prices"
     ],
     "members": [],
     "translations": {
@@ -34843,10 +34843,10 @@
     ],
     "narrower": [],
     "related": [
-      "customs duties",
-      "preshipment inspection",
       "interest charges",
-      "customs valuation legislation"
+      "customs duties",
+      "customs valuation legislation",
+      "preshipment inspection"
     ],
     "members": [],
     "translations": {
@@ -35174,8 +35174,8 @@
     ],
     "narrower": [],
     "related": [
-      "taxation",
-      "fiscal policy"
+      "fiscal policy",
+      "taxation"
     ],
     "members": [],
     "translations": {
@@ -35269,8 +35269,8 @@
     ],
     "narrower": [
       "consumption tax",
-      "internal taxes",
-      "income tax"
+      "income tax",
+      "internal taxes"
     ],
     "related": [],
     "members": [],
@@ -35379,8 +35379,8 @@
     ],
     "narrower": [],
     "related": [
-      "tax credit",
-      "income"
+      "income",
+      "tax credit"
     ],
     "members": [],
     "translations": {
@@ -35530,8 +35530,8 @@
       "price control"
     ],
     "related": [
-      "prices",
-      "balance of payments"
+      "balance of payments",
+      "prices"
     ],
     "members": [],
     "translations": {
@@ -35994,8 +35994,8 @@
     ],
     "narrower": [],
     "related": [
-      "health policy",
       "social protection",
+      "health policy",
       "pension plan"
     ],
     "members": [],
@@ -36095,14 +36095,14 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "exchange arrangements",
       "exchange rate",
+      "exchange restrictions",
       "foreign exchange",
-      "exchange restrictions"
+      "exchange arrangements"
     ],
     "related": [
-      "currencies",
       "balance of payments",
+      "currencies",
       "monetary policy"
     ],
     "members": [],
@@ -36190,8 +36190,8 @@
     ],
     "narrower": [],
     "related": [
-      "work",
-      "labour policy"
+      "labour policy",
+      "work"
     ],
     "members": [],
     "translations": {
@@ -36234,10 +36234,10 @@
     ],
     "narrower": [],
     "related": [
-      "work",
-      "employment",
+      "labour policy",
       "staff regulations",
-      "labour policy"
+      "work",
+      "employment"
     ],
     "members": [],
     "translations": {
@@ -36278,10 +36278,10 @@
       "employment policy"
     ],
     "related": [
-      "work",
-      "labour standards",
       "working conditions",
-      "labour legislation"
+      "labour legislation",
+      "labour standards",
+      "work"
     ],
     "members": [],
     "translations": {
@@ -36791,8 +36791,8 @@
       "remuneration"
     ],
     "narrower": [
-      "dependancy allowances",
-      "educational grants"
+      "educational grants",
+      "dependancy allowances"
     ],
     "related": [],
     "members": [],
@@ -37315,11 +37315,11 @@
     ],
     "narrower": [],
     "related": [
-      "economic development",
-      "environmental policy",
-      "circular economy",
-      "environmental sustainability",
       "fossil fuel subsidies",
+      "circular economy",
+      "environmental policy",
+      "economic development",
+      "environmental sustainability",
       "sustainable agriculture"
     ],
     "members": [],
@@ -37510,8 +37510,8 @@
     ],
     "narrower": [],
     "related": [
-      "circular economy",
-      "environmental sustainability"
+      "environmental sustainability",
+      "circular economy"
     ],
     "members": [],
     "translations": {
@@ -37974,8 +37974,8 @@
     ],
     "narrower": [],
     "related": [
-      "state trading",
-      "public enterprises"
+      "public enterprises",
+      "state trading"
     ],
     "members": [],
     "translations": {
@@ -38072,9 +38072,9 @@
     ],
     "narrower": [],
     "related": [
-      "industrial policy",
       "fiscal policy",
-      "subsidies"
+      "subsidies",
+      "industrial policy"
     ],
     "members": [],
     "translations": {
@@ -38171,8 +38171,8 @@
     ],
     "narrower": [],
     "related": [
-      "trade promotion",
-      "import subsidies"
+      "import subsidies",
+      "trade promotion"
     ],
     "members": [],
     "translations": {
@@ -38375,10 +38375,10 @@
       "customs regulations"
     ],
     "narrower": [
+      "licences",
       "certificates of origin",
       "phytosanitary certificates",
-      "health certificates",
-      "licences"
+      "health certificates"
     ],
     "related": [],
     "members": [],
@@ -38419,9 +38419,9 @@
     ],
     "narrower": [],
     "related": [
-      "import licensing",
       "import licences",
-      "import policy"
+      "import policy",
+      "import licensing"
     ],
     "members": [],
     "translations": {
@@ -38471,10 +38471,10 @@
     "narrower": [
       "customs",
       "customs procedures",
-      "customs documents",
-      "customs inspection",
+      "preshipment inspection",
       "customs valuation",
-      "preshipment inspection"
+      "customs documents",
+      "customs inspection"
     ],
     "related": [
       "tariff policy"
@@ -38543,8 +38543,8 @@
     ],
     "related": [
       "least developed countries",
-      "waiver",
       "enabling clause",
+      "waiver",
       "regional trade agreement"
     ],
     "members": [],
@@ -38952,8 +38952,8 @@
     "narrower": [],
     "related": [
       "price support",
-      "environmental policy",
-      "agriculture (sector)"
+      "agriculture (sector)",
+      "environmental policy"
     ],
     "members": [],
     "translations": {
@@ -39225,10 +39225,10 @@
     ],
     "narrower": [],
     "related": [
-      "pest control",
-      "plant diseases",
       "plant protection",
-      "plant health"
+      "plant health",
+      "plant diseases",
+      "pest control"
     ],
     "members": [],
     "translations": {
@@ -39399,8 +39399,8 @@
       "domestic support"
     ],
     "related": [
-      "price support",
-      "aid policy"
+      "aid policy",
+      "price support"
     ],
     "members": [],
     "translations": {
@@ -39576,9 +39576,9 @@
     ],
     "narrower": [],
     "related": [
-      "aggregate measurement of support (amber box)",
+      "green box measures",
       "support policy",
-      "green box measures"
+      "aggregate measurement of support (amber box)"
     ],
     "members": [],
     "translations": {
@@ -40114,8 +40114,8 @@
       "customs documents"
     ],
     "narrower": [
-      "export licences",
-      "import licences"
+      "import licences",
+      "export licences"
     ],
     "related": [
       "licensing"
@@ -40163,8 +40163,8 @@
     ],
     "narrower": [],
     "related": [
-      "commercial law",
       "licensing",
+      "commercial law",
       "patents"
     ],
     "members": [],
@@ -40209,8 +40209,8 @@
       "copyright legislation"
     ],
     "related": [
-      "licensing",
-      "intellectual property"
+      "intellectual property",
+      "licensing"
     ],
     "members": [],
     "translations": {
@@ -40250,9 +40250,9 @@
     ],
     "narrower": [],
     "related": [
-      "customs inspection",
-      "counterfeiting",
       "enforcement",
+      "counterfeiting",
+      "customs inspection",
       "customs procedures"
     ],
     "members": [],
@@ -40300,16 +40300,16 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "export regulations",
-      "technical regulations",
       "customs regulations",
       "domestic regulations",
       "import regulations",
+      "export regulations",
+      "technical regulations",
       "health and sanitary regulations"
     ],
     "related": [
-      "legislation",
-      "law"
+      "law",
+      "legislation"
     ],
     "members": [],
     "translations": {
@@ -40479,9 +40479,9 @@
     ],
     "narrower": [],
     "related": [
-      "penal sanctions",
       "crime",
-      "criminal law"
+      "criminal law",
+      "penal sanctions"
     ],
     "members": [],
     "translations": {
@@ -40585,8 +40585,8 @@
     ],
     "narrower": [],
     "related": [
-      "crime protection",
-      "crime"
+      "crime",
+      "crime protection"
     ],
     "members": [],
     "translations": {
@@ -40630,8 +40630,8 @@
     ],
     "narrower": [],
     "related": [
-      "judicial system",
-      "crime protection"
+      "crime protection",
+      "judicial system"
     ],
     "members": [],
     "translations": {
@@ -40753,9 +40753,9 @@
     ],
     "narrower": [],
     "related": [
+      "radioactive pollution",
       "nuclear industry",
-      "safety",
-      "radioactive pollution"
+      "safety"
     ],
     "members": [],
     "translations": {
@@ -40796,10 +40796,10 @@
       "law"
     ],
     "narrower": [
-      "penal sanctions",
       "international sanctions",
+      "economic sanctions",
       "administrative measures",
-      "economic sanctions"
+      "penal sanctions"
     ],
     "related": [
       "enforcement"
@@ -41479,8 +41479,8 @@
       "labour policy"
     ],
     "narrower": [
-      "employment",
-      "unemployment"
+      "unemployment",
+      "employment"
     ],
     "related": [],
     "members": [],
@@ -41560,8 +41560,8 @@
     "type": "concept",
     "broader": [],
     "narrower": [
-      "access to information",
-      "data protection"
+      "data protection",
+      "access to information"
     ],
     "related": [],
     "members": [],
@@ -41599,8 +41599,8 @@
       "information policy"
     ],
     "narrower": [
-      "confidentiality",
-      "derestriction and circulation"
+      "derestriction and circulation",
+      "confidentiality"
     ],
     "related": [],
     "members": [],
@@ -41948,95 +41948,95 @@
     "narrower": [],
     "related": [],
     "members": [
-      "consumer protection",
-      "telecommunications",
-      "conformity assessment",
-      "energy conservation",
-      "plant protection",
-      "technical regulations",
-      "ecodesign",
-      "functioning of WTO bodies",
-      "quality control",
-      "standardisation",
-      "organic agriculture",
+      "environmental measures",
+      "trade concerns",
+      "circular economy",
+      "decarbonization",
       "technical cooperation",
-      "sustainable development",
-      "risk assessment",
-      "waste management",
-      "experience sharing",
-      "certification",
-      "animal health",
-      "marketing standards",
-      "sustainable fishing",
-      "renewable energy",
-      "standardizing bodies",
-      "ISPM 15",
-      "energy",
-      "dangerous substances",
-      "plastics pollution",
-      "product quality",
-      "energy labelling",
-      "pollution control",
-      "metrology",
-      "standards",
-      "trade concerns mechanism",
+      "enquiry points",
       "electronic commerce",
+      "technical assistance",
+      "consumer protection",
+      "transparency",
+      "testing",
+      "technical regulations",
       "agriculture (activity)",
-      "notification obligation",
-      "aquaculture",
-      "environmental protection",
-      "labour standards",
-      "ecolabelling",
-      "labelling",
+      "sustainable development",
+      "production standards",
+      "farming",
+      "functioning of WTO bodies",
+      "trade barriers",
+      "metrology",
+      "animal health",
+      "waste recycling",
+      "environmental policy",
+      "conformity assessment",
+      "animal protection",
+      "persistant organic pollutants",
+      "safety",
+      "qualification requirements and procedures",
+      "standards",
+      "toxic substances",
+      "environmental sustainability",
+      "dangerous substances",
+      "technical barriers to trade",
+      "marketing standards",
+      "plastics pollution",
+      "ISPM 15",
+      "organic agriculture",
       "energy policy",
       "plant growing",
-      "emissions control",
-      "energy efficiency",
-      "safety standards",
-      "quality requirements",
-      "toxic substances",
-      "technical assistance",
-      "code of good practice",
-      "packaging",
-      "degradation of the environment",
-      "manufacturing",
-      "farming",
-      "food standards",
-      "environmental policy",
-      "animal protection",
-      "fishing",
-      "climate change",
-      "waste disposal",
-      "certifying bodies",
-      "technical standards",
-      "circular economy",
       "animal welfare",
-      "persistant organic pollutants",
-      "trade concerns",
-      "air pollution",
-      "accounting standards",
-      "notification authority",
-      "transparency",
-      "technical barriers to trade",
-      "quality standards",
-      "trade barriers",
-      "fire protection",
-      "environmental sustainability",
-      "digital economy",
-      "electromagnetic compatibility (EMC)",
+      "food standards",
+      "ecolabelling",
+      "pollution control",
+      "energy labelling",
+      "labelling",
+      "standardizing bodies",
+      "quality requirements",
+      "renewable energy",
+      "ecodesign",
+      "risk assessment",
       "human health",
-      "enquiry points",
-      "decarbonization",
-      "qualification requirements and procedures",
-      "testing",
-      "dispute settlement",
-      "safety",
+      "aquaculture",
+      "accounting standards",
+      "air pollution",
+      "technical standards",
+      "fishing",
+      "safety standards",
+      "energy conservation",
+      "packaging",
+      "trade concerns mechanism",
+      "product quality",
+      "energy",
+      "quality standards",
+      "manufacturing",
       "plant health",
-      "waste recycling",
-      "environmental measures",
+      "waste management",
+      "radiocommunications",
+      "environmental protection",
+      "certifying bodies",
+      "energy efficiency",
       "consumer behaviour",
-      "production standards",
-      "radiocommunications"
+      "emissions control",
+      "notification obligation",
+      "notification authority",
+      "sustainable fishing",
+      "plant protection",
+      "degradation of the environment",
+      "dispute settlement",
+      "climate change",
+      "digital economy",
+      "certification",
+      "experience sharing",
+      "waste disposal",
+      "electromagnetic compatibility (EMC)",
+      "standardisation",
+      "telecommunications",
+      "fire protection",
+      "code of good practice",
+      "quality control",
+      "labour standards"
     ],
     "translations": {}
   },
@@ -42063,34 +42063,34 @@
     "narrower": [],
     "related": [],
     "members": [
-      "import licensing legislation",
-      "trade concerns",
-      "least developed countries",
-      "market surveillance",
-      "animal health",
-      "transparency",
-      "intellectual property",
-      "import prohibition",
-      "observer status",
-      "import licences",
-      "licensing",
-      "domestic law",
-      "WTO reform",
-      "functioning of WTO bodies",
-      "non-automatic import licensing",
-      "import regulations",
-      "trade concerns mechanism",
-      "import licensing",
-      "automatic import licensing",
-      "customs documents",
-      "human health",
-      "notification obligation",
-      "environmental protection",
-      "import restrictions",
-      "rules of procedure",
-      "imports",
       "plant health",
-      "import policy"
+      "intellectual property",
+      "market surveillance",
+      "trade concerns",
+      "environmental protection",
+      "human health",
+      "import restrictions",
+      "import prohibition",
+      "transparency",
+      "notification obligation",
+      "least developed countries",
+      "observer status",
+      "domestic law",
+      "import licences",
+      "import regulations",
+      "rules of procedure",
+      "WTO reform",
+      "customs documents",
+      "automatic import licensing",
+      "licensing",
+      "import licensing legislation",
+      "import licensing",
+      "functioning of WTO bodies",
+      "animal health",
+      "trade concerns mechanism",
+      "non-automatic import licensing",
+      "import policy",
+      "imports"
     ],
     "translations": {}
   },
@@ -42117,33 +42117,33 @@
     "narrower": [],
     "related": [],
     "members": [
-      "economic structure",
-      "economic development",
-      "investment",
-      "agricultural policy",
-      "trade facilitation",
-      "trade in goods",
-      "tariff policy",
-      "trade relations",
-      "trade promotion",
-      "economic policy",
-      "transparency",
-      "intellectual property",
-      "trade policy review mechanism",
-      "trade policy review",
-      "international cooperation",
-      "trade flows",
-      "customs regulations",
-      "market access",
-      "domestic regulations",
-      "environmental policy",
-      "incentives",
       "trade policy",
-      "economic conditions",
-      "fiscal policy",
       "subsidies",
+      "international cooperation",
+      "intellectual property",
+      "economic development",
+      "trade monitoring",
+      "market access",
+      "agricultural policy",
+      "trade flows",
+      "economic policy",
+      "domestic regulations",
+      "trade in goods",
+      "trade facilitation",
+      "transparency",
+      "trade relations",
+      "investment",
+      "trade policy review mechanism",
+      "tariff policy",
+      "fiscal policy",
+      "incentives",
+      "economic structure",
+      "trade policy review",
+      "customs regulations",
+      "economic conditions",
       "trade in services",
-      "trade monitoring"
+      "environmental policy",
+      "trade promotion"
     ],
     "translations": {}
   },
@@ -42170,34 +42170,34 @@
     "narrower": [],
     "related": [],
     "members": [
-      "Global System of Trade Preferences",
-      "least developed countries",
-      "certification",
-      "reciprocal trade preferences",
-      "Generalized System of Preferences",
-      "transparency",
-      "rules of origin",
-      "anti-dumping measures",
-      "technical assistance",
-      "WTO reform",
-      "regional trade agreement",
-      "non-reciprocal trade preferences",
-      "preferential rules of origin",
-      "most-favoured nation treatment",
-      "non-preferential rules of origin",
-      "tariff preferences",
-      "functioning of WTO bodies",
-      "preference-granting member",
-      "appellation of origin",
-      "market access",
-      "notification obligation",
-      "trade preferences",
-      "harmonization work programme",
-      "certificates of origin",
       "trade policy",
+      "customs unions",
+      "rules of origin",
+      "Generalized System of Preferences",
+      "market access",
+      "tariff preferences",
+      "preference-granting member",
+      "regional trade agreement",
+      "technical assistance",
+      "transparency",
+      "notification obligation",
+      "least developed countries",
+      "appellation of origin",
+      "reciprocal trade preferences",
+      "certificates of origin",
+      "non-reciprocal trade preferences",
+      "Global System of Trade Preferences",
+      "harmonization work programme",
       "rules of procedure",
+      "WTO reform",
+      "preferential rules of origin",
+      "non-preferential rules of origin",
+      "certification",
+      "functioning of WTO bodies",
       "origin of goods",
-      "customs unions"
+      "trade preferences",
+      "anti-dumping measures",
+      "most-favoured nation treatment"
     ],
     "translations": {}
   },
@@ -42224,103 +42224,103 @@
     "narrower": [],
     "related": [],
     "members": [
-      "pandemics",
-      "food security",
-      "territory protection",
-      "foot and mouth disease",
-      "fungi",
-      "biological pest control",
-      "food resources",
-      "equivalence",
-      "plant diseases",
-      "plant protection",
-      "covid-19",
-      "functioning of WTO bodies",
-      "fruit fly",
-      "organic agriculture",
-      "food labelling",
-      "technical cooperation",
-      "disease control",
-      "regionalisation",
-      "avian Influenza",
-      "viruses",
-      "listeria monocytogenes",
-      "escherichia coli",
-      "food processing",
-      "genetic engineering",
-      "bacteria",
-      "wood packaging",
-      "classical Swine fever",
-      "diseases",
-      "certification",
-      "health certificates",
-      "animal health",
-      "sanitary and phytosanitary measures",
-      "ISPM 15",
-      "african swine fever",
-      "food contamination",
-      "food stocks",
-      "agriculture (sector)",
-      "phytosanitary inspection",
-      "sudden oak death",
-      "dioxins",
-      "agriculture (activity)",
-      "notification obligation",
-      "citrus canker",
-      "labelling",
-      "food safety",
-      "nematode",
-      "transmissible Spongiform Encephalopathy (TSE)",
-      "epidemics",
-      "plant growing",
       "slaughter of animals",
-      "agricultural development",
-      "veterinary inspection",
-      "salmonella",
-      "toxic substances",
-      "newcastle disease",
-      "technical assistance",
-      "food preserving",
-      "packaging",
-      "human diseases",
-      "health legislation",
-      "irradiation",
-      "animal diseases",
-      "public health",
-      "pests",
-      "environmental policy",
-      "pest control",
-      "animal protection",
-      "pathogens",
-      "climate change",
-      "HACCP plan requirements",
-      "maximum residue limits (MRL)",
-      "exemption from the requirement of a tolerance",
-      "zoonoses",
-      "animal welfare",
-      "food inspection",
-      "phytosanitary certificates",
-      "biotechnology",
-      "agricultural production",
-      "allergens",
-      "short-term measures (SPS)",
-      "agricultural policy",
-      "scrapie",
-      "food production",
-      "notification authority",
-      "transparency",
-      "nutrition",
-      "bovine spongiform encephalopathy (BSE)",
-      "nutrition information",
-      "swine Influenza",
-      "pesticide residues",
-      "human health",
-      "toxins",
+      "technical cooperation",
       "enquiry points",
+      "technical assistance",
+      "citrus canker",
+      "food security",
+      "pesticide residues",
+      "phytosanitary inspection",
+      "phytosanitary certificates",
+      "transparency",
+      "scrapie",
+      "agriculture (activity)",
+      "sanitary and phytosanitary measures",
+      "disease control",
+      "salmonella",
+      "nutrition",
+      "food processing",
+      "pests",
+      "functioning of WTO bodies",
+      "animal health",
+      "foot and mouth disease",
+      "short-term measures (SPS)",
+      "wood packaging",
+      "food inspection",
+      "environmental policy",
+      "HACCP plan requirements",
+      "animal protection",
       "food industry",
+      "maximum residue limits (MRL)",
+      "agricultural production",
+      "health certificates",
+      "nematode",
+      "veterinary inspection",
+      "fungi",
+      "epidemics",
+      "toxic substances",
+      "food contamination",
+      "covid-19",
+      "public health",
+      "food safety",
+      "organic agriculture",
+      "ISPM 15",
+      "transmissible Spongiform Encephalopathy (TSE)",
+      "irradiation",
+      "health legislation",
+      "pandemics",
+      "plant growing",
+      "animal welfare",
+      "food preserving",
+      "animal diseases",
+      "labelling",
+      "pathogens",
+      "zoonoses",
+      "pest control",
+      "sudden oak death",
+      "allergens",
+      "toxins",
+      "agriculture (sector)",
+      "human health",
+      "newcastle disease",
+      "biotechnology",
+      "avian Influenza",
+      "fruit fly",
+      "escherichia coli",
+      "territory protection",
+      "packaging",
+      "bacteria",
+      "equivalence",
+      "african swine fever",
+      "exemption from the requirement of a tolerance",
+      "swine Influenza",
+      "plant health",
+      "genetic engineering",
+      "dioxins",
+      "listeria monocytogenes",
+      "agricultural policy",
+      "regionalisation",
+      "plant diseases",
+      "biological pest control",
+      "food stocks",
+      "nutrition information",
+      "notification obligation",
+      "notification authority",
+      "bovine spongiform encephalopathy (BSE)",
       "bluetongue",
-      "customs inspection",
-      "plant health"
+      "classical Swine fever",
+      "food labelling",
+      "plant protection",
+      "viruses",
+      "climate change",
+      "diseases",
+      "human diseases",
+      "certification",
+      "agricultural development",
+      "food resources",
+      "food production",
+      "customs inspection"
     ],
     "translations": {}
   },
@@ -42347,20 +42347,20 @@
     "narrower": [],
     "related": [],
     "members": [
-      "domestic law",
-      "interest charges",
       "customs",
-      "special and differential treatment",
-      "technical assistance",
-      "developing countries",
-      "imports",
-      "notification obligation",
       "functioning of WTO bodies",
-      "customs valuation",
-      "customs valuation legislation",
+      "domestic law",
       "customs duties",
+      "special and differential treatment",
       "preshipment inspection",
-      "ad valorem tariff"
+      "notification obligation",
+      "interest charges",
+      "ad valorem tariff",
+      "customs valuation",
+      "imports",
+      "developing countries",
+      "technical assistance",
+      "customs valuation legislation"
     ],
     "translations": {}
   },
@@ -42387,45 +42387,45 @@
     "narrower": [],
     "related": [],
     "members": [
-      "endangered species",
-      "cotton industry",
-      "investment",
-      "trade facilitation",
-      "fisheries subsidies",
-      "non-tariff measures",
-      "subsidies and countervailing measures",
-      "sanitary and phytosanitary measures",
-      "trade-related investment measures",
-      "trade negotiations",
-      "intellectual property",
       "rules of origin",
-      "technical barriers to trade",
-      "government procurement",
-      "state trading",
-      "textile industry",
-      "tariffs",
-      "covid-19",
-      "technical assistance",
-      "information and communication technology",
-      "services",
-      "agriculture (sector)",
-      "customs valuation",
-      "environmental sustainability",
-      "aircraft industry",
-      "safeguard measures",
-      "trade financing",
-      "import licensing",
+      "intellectual property",
       "market access",
-      "preshipment inspection",
+      "delivery services",
+      "agriculture (sector)",
+      "technical assistance",
       "gender equality",
-      "balance of payments",
+      "textile industry",
+      "covid-19",
+      "trade facilitation",
+      "preshipment inspection",
+      "trade financing",
+      "environmental sustainability",
+      "trade-related investment measures",
+      "customs valuation",
+      "investment",
+      "aircraft industry",
+      "quantitative restrictions",
+      "safeguard measures",
+      "services",
+      "technical barriers to trade",
+      "sanitary and phytosanitary measures",
+      "aid for trade",
+      "non-tariff measures",
       "schedules of specific commitments",
+      "subsidies and countervailing measures",
+      "trade negotiations",
       "dispute settlement",
       "environment",
-      "quantitative restrictions",
-      "delivery services",
-      "aid for trade",
-      "trade in services"
+      "government procurement",
+      "balance of payments",
+      "import licensing",
+      "tariffs",
+      "trade in services",
+      "endangered species",
+      "fisheries subsidies",
+      "state trading",
+      "information and communication technology",
+      "cotton industry"
     ],
     "translations": {}
   },
@@ -42452,33 +42452,33 @@
     "narrower": [],
     "related": [],
     "members": [
-      "trade remedies",
-      "anti-dumping actions",
-      "import policy",
-      "transparency",
-      "anti-dumping legislation",
-      "countervailing actions",
-      "waiver",
-      "anti-dumping measures",
-      "fair competition",
-      "domestic law",
-      "competent authority",
-      "countervailing investigations",
-      "functioning of WTO bodies",
-      "anti-circumvention",
-      "countervailing duties",
-      "dumping",
-      "anti-dumping duties",
-      "notification obligation",
-      "domestic industry",
-      "zeroing",
-      "circumvention",
-      "unfair competition",
       "subsidies",
-      "dispute settlement",
-      "anti-dumping investigations",
+      "unfair competition",
       "injury",
-      "countervailing duty legislation"
+      "anti-dumping actions",
+      "countervailing duties",
+      "countervailing actions",
+      "anti-circumvention",
+      "transparency",
+      "notification obligation",
+      "waiver",
+      "domestic industry",
+      "domestic law",
+      "zeroing",
+      "dispute settlement",
+      "circumvention",
+      "anti-dumping investigations",
+      "countervailing duty legislation",
+      "competent authority",
+      "dumping",
+      "fair competition",
+      "functioning of WTO bodies",
+      "anti-dumping measures",
+      "anti-dumping legislation",
+      "countervailing investigations",
+      "import policy",
+      "anti-dumping duties",
+      "trade remedies"
     ],
     "translations": {}
   },
@@ -42505,95 +42505,95 @@
     "narrower": [],
     "related": [],
     "members": [
-      "tariff reductions",
-      "special and differential treatment",
-      "tariffication",
-      "export restrictions",
       "supply and demand",
-      "schedules of concessions",
-      "pandemics",
-      "food security",
-      "food resources",
-      "trade negotiations",
-      "covid-19",
-      "WTO reform",
-      "pollution",
-      "functioning of WTO bodies",
-      "public food stockholding (PSH)",
-      "ad valorem tariff",
-      "organic agriculture",
       "export competition",
       "technical cooperation",
-      "market access",
-      "disease control",
-      "food aid",
-      "forestry",
+      "export policy",
+      "technical assistance",
+      "export restrictions",
+      "food security",
+      "ministerial conference",
+      "phytosanitary inspection",
+      "transparency",
+      "agriculture (activity)",
       "sustainable development",
+      "export prohibition",
+      "disease control",
+      "trade negotiations",
+      "green box measures",
+      "rules of procedure",
+      "tariffication",
+      "functioning of WTO bodies",
+      "animal health",
+      "biodiversity",
+      "endangered species",
+      "pollution",
+      "food inspection",
+      "environmental policy",
+      "food industry",
+      "agricultural production",
+      "applied tariff",
+      "safeguards",
+      "Harmonized system",
+      "tariff classification",
+      "veterinary inspection",
+      "covid-19",
+      "public health",
+      "least developed countries",
+      "dangerous substances",
+      "special agriculture safeguard (SSG)",
+      "domestic subsidies",
+      "food safety",
+      "technology transfer",
+      "bound tariff",
+      "special and differential treatment",
+      "WTO reform",
+      "organic agriculture",
+      "pandemics",
+      "tariffs",
+      "nuisance tariff",
+      "ad valorem tariff",
+      "natural resources",
+      "food technology",
+      "work programmes",
+      "labelling",
+      "domestic support",
+      "MFN tariff",
+      "market access",
+      "tariff preferences",
+      "agriculture (sector)",
+      "human health",
+      "biotechnology",
+      "tariff quotas",
+      "aid for trade",
+      "tariff escalation",
+      "packaging",
+      "tariff binding",
+      "net-food importing countries",
+      "schedules of concessions",
       "fisheries",
       "import policy",
-      "agricultural trade",
-      "diseases",
-      "ministerial conference",
-      "animal health",
-      "dangerous substances",
-      "food stocks",
-      "technology transfer",
-      "agriculture (sector)",
-      "net-food importing countries",
-      "phytosanitary inspection",
-      "tariff preferences",
-      "special agriculture safeguard (SSG)",
-      "export subsidies",
-      "agriculture (activity)",
-      "notification obligation",
-      "Harmonized system",
-      "rules of procedure",
-      "labelling",
-      "food safety",
-      "export prohibition",
-      "export policy",
-      "tariff quotas",
-      "domestic subsidies",
-      "tariff classification",
-      "green box measures",
-      "endangered species",
-      "MFN tariff",
-      "nuisance tariff",
-      "national treatment",
-      "veterinary inspection",
-      "applied tariff",
-      "tariffs",
-      "technical assistance",
-      "packaging",
       "most-favoured nation treatment",
-      "aggregate measurement of support (amber box)",
-      "food technology",
-      "public health",
-      "environmental policy",
-      "tariff negotiations",
-      "domestic support",
-      "climate change",
-      "aid for trade",
-      "food inspection",
-      "biotechnology",
-      "least developed countries",
-      "agricultural production",
-      "agricultural policy",
-      "tariff policy",
-      "natural resources",
-      "biodiversity",
-      "transparency",
-      "special safeguard mechanism (SSM)",
-      "observer status",
-      "safeguards",
-      "human health",
-      "food industry",
-      "tariff escalation",
-      "dispute settlement",
-      "tariff binding",
       "plant health",
-      "work programmes",
-      "bound tariff"
+      "food aid",
+      "national treatment",
+      "tariff negotiations",
+      "forestry",
+      "agricultural policy",
+      "food stocks",
+      "public food stockholding (PSH)",
+      "notification obligation",
+      "tariff policy",
+      "agricultural trade",
+      "observer status",
+      "aggregate measurement of support (amber box)",
+      "dispute settlement",
+      "climate change",
+      "diseases",
+      "tariff reductions",
+      "special safeguard mechanism (SSM)",
+      "export subsidies",
+      "food resources"
     ],
     "translations": {}
   },
@@ -42620,45 +42620,45 @@
     "narrower": [],
     "related": [],
     "members": [
-      "patent law",
-      "biotechnology",
-      "least developed countries",
       "industrial property",
-      "biodiversity",
-      "copyright",
-      "transparency",
-      "intellectual property",
-      "trade-related aspects of intellectual property rights",
-      "observer status",
-      "election of chairperson",
-      "waiver",
-      "covid-19",
-      "technical assistance",
-      "technology transfer",
-      "traditional knowledge and folklore",
-      "patents",
+      "patent law",
       "international cooperation",
-      "enforcement",
-      "sanctions",
-      "appellation of origin",
-      "electronic commerce",
+      "intellectual property",
       "intellectual property legislation",
-      "neighbouring rights",
-      "innovation",
-      "plant variety protection",
-      "technical cooperation",
-      "notification obligation",
-      "public health",
-      "counterfeiting",
-      "undisclosed information",
-      "contact points",
-      "notifications",
-      "climate change",
-      "trademarks",
-      "geographical indications",
-      "copyright legislation",
       "layout designs",
+      "technical cooperation",
+      "technical assistance",
+      "electronic commerce",
+      "copyright legislation",
+      "patents",
+      "biotechnology",
+      "covid-19",
+      "traditional knowledge and folklore",
+      "transparency",
+      "public health",
+      "notification obligation",
+      "least developed countries",
+      "appellation of origin",
+      "waiver",
+      "observer status",
+      "trademarks",
+      "enforcement",
+      "innovation",
+      "technology transfer",
+      "undisclosed information",
+      "notifications",
+      "trade-related aspects of intellectual property rights",
+      "climate change",
+      "counterfeiting",
+      "copyright",
+      "geographical indications",
       "crisis preparedness",
+      "biodiversity",
+      "contact points",
+      "plant variety protection",
+      "neighbouring rights",
+      "election of chairperson",
+      "sanctions",
       "industrial designs"
     ],
     "translations": {}

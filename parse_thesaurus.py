@@ -35,6 +35,8 @@ def get_labels_by_language(graph, concept_uri):
 
 def parse_thesaurus_rdf(rdf_file):
     """Parse SKOS RDF file and extract keyword relationships and collections."""
+    from rdflib import RDF
+    
     print(f"Loading RDF file: {rdf_file}")
     
     # Load RDF graph
@@ -59,7 +61,10 @@ def parse_thesaurus_rdf(rdf_file):
         concept_str = str(concept_uri)
         
         # Skip if this is a Collection (we'll process those separately)
-        if (concept_uri, None, SKOS.Collection) in g:
+        # Check if this URI is typed as a Collection using rdf:type
+        is_collection = (concept_uri, RDF.type, SKOS.Collection) in g
+        
+        if is_collection:
             continue
             
         # Get labels by language
@@ -91,7 +96,7 @@ def parse_thesaurus_rdf(rdf_file):
     print(f"Processed {len(concepts)} concepts")
     
     # Process all collections
-    for collection_uri in g.subjects(None, SKOS.Collection):
+    for collection_uri in g.subjects(RDF.type, SKOS.Collection):
         collection_str = str(collection_uri)
         
         # Get labels by language for collection
