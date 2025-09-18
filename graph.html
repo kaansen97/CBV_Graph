@@ -75,7 +75,14 @@
             transform: rotate(45deg); 
         }
 
-        .info-panel { bottom: 20px; left: 20px; max-width: 300px; font-size: 12px; }
+        .info-panel { 
+            bottom: 20px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            max-width: 400px; 
+            font-size: 12px; 
+            text-align: center;
+        }
         
         /* Responsive design for small screens */
         @media (max-width: 768px) {
@@ -114,7 +121,8 @@
             }
             .info-panel { 
                 bottom: 10px; 
-                left: 10px; 
+                left: 50%; 
+                transform: translateX(-50%); 
                 max-width: calc(100% - 20px); 
                 font-size: 11px;
             }
@@ -632,17 +640,33 @@
             const totalKeywords = document.getElementById('total-keywords').textContent;
             const infoPanel = document.getElementById('info-panel');
             
+            let currentKeywordLink = '';
+            if (currentKeyword) {
+                const cbvURL = getCBVSourceURL(currentKeyword);
+                const displayLabel = getDisplayLabel(currentKeyword);
+                if (cbvURL) {
+                    currentKeywordLink = `
+                        <div style="margin: 8px 0; padding: 8px; background: rgba(78, 205, 196, 0.1); border-radius: 5px;">
+                            <strong>Current Topic:</strong> ${displayLabel}<br/>
+                            <a href="${cbvURL}" target="_blank" style="color: #4ecdc4; text-decoration: none; font-size: 13px;">
+                                🔗 View "${displayLabel}" in CBV Source
+                            </a>
+                        </div>
+                    `;
+                }
+            }
+            
             infoPanel.innerHTML = `
                 <span id="info-text">
                     <strong>${infoTexts.title}:</strong> ${infoTexts.description.replace('{count}', totalKeywords)} ${infoTexts.instruction}
                 </span>
+                ${currentKeywordLink}
                 <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2);">
                     <span style="font-size: 11px; color: #aaa;">
                         ${infoTexts.sourceText} 
                         <a href="https://cbv.cwr.wto.org/showvoc/#/home" target="_blank" style="color: #667eea; text-decoration: none;">
                             cbv.cwr.wto.org 🔗
-                        </a><br/>
-                        <span style="color: #4ecdc4;">🔗 Click links to view individual items in CBV source</span>
+                        </a>
                     </span>
                 </div>
             `;
@@ -716,7 +740,6 @@
                 // Update info panel
                 document.getElementById('total-keywords').textContent = allKeywords.length.toLocaleString();
                 
-                console.log(`Loaded ${allKeywords.length} keywords with relationships from unified data file`);
                 return true;
             } catch (error) {
                 console.error('Error loading data:', error);
@@ -970,6 +993,7 @@
             const graph = { nodes, links };
             renderGraph(graph);
             updateRelatedKeywordsPanel(keywordName);
+            updateInfoPanel();
         }
 
         function getNodeColor(d) {
@@ -1013,7 +1037,6 @@
                 // Based on your examples: https: stays as is, but // becomes %2F%2F and other / become %2F
                 const encodedURI = keywordInfo.uri.replace(/https:\/\//, 'https:%2F%2F').replace(/\//g, '%2F');
                 const finalURL = `https://cbv.cwr.wto.org/showvoc/#/datasets/WTO_Thesaurus/data?resId=${encodedURI}`;
-                console.log(`CBV URL for ${keywordName}: ${finalURL}`);
                 return finalURL;
             }
             return null;
@@ -1306,15 +1329,7 @@
                 }
             }
             
-            // Add CBV source link
-            const cbvURL = getCBVSourceURL(d.name);
-            if (cbvURL) {
-                content += `<div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #444;">
-                    <a href="${cbvURL}" target="_blank" style="color: #4ecdc4; text-decoration: none; font-size: 12px;">
-                        🔗 View in CBV Source
-                    </a>
-                </div>`;
-            }
+            // CBV source link is now in the info panel instead of tooltip
             
             tooltip.style("display", "block")
                 .html(content)
