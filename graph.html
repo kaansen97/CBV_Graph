@@ -911,9 +911,10 @@
                 members: []
             };
 
-            // Create nodes
+            // Create nodes with multiple rings support (30 nodes per ring)
             const nodes = [];
             const links = [];
+            const maxNodesPerRing = 30;
             
             // Central node
             nodes.push({
@@ -923,66 +924,56 @@
                 ring: 'center'
             });
             
-            // Narrower terms (inner ring)
-            relationships.narrower.forEach(term => {
-                if (relationshipData[term]) {
+            // Helper function to organize nodes into rings
+            function organizeNodesIntoRings(terms, type, startingRing = 1) {
+                const validTerms = terms.filter(term => relationshipData[term]);
+                
+                for (let i = 0; i < validTerms.length; i++) {
+                    const term = validTerms[i];
+                    const ringNumber = Math.floor(i / maxNodesPerRing) + startingRing;
+                    
                     nodes.push({
                         id: term,
                         name: term,
-                        type: 'narrower',
-                        ring: 'inner'
+                        type: type,
+                        ring: `ring-${ringNumber}`,
+                        ringIndex: i % maxNodesPerRing,
+                        totalInRing: Math.min(maxNodesPerRing, validTerms.length - (ringNumber - startingRing) * maxNodesPerRing)
                     });
+                    
                     links.push({
                         source: keywordName,
                         target: term,
-                        type: 'narrower'
+                        type: type
                     });
                 }
-            });
+                
+                return Math.ceil(validTerms.length / maxNodesPerRing);
+            }
             
-            // Broader terms (outer ring)
-            relationships.broader.forEach(term => {
-                if (relationshipData[term]) {
-                    nodes.push({
-                        id: term,
-                        name: term,
-                        type: 'broader',
-                        ring: 'outer'
-                    });
-                    links.push({
-                        source: keywordName,
-                        target: term,
-                        type: 'broader'
-                    });
-                }
-            });
+            // Narrower terms (left side)
+            const narrowerRings = organizeNodesIntoRings(relationships.narrower, 'narrower', 1);
             
-            // Related terms (outer ring, different color)
-            relationships.related.forEach(term => {
+            // Related terms (middle/top-bottom)
+            const relatedRings = organizeNodesIntoRings(relationships.related, 'related', 1);
+            
+            // Broader terms (right side)
+            const broaderRings = organizeNodesIntoRings(relationships.broader, 'broader', 1);
+            
+            // Collection members (around center)
+            relationships.members.forEach((term, i) => {
                 if (relationshipData[term] && !nodes.find(n => n.id === term)) {
-                    nodes.push({
-                        id: term,
-                        name: term,
-                        type: 'related',
-                        ring: 'outer'
-                    });
-                    links.push({
-                        source: keywordName,
-                        target: term,
-                        type: 'related'
-                    });
-                }
-            });
-
-            // Collection members (middle ring for visibility)
-            relationships.members.forEach(term => {
-                if (relationshipData[term] && !nodes.find(n => n.id === term)) {
+                    const ringNumber = Math.floor(i / maxNodesPerRing) + 1;
+                    
                     nodes.push({
                         id: term,
                         name: term,
                         type: 'members',
-                        ring: 'middle'
+                        ring: `members-ring-${ringNumber}`,
+                        ringIndex: i % maxNodesPerRing,
+                        totalInRing: Math.min(maxNodesPerRing, relationships.members.length - (ringNumber - 1) * maxNodesPerRing)
                     });
+                    
                     links.push({
                         source: keywordName,
                         target: term,
@@ -1044,36 +1035,101 @@
 
         function renderGraph(graph) {
             const centerNode = graph.nodes.find(n => n.ring === 'center');
-            const innerNodes = graph.nodes.filter(n => n.ring === 'inner');
-            const middleNodes = graph.nodes.filter(n => n.ring === 'middle');
-            const outerNodes = graph.nodes.filter(n => n.ring === 'outer');
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const baseRadius = Math.min(width, height) * 0.15;
 
-            const innerRadius = Math.min(width, height) * 0.2;
-            const middleRadius = Math.min(width, height) * 0.275;
-            const outerRadius = Math.min(width, height) * 0.35;
-
-            // Position nodes
+            // Position center node
             if (centerNode) { 
-                centerNode.fx = width / 2; 
-                centerNode.fy = height / 2; 
+                centerNode.fx = centerX; 
+                centerNode.fy = centerY; 
             }
             
-            innerNodes.forEach((node, i) => {
-                const angle = (i / innerNodes.length) * 2 * Math.PI;
-                node.fx = width / 2 + innerRadius * Math.cos(angle);
-                node.fy = height / 2 + innerRadius * Math.sin(angle);
-            });
+            // Helper function to position nodes in directional arcs
+            function positionNodesInDirection(nodes, direction, startRadius) {
+                const rings = {};
+                
+                // Group nodes by ring
+                nodes.forEach(node => {
+                    if (!rings[node.ring]) rings[node.ring] = [];
+                    rings[node.ring].push(node);
+                });
+                
+                // Position each ring
+                Object.keys(rings).forEach((ringKey, ringIndex) => {
+                    const ringNodes = rings[ringKey];
+                    const radius = startRadius + (ringIndex * baseRadius * 0.8);
+                    
+                    ringNodes.forEach((node, nodeIndex) => {
+                        let angle;
+                        const totalNodes = node.totalInRing;
+                        
+                        if (direction === 'left') {
+                            // Left side: from top-left to bottom-left (150° to 210°)
+                            const arcSpan = Math.PI / 3; // 60 degrees
+                            const startAngle = Math.PI * 5/6; // 150 degrees
+                            angle = startAngle + (nodeIndex / Math.max(1, totalNodes - 1)) * arcSpan;
+                        } else if (direction === 'right') {
+                            // Right side: from top-right to bottom-right (330° to 30°)
+                            const arcSpan = Math.PI / 3; // 60 degrees
+                            const startAngle = -Math.PI / 6; // 330 degrees
+                            angle = startAngle + (nodeIndex / Math.max(1, totalNodes - 1)) * arcSpan;
+                        } else if (direction === 'top-bottom') {
+                            // Top and bottom: split between top (240° to 300°) and bottom (60° to 120°)
+                            if (nodeIndex < totalNodes / 2) {
+                                // Top half
+                                const arcSpan = Math.PI / 3; // 60 degrees
+                                const startAngle = Math.PI * 4/3; // 240 degrees
+                                const topIndex = nodeIndex;
+                                const topTotal = Math.ceil(totalNodes / 2);
+                                angle = startAngle + (topIndex / Math.max(1, topTotal - 1)) * arcSpan;
+                            } else {
+                                // Bottom half
+                                const arcSpan = Math.PI / 3; // 60 degrees
+                                const startAngle = Math.PI / 3; // 60 degrees
+                                const bottomIndex = nodeIndex - Math.ceil(totalNodes / 2);
+                                const bottomTotal = Math.floor(totalNodes / 2);
+                                angle = startAngle + (bottomIndex / Math.max(1, bottomTotal - 1)) * arcSpan;
+                            }
+                        } else {
+                            // Fallback: full circle
+                            angle = (nodeIndex / totalNodes) * 2 * Math.PI;
+                        }
+                        
+                        node.fx = centerX + radius * Math.cos(angle);
+                        node.fy = centerY + radius * Math.sin(angle);
+                    });
+                });
+            }
             
-            middleNodes.forEach((node, i) => {
-                const angle = (i / middleNodes.length) * 2 * Math.PI;
-                node.fx = width / 2 + middleRadius * Math.cos(angle);
-                node.fy = height / 2 + middleRadius * Math.sin(angle);
-            });
+            // Position nodes by type and direction
+            const narrowerNodes = graph.nodes.filter(n => n.type === 'narrower');
+            const broaderNodes = graph.nodes.filter(n => n.type === 'broader');
+            const relatedNodes = graph.nodes.filter(n => n.type === 'related');
+            const memberNodes = graph.nodes.filter(n => n.type === 'members');
             
-            outerNodes.forEach((node, i) => {
-                const angle = (i / outerNodes.length) * 2 * Math.PI;
-                node.fx = width / 2 + outerRadius * Math.cos(angle);
-                node.fy = height / 2 + outerRadius * Math.sin(angle);
+            positionNodesInDirection(narrowerNodes, 'left', baseRadius);
+            positionNodesInDirection(broaderNodes, 'right', baseRadius);
+            positionNodesInDirection(relatedNodes, 'top-bottom', baseRadius);
+            
+            // Position member nodes in a circle around center
+            memberNodes.forEach((node, i) => {
+                const rings = {};
+                memberNodes.forEach(n => {
+                    if (!rings[n.ring]) rings[n.ring] = [];
+                    rings[n.ring].push(n);
+                });
+                
+                Object.keys(rings).forEach((ringKey, ringIndex) => {
+                    const ringNodes = rings[ringKey];
+                    const radius = baseRadius * 0.7 + (ringIndex * baseRadius * 0.3);
+                    
+                    ringNodes.forEach((node, nodeIndex) => {
+                        const angle = (nodeIndex / node.totalInRing) * 2 * Math.PI;
+                        node.fx = centerX + radius * Math.cos(angle);
+                        node.fy = centerY + radius * Math.sin(angle);
+                    });
+                });
             });
 
             simulation = d3.forceSimulation(graph.nodes)
@@ -1148,7 +1204,7 @@
             
             // Add member count text in center of collection nodes
             node.each(function(d) {
-                if (d.ring === 'center') {
+                if (d.ring === 'center' || d.type === 'central') {
                     const currentData = relationshipData[d.name] || {};
                     if (currentData.type === 'collection') {
                         const members = currentData.members || [];
@@ -1266,7 +1322,7 @@
                     return isConnected;
                 }).style('opacity', 1);
                 
-            } else if (d.ring === 'center') {
+            } else if (d.ring === 'center' || d.type === 'central') {
                 // For central topic, highlight all direct connections
                 g.selectAll('.link').filter(linkData => 
                     linkData.source.id === d.id || linkData.target.id === d.id
