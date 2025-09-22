@@ -1083,28 +1083,28 @@
                         const totalNodes = node.totalInRing;
                         
                         if (direction === 'left') {
-                            // Left side: expanded arc from top-left to bottom-left (120° to 240°)
-                            const arcSpan = Math.PI * 2/3; // 120 degrees (expanded from 60)
-                            const startAngle = Math.PI * 2/3; // 120 degrees
+                            // LEFT SIDE: Narrower terms (180° ± 45° = 135° to 225°)
+                            const arcSpan = Math.PI / 2; // 90 degrees
+                            const startAngle = Math.PI * 3/4; // 135 degrees
                             angle = startAngle + (nodeIndex / Math.max(1, totalNodes - 1)) * arcSpan;
                         } else if (direction === 'right') {
-                            // Right side: expanded arc from top-right to bottom-right (300° to 60°)
-                            const arcSpan = Math.PI * 2/3; // 120 degrees (expanded from 60)
-                            const startAngle = -Math.PI / 3; // 300 degrees
+                            // RIGHT SIDE: Broader terms (0° ± 45° = 315° to 45°)
+                            const arcSpan = Math.PI / 2; // 90 degrees
+                            const startAngle = -Math.PI / 4; // 315 degrees
                             angle = startAngle + (nodeIndex / Math.max(1, totalNodes - 1)) * arcSpan;
-                        } else if (direction === 'top-bottom') {
-                            // Top and bottom: split between expanded arcs
+                        } else if (direction === 'middle') {
+                            // MIDDLE: Related terms - top and bottom
                             if (nodeIndex < totalNodes / 2) {
-                                // Top half: expanded arc (210° to 330°)
-                                const arcSpan = Math.PI * 2/3; // 120 degrees
-                                const startAngle = Math.PI * 7/6; // 210 degrees
+                                // Top middle (270° ± 22.5° = 247.5° to 292.5°)
+                                const arcSpan = Math.PI / 4; // 45 degrees
+                                const startAngle = Math.PI * 11/8; // 247.5 degrees
                                 const topIndex = nodeIndex;
                                 const topTotal = Math.ceil(totalNodes / 2);
                                 angle = startAngle + (topIndex / Math.max(1, topTotal - 1)) * arcSpan;
                             } else {
-                                // Bottom half: expanded arc (30° to 150°)
-                                const arcSpan = Math.PI * 2/3; // 120 degrees
-                                const startAngle = Math.PI / 6; // 30 degrees
+                                // Bottom middle (90° ± 22.5° = 67.5° to 112.5°)
+                                const arcSpan = Math.PI / 4; // 45 degrees
+                                const startAngle = Math.PI * 3/8; // 67.5 degrees
                                 const bottomIndex = nodeIndex - Math.ceil(totalNodes / 2);
                                 const bottomTotal = Math.floor(totalNodes / 2);
                                 angle = startAngle + (bottomIndex / Math.max(1, bottomTotal - 1)) * arcSpan;
@@ -1128,7 +1128,7 @@
             
             positionNodesInDirection(narrowerNodes, 'left', baseRadius);
             positionNodesInDirection(broaderNodes, 'right', baseRadius);
-            positionNodesInDirection(relatedNodes, 'top-bottom', baseRadius);
+            positionNodesInDirection(relatedNodes, 'middle', baseRadius);
             
             // Position member nodes in a circle around center
             memberNodes.forEach((node, i) => {
