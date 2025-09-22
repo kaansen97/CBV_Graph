@@ -170,6 +170,7 @@
     <div class="ui-panel control-panel">
         <button onclick="window.location.href='index.html'">🏠 Main Menu</button>
         <button class="toggle-panel-btn" onclick="toggleRelatedPanel()">📋 Relations</button>
+        <button onclick="resetZoom()">🔍 Reset Zoom</button>
     </div>
 
     <div class="ui-panel search-panel">
@@ -263,6 +264,23 @@
         const svg = d3.select("#graph-container");
         const g = svg.append("g");
         const tooltip = d3.select("#tooltip");
+        
+        // Add zoom behavior
+        const zoom = d3.zoom()
+            .scaleExtent([0.1, 3]) // Allow zoom from 10% to 300%
+            .on("zoom", (event) => {
+                g.attr("transform", event.transform);
+            });
+        
+        svg.call(zoom);
+        
+        // Reset zoom function
+        function resetZoom() {
+            svg.transition().duration(750).call(
+                zoom.transform,
+                d3.zoomIdentity
+            );
+        }
         
         let simulation = null, allKeywords = [], keywordData = {}, relationshipData = {}, currentKeyword = '', currentLanguage = 'en';
         let isRelatedPanelVisible = false;
@@ -997,8 +1015,8 @@
         }
 
         function getNodeRadius(d) {
-            if (d.ring === 'center') return 25;
-            return 12;
+            if (d.ring === 'center') return 35; // Increased from 25 to 35
+            return 18; // Increased from 12 to 18
         }
 
         function getDisplayLabel(keywordName) {
@@ -1037,7 +1055,7 @@
             const centerNode = graph.nodes.find(n => n.ring === 'center');
             const centerX = width / 2;
             const centerY = height / 2;
-            const baseRadius = Math.min(width, height) * 0.15;
+            const baseRadius = Math.min(width, height) * 0.25; // Increased from 0.15 to 0.25
 
             // Position center node
             if (centerNode) { 
@@ -1058,35 +1076,35 @@
                 // Position each ring
                 Object.keys(rings).forEach((ringKey, ringIndex) => {
                     const ringNodes = rings[ringKey];
-                    const radius = startRadius + (ringIndex * baseRadius * 0.8);
+                    const radius = startRadius + (ringIndex * baseRadius * 1.2); // Increased spacing from 0.8 to 1.2
                     
                     ringNodes.forEach((node, nodeIndex) => {
                         let angle;
                         const totalNodes = node.totalInRing;
                         
                         if (direction === 'left') {
-                            // Left side: from top-left to bottom-left (150° to 210°)
-                            const arcSpan = Math.PI / 3; // 60 degrees
-                            const startAngle = Math.PI * 5/6; // 150 degrees
+                            // Left side: expanded arc from top-left to bottom-left (120° to 240°)
+                            const arcSpan = Math.PI * 2/3; // 120 degrees (expanded from 60)
+                            const startAngle = Math.PI * 2/3; // 120 degrees
                             angle = startAngle + (nodeIndex / Math.max(1, totalNodes - 1)) * arcSpan;
                         } else if (direction === 'right') {
-                            // Right side: from top-right to bottom-right (330° to 30°)
-                            const arcSpan = Math.PI / 3; // 60 degrees
-                            const startAngle = -Math.PI / 6; // 330 degrees
+                            // Right side: expanded arc from top-right to bottom-right (300° to 60°)
+                            const arcSpan = Math.PI * 2/3; // 120 degrees (expanded from 60)
+                            const startAngle = -Math.PI / 3; // 300 degrees
                             angle = startAngle + (nodeIndex / Math.max(1, totalNodes - 1)) * arcSpan;
                         } else if (direction === 'top-bottom') {
-                            // Top and bottom: split between top (240° to 300°) and bottom (60° to 120°)
+                            // Top and bottom: split between expanded arcs
                             if (nodeIndex < totalNodes / 2) {
-                                // Top half
-                                const arcSpan = Math.PI / 3; // 60 degrees
-                                const startAngle = Math.PI * 4/3; // 240 degrees
+                                // Top half: expanded arc (210° to 330°)
+                                const arcSpan = Math.PI * 2/3; // 120 degrees
+                                const startAngle = Math.PI * 7/6; // 210 degrees
                                 const topIndex = nodeIndex;
                                 const topTotal = Math.ceil(totalNodes / 2);
                                 angle = startAngle + (topIndex / Math.max(1, topTotal - 1)) * arcSpan;
                             } else {
-                                // Bottom half
-                                const arcSpan = Math.PI / 3; // 60 degrees
-                                const startAngle = Math.PI / 3; // 60 degrees
+                                // Bottom half: expanded arc (30° to 150°)
+                                const arcSpan = Math.PI * 2/3; // 120 degrees
+                                const startAngle = Math.PI / 6; // 30 degrees
                                 const bottomIndex = nodeIndex - Math.ceil(totalNodes / 2);
                                 const bottomTotal = Math.floor(totalNodes / 2);
                                 angle = startAngle + (bottomIndex / Math.max(1, bottomTotal - 1)) * arcSpan;
@@ -1122,7 +1140,7 @@
                 
                 Object.keys(rings).forEach((ringKey, ringIndex) => {
                     const ringNodes = rings[ringKey];
-                    const radius = baseRadius * 0.7 + (ringIndex * baseRadius * 0.3);
+                    const radius = baseRadius * 0.8 + (ringIndex * baseRadius * 0.5); // Increased member ring spacing
                     
                     ringNodes.forEach((node, nodeIndex) => {
                         const angle = (nodeIndex / node.totalInRing) * 2 * Math.PI;
@@ -1133,10 +1151,10 @@
             });
 
             simulation = d3.forceSimulation(graph.nodes)
-                .force("link", d3.forceLink(graph.links).id(d => d.id).strength(0.6))
-                .force("charge", d3.forceManyBody().strength(-150))
+                .force("link", d3.forceLink(graph.links).id(d => d.id).strength(0.4)) // Reduced link strength
+                .force("charge", d3.forceManyBody().strength(-200)) // Increased charge strength
                 .force("center", d3.forceCenter(width / 2, height / 2))
-                .force("collision", d3.forceCollide().radius(d => getNodeRadius(d) + 15));
+                .force("collision", d3.forceCollide().radius(d => getNodeRadius(d) + 25)); // Increased collision padding
 
             const link = g.append("g").selectAll("line")
                 .data(graph.links)
@@ -1200,7 +1218,13 @@
             // Add node labels
             node.append("text")
                 .text(d => getDisplayLabel(d.name))
-                .attr("dy", d => -getNodeRadius(d) - 8);
+                .attr("dy", d => -getNodeRadius(d) - 12) // Increased distance from node
+                .style("font-size", "14px") // Increased font size
+                .style("font-weight", "600") // Made text bolder
+                .style("fill", "#ffffff") // White text
+                .style("text-anchor", "middle")
+                .style("text-shadow", "2px 2px 4px rgba(0,0,0,0.8)") // Stronger shadow
+                .style("pointer-events", "none"); // Prevent text from interfering with mouse events
             
             // Add member count text in center of collection nodes
             node.each(function(d) {
@@ -1213,12 +1237,13 @@
                         
                         d3.select(this).append("text")
                             .text(displayText)
-                            .attr("dy", 4)
-                            .style("font-size", "11px")
+                            .attr("dy", 6) // Slightly lower
+                            .style("font-size", "13px") // Increased font size
                             .style("font-weight", "bold")
                             .style("fill", "white")
                             .style("text-anchor", "middle")
-                            .style("text-shadow", "1px 1px 2px rgba(0,0,0,0.8)");
+                            .style("text-shadow", "2px 2px 4px rgba(0,0,0,0.9)") // Stronger shadow
+                            .style("pointer-events", "none");
                     }
                 }
             });
