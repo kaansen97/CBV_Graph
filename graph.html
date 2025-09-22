@@ -1015,8 +1015,8 @@
         }
 
         function getNodeRadius(d) {
-            if (d.ring === 'center') return 35; // Increased from 25 to 35
-            return 18; // Increased from 12 to 18
+            if (d.ring === 'center') return 20; // Reduced from 35 to 20
+            return 10; // Reduced from 18 to 10
         }
 
         function getDisplayLabel(keywordName) {
@@ -1055,7 +1055,7 @@
             const centerNode = graph.nodes.find(n => n.ring === 'center');
             const centerX = width / 2;
             const centerY = height / 2;
-            const baseRadius = Math.min(width, height) * 0.25; // Increased from 0.15 to 0.25
+            const baseRadius = Math.min(width, height) * 0.3; // Increased from 0.25 to 0.3 for more space from center
 
             // Position center node
             if (centerNode) { 
@@ -1076,7 +1076,7 @@
                 // Position each ring
                 Object.keys(rings).forEach((ringKey, ringIndex) => {
                     const ringNodes = rings[ringKey];
-                    const radius = startRadius + (ringIndex * baseRadius * 1.2); // Increased spacing from 0.8 to 1.2
+                    const radius = startRadius + (ringIndex * baseRadius * 1.5); // Increased spacing from 1.2 to 1.5
                     
                     ringNodes.forEach((node, nodeIndex) => {
                         let angle;
@@ -1140,7 +1140,7 @@
                 
                 Object.keys(rings).forEach((ringKey, ringIndex) => {
                     const ringNodes = rings[ringKey];
-                    const radius = baseRadius * 0.8 + (ringIndex * baseRadius * 0.5); // Increased member ring spacing
+                    const radius = baseRadius * 0.6 + (ringIndex * baseRadius * 0.7); // Better member ring spacing
                     
                     ringNodes.forEach((node, nodeIndex) => {
                         const angle = (nodeIndex / node.totalInRing) * 2 * Math.PI;
@@ -1154,7 +1154,7 @@
                 .force("link", d3.forceLink(graph.links).id(d => d.id).strength(0.4)) // Reduced link strength
                 .force("charge", d3.forceManyBody().strength(-200)) // Increased charge strength
                 .force("center", d3.forceCenter(width / 2, height / 2))
-                .force("collision", d3.forceCollide().radius(d => getNodeRadius(d) + 25)); // Increased collision padding
+                .force("collision", d3.forceCollide().radius(d => getNodeRadius(d) + 15)); // Adjusted collision padding for smaller nodes
 
             const link = g.append("g").selectAll("line")
                 .data(graph.links)
@@ -1218,8 +1218,8 @@
             // Add node labels
             node.append("text")
                 .text(d => getDisplayLabel(d.name))
-                .attr("dy", d => -getNodeRadius(d) - 12) // Increased distance from node
-                .style("font-size", "14px") // Increased font size
+                .attr("dy", d => -getNodeRadius(d) - 8) // Adjusted distance for smaller nodes
+                .style("font-size", "12px") // Reduced font size for smaller nodes
                 .style("font-weight", "600") // Made text bolder
                 .style("fill", "#ffffff") // White text
                 .style("text-anchor", "middle")
@@ -1237,8 +1237,8 @@
                         
                         d3.select(this).append("text")
                             .text(displayText)
-                            .attr("dy", 6) // Slightly lower
-                            .style("font-size", "13px") // Increased font size
+                            .attr("dy", 4) // Adjusted for smaller center node
+                            .style("font-size", "11px") // Reduced font size for smaller center node
                             .style("font-weight", "bold")
                             .style("fill", "white")
                             .style("text-anchor", "middle")
