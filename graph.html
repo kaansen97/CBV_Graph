@@ -17,7 +17,8 @@
         .link.members { stroke: rgba(52, 152, 219, 0.6); stroke-width: 2; }
         
         .tooltip { position: absolute; background: rgba(0, 0, 0, 0.9); color: white; padding: 12px; border-radius: 8px; font-size: 14px; pointer-events: none; z-index: 1000; max-width: 300px; border: 1px solid rgba(255,255,255,0.2); }
-        .tooltip .translations { font-size: 12px; color: #ccc; border-top: 1px solid #444; margin-top: 8px; padding-top: 8px; }
+        .tooltip .tooltip-definition { font-size: 12px; color: #ddd; border-top: 1px solid #444; margin-top: 8px; padding-top: 8px; font-style: italic; }
+        .tooltip .tooltip-translations { font-size: 12px; color: #ccc; border-top: 1px solid #444; margin-top: 8px; padding-top: 8px; }
         
         .ui-panel { position: absolute; background: rgba(0, 0, 0, 0.8); color: white; padding: 15px; border-radius: 10px; z-index: 1000; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease; }
         
@@ -661,10 +662,11 @@
                 allKeywords = [];
                 
                 for (const [keyword, data] of Object.entries(cbvData)) {
-                    // Extract keyword information (labels, URI)
+                    // Extract keyword information (labels, URI, definitions)
                     keywordData[keyword] = {
                         uri: data.uri,
-                        labels: data.labels
+                        labels: data.labels,
+                        definitions: data.definitions // <-- MODIFIED: Added definitions
                     };
                     
                     // Extract relationship information
@@ -1368,6 +1370,7 @@
             g.selectAll('.link').style('opacity', 1);
         }
 
+        
         function showTooltip(event, d) {
             const displayLabel = getDisplayLabel(d.name);
             let content = `<strong>${displayLabel}</strong><br/>`;
@@ -1391,7 +1394,6 @@
                 if (d.type === 'broader') {
                     content += `<span style="color: #ff8c42;">▲ ${tooltipTexts.broaderTerm}</span><br/>`;
                     
-                    // Show how many children this broader term has
                     const hoveredNodeRelationships = relationshipData[d.name] || {};
                     const childrenCount = (hoveredNodeRelationships.narrower || []).length;
                     if (childrenCount > 0) {
@@ -1401,9 +1403,8 @@
                 } else if (d.type === 'narrower') {
                     content += `<span style="color: #8a68cc;">▼ ${tooltipTexts.narrowerTerm}</span><br/>`;
                     
-                    // Show how many sibling narrower terms exist
                     const currentRelationships = relationshipData[currentKeyword] || {};
-                    const siblingCount = (currentRelationships.narrower || []).length - 1; // Exclude self
+                    const siblingCount = (currentRelationships.narrower || []).length - 1;
                     if (siblingCount > 0) {
                         content += `<span style="color: #8a68cc;">👥 ${tooltipTexts.hasSiblings}: ${siblingCount}</span><br/>`;
                     }
@@ -1413,11 +1414,23 @@
                 } else if (d.type === 'members') {
                     content += `<span style="color: #3498db;">★ Collection Member</span><br/>`;
                 }
-                content += `<span style="color: #4a90e2;">🔍 ${tooltipTexts.clickToExplore}</span>`;
+                content += `<a href="#" onclick="navigateToTopic('${d.name}'); return false;" style="color: #4ecdc4; text-decoration: none;">🔍 ${tooltipTexts.clickToExplore}</a>`;
             }
             
-            // Show translations if available
             const keywordInfo = keywordData[d.name];
+            if (keywordInfo && keywordInfo.definitions) {
+                let definition = '';
+                if (keywordInfo.definitions[currentLanguage] && keywordInfo.definitions[currentLanguage].length > 0) {
+                    definition = keywordInfo.definitions[currentLanguage][0];
+                } else if (keywordInfo.definitions['en'] && keywordInfo.definitions['en'].length > 0) {
+                    definition = keywordInfo.definitions['en'][0];
+                }
+
+                if (definition) {
+                    content += `<div class="tooltip-definition">${definition}</div>`;
+                }
+            }
+            
             if (keywordInfo && keywordInfo.labels) {
                 const translations = [];
                 ['es', 'fr'].forEach(lang => {
@@ -1428,29 +1441,21 @@
                     }
                 });
                 if (translations.length > 0) {
-                    content += `<div class="translations">Also: ${translations.join(', ')}</div>`;
+                    content += `<div class="tooltip-translations">Also: ${translations.join(', ')}</div>`;
                 }
             }
             
-            // CBV source link is now in the info panel instead of tooltip
-            
-            // Calculate tooltip position to avoid overflow
-            const tooltipWidth = 300; // max-width from CSS
-            const tooltipHeight = 150; // estimated height
+            const tooltipWidth = 300;
+            const tooltipHeight = 150;
             let leftPos = event.pageX + 15;
             let topPos = event.pageY - 15;
             
-            // Adjust if tooltip would go off right edge
             if (leftPos + tooltipWidth > window.innerWidth) {
                 leftPos = event.pageX - tooltipWidth - 15;
             }
-            
-            // Adjust if tooltip would go off top edge
             if (topPos < 0) {
                 topPos = event.pageY + 15;
             }
-            
-            // Adjust if tooltip would go off bottom edge
             if (topPos + tooltipHeight > window.innerHeight) {
                 topPos = window.innerHeight - tooltipHeight - 10;
             }
