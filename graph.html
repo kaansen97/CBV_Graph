@@ -70,7 +70,9 @@
     <!-- UI Panels -->
     <div class="ui-panel control-panel">
         <button id="main-menu-btn">🏠 Main Menu</button>
-        <button id="reset-zoom-btn">🔍 Reset Zoom</button>
+        <button id="zoom-in-btn">➕</button>
+        <button id="zoom-out-btn">➖</button>
+        <button id="reset-zoom-btn">🔍 Reset</button>
     </div>
 
     <div class="ui-panel search-panel">
@@ -209,6 +211,8 @@
         // --- UI & EVENT HANDLING ---
         function initializeEventListeners() {
             d3.select("#main-menu-btn").on("click", () => window.location.href = 'index.html');
+            d3.select("#zoom-in-btn").on("click", () => svg.transition().call(zoom.scaleBy, 1.2));
+            d3.select("#zoom-out-btn").on("click", () => svg.transition().call(zoom.scaleBy, 0.8));
             d3.select("#reset-zoom-btn").on("click", resetZoom);
             d3.selectAll(".lang-btn").on("click", (event) => switchLanguage(event.target.dataset.lang));
             svg.on('click', () => hideTooltip(true));
@@ -261,7 +265,6 @@
             link.style.display = url ? 'inline' : 'none';
         }
 
-        // --- RELATED KEYWORDS PANEL (Restored Logic) ---
         function updateRelatedKeywordsPanel(keywordName, keywordInfo) {
             const content = document.getElementById('related-content');
             content.innerHTML = '';
