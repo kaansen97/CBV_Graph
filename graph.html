@@ -16,10 +16,12 @@
         .link.related { stroke: rgba(74, 144, 226, 0.6); stroke-width: 2; }
         .link.members { stroke: rgba(52, 152, 219, 0.6); stroke-width: 2; }
         
-        .tooltip { position: absolute; background: rgba(0, 0, 0, 0.9); color: white; padding: 12px; border-radius: 8px; font-size: 14px; pointer-events: none; z-index: 1000; max-width: 300px; border: 1px solid rgba(255,255,255,0.2); }
+        .tooltip { position: absolute; background: rgba(0, 0, 0, 0.9); color: white; padding: 12px; border-radius: 8px; font-size: 14px; pointer-events: none; z-index: 1000; max-width: 300px; border: 1px solid rgba(255,255,255,0.2); cursor : default; }
         .tooltip .tooltip-definition { font-size: 12px; color: #ddd; border-top: 1px solid #444; margin-top: 8px; padding-top: 8px; font-style: italic; }
         .tooltip .tooltip-translations { font-size: 12px; color: #ccc; border-top: 1px solid #444; margin-top: 8px; padding-top: 8px; }
-        
+        .tooltip-close {position: absolute; top: 5px; right: 8px; background: transparent; border: none; color: #aaa; font-size: 20px; cursor: pointer; padding: 0; line-height: 1; }
+        .tooltip-close:hover { color: white; }
+
         .ui-panel { position: absolute; background: rgba(0, 0, 0, 0.8); color: white; padding: 15px; border-radius: 10px; z-index: 1000; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease; }
         
         .control-panel { top: 20px; left: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
@@ -257,7 +259,10 @@
 
 
     <svg id="graph-container"></svg>
-    <div class="tooltip" id="tooltip" style="display: none;"></div>
+    <div class="tooltip" id="tooltip" style="display: none;">
+        <button class="tooltip-close" onclick="hideTooltip()">×</button>
+        <div id="tooltip-content"></div>
+    </div>
 
     <script>
         const width = window.innerWidth;
@@ -284,6 +289,7 @@
         }
         
         let simulation = null, allKeywords = [], keywordData = {}, relationshipData = {}, currentKeyword = '', currentLanguage = 'en';
+        let pinnedTooltipNode = null;
         let isRelatedPanelVisible = false;
 
         // Toggle related topics panel on small screens
@@ -1164,21 +1170,42 @@
                 .attr("class", d => `link ${d.type}`)
                 .attr("stroke-width", d => d.type === 'broader' || d.type === 'narrower' ? 2.5 : 2);
             
-            const node = g.append("g").selectAll("g")
-                .data(graph.nodes)
-                .join("g")
-                .attr("class", "node")
-                .call(d3.drag()
-                    .on("start", dragstarted)
-                    .on("drag", dragged)
-                    .on("end", dragended))
-                .on("click", (event, d) => { 
-                    if (d.ring !== 'center') {
-                        navigateToTopic(d.name);
-                    }
-                })
-                .on("mouseover", (event, d) => { showTooltip(event, d); highlightRelated(d); })
-                .on("mouseout", () => { hideTooltip(); resetHighlight(); });
+        const node = g.append("g").selectAll("g")
+            .data(graph.nodes)
+            .join("g")
+            .attr("class", "node")
+            .call(d3.drag()
+                .on("start", dragstarted)
+                .on("drag", dragged)
+                .on("end", dragended))
+            .on("click", (event, d) => {
+                event.stopPropagation(); // Prevent the background click from firing
+                if (pinnedTooltipNode === d) {
+                    // If clicking the same node, hide the tooltip
+                    hideTooltip();
+                } else {
+                    // Otherwise, show the tooltip for this node
+                    pinnedTooltipNode = d;
+                    showTooltip(event, d);
+                }
+            })
+            .on("dblclick", (event, d) => {
+                // Navigate on double-click instead of single click
+                if (d.ring !== 'center') {
+                    navigateToTopic(d.name);
+                }
+            })
+            .on("mouseover", (event, d) => {
+                highlightRelated(d);
+            })
+            .on("mouseout", () => {
+                resetHighlight();
+            });
+
+        // Add a click listener to the SVG background to close the tooltip
+        svg.on('click', () => {
+            hideTooltip();
+        });
 
             // Add shapes based on node type
             node.each(function(d) {
@@ -1372,6 +1399,7 @@
 
         
         function showTooltip(event, d) {
+            const tooltipContent = d3.select("#tooltip-content");
             const displayLabel = getDisplayLabel(d.name);
             let content = `<strong>${displayLabel}</strong><br/>`;
             
@@ -1393,28 +1421,14 @@
             } else {
                 if (d.type === 'broader') {
                     content += `<span style="color: #ff8c42;">▲ ${tooltipTexts.broaderTerm}</span><br/>`;
-                    
-                    const hoveredNodeRelationships = relationshipData[d.name] || {};
-                    const childrenCount = (hoveredNodeRelationships.narrower || []).length;
-                    if (childrenCount > 0) {
-                        content += `<span style="color: #8a68cc;">💫 ${tooltipTexts.hasChildren}: ${childrenCount}</span><br/>`;
-                    }
-                    
                 } else if (d.type === 'narrower') {
                     content += `<span style="color: #8a68cc;">▼ ${tooltipTexts.narrowerTerm}</span><br/>`;
-                    
-                    const currentRelationships = relationshipData[currentKeyword] || {};
-                    const siblingCount = (currentRelationships.narrower || []).length - 1;
-                    if (siblingCount > 0) {
-                        content += `<span style="color: #8a68cc;">👥 ${tooltipTexts.hasSiblings}: ${siblingCount}</span><br/>`;
-                    }
-                    
                 } else if (d.type === 'related') {
                     content += `<span style="color: #4a90e2;">◆ ${tooltipTexts.relatedTerm}</span><br/>`;
                 } else if (d.type === 'members') {
                     content += `<span style="color: #3498db;">★ Collection Member</span><br/>`;
                 }
-                content += `<a href="#" onclick="navigateToTopic('${d.name}'); return false;" style="color: #4ecdc4; text-decoration: none;">🔍 ${tooltipTexts.clickToExplore}</a>`;
+                content += `<span style="font-size: 12px; color: #ccc;">(Double-click node to explore)</span>`;
             }
             
             const keywordInfo = keywordData[d.name];
@@ -1425,7 +1439,6 @@
                 } else if (keywordInfo.definitions['en'] && keywordInfo.definitions['en'].length > 0) {
                     definition = keywordInfo.definitions['en'][0];
                 }
-
                 if (definition) {
                     content += `<div class="tooltip-definition">${definition}</div>`;
                 }
@@ -1445,8 +1458,9 @@
                 }
             }
             
+            tooltipContent.html(content);
+            
             const tooltipWidth = 300;
-            const tooltipHeight = 150;
             let leftPos = event.pageX + 15;
             let topPos = event.pageY - 15;
             
@@ -1454,20 +1468,17 @@
                 leftPos = event.pageX - tooltipWidth - 15;
             }
             if (topPos < 0) {
-                topPos = event.pageY + 15;
-            }
-            if (topPos + tooltipHeight > window.innerHeight) {
-                topPos = window.innerHeight - tooltipHeight - 10;
+                topPos = 5;
             }
             
             tooltip.style("display", "block")
-                .html(content)
                 .style("left", leftPos + "px")
                 .style("top", topPos + "px");
         }
 
         function hideTooltip() { 
             tooltip.style("display", "none"); 
+            pinnedTooltipNode = null;
         }
         
         function filterRelationshipList(type, searchTerm) {
