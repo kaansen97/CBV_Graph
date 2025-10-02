@@ -49,8 +49,9 @@
         .relationship-title.narrower { color: #8a68cc; }
         .relationship-title.related { color: #4a90e2; }
         .relationship-title.members { color: #3498db; }
-        .relationship-title.translation { color: #95a5a6; }
-        .relationship-search input { width: 100%; padding: 4px 8px; border: 1px solid #555; border-radius: 3px; background: rgba(255, 255, 255, 0.9); color: #333; font-size: 12px; outline: none; box-sizing: border-box; }
+        .relationship-title.parent-collections { color: #e67e22; }
+        .relationship-title.other-collections { color: #e74c3c; }
+        .relationship-title.translations { color: #95a5a6; }
         #related-keywords-panel ul { list-style: none; padding: 0; margin: 0 0 10px 0; max-height: 120px; overflow-y: auto; }
         #related-keywords-panel li a { color: #eee; text-decoration: none; display: block; padding: 6px; border-radius: 3px; transition: background 0.2s ease; font-size: 13px; }
         #related-keywords-panel li a:hover { background: #667eea; }
@@ -61,7 +62,7 @@
         .legend-color { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
         .legend-color.broader-shape { border-radius: 0; transform: rotate(45deg); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
         .legend-color.narrower-shape { border-radius: 0; transform: rotate(-135deg); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
-        .legend-color.diamond-shape { border-radius: 0; transform: rotate(45deg); }
+        .legend-color.related-shape { border-radius: 0; transform: rotate(45deg); }
     </style>
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
@@ -88,14 +89,10 @@
 
     <div class="ui-panel" id="related-keywords-panel">
         <h3 id="panel-main-title"></h3>
-        <div id="related-content">
-            <!-- Relationship sections will be populated by JavaScript -->
-        </div>
+        <div id="related-content"></div>
     </div>
 
-    <div class="ui-panel" id="legend">
-        <!-- Legend items will be populated by JavaScript -->
-    </div>
+    <div class="ui-panel" id="legend"></div>
 
     <svg id="graph-container"></svg>
     <div class="tooltip" id="tooltip" style="display: none;">
@@ -110,23 +107,16 @@
         const svg = d3.select("#graph-container");
         const g = svg.append("g");
         const tooltip = d3.select("#tooltip");
+        const zoom = d3.zoom().scaleExtent([0.1, 4]).on("zoom", (event) => g.attr("transform", event.transform));
+        svg.call(zoom);
 
-        let simulation = null;
-        let allKeywords = [];
-        let keywordData = {};
-        let currentKeyword = '';
-        let currentLanguage = 'en';
-        let pinnedTooltipNode = null;
+        let simulation = null, allKeywords = [], keywordData = {}, currentKeyword = '', currentLanguage = 'en', pinnedTooltipNode = null;
 
         // --- DATA LOADING ---
-        /**
-         * Loads and processes the keyword data from the JSON file.
-         */
         async function loadData() {
             try {
                 const response = await fetch('cbv_data.json');
-                const data = await response.json();
-                keywordData = data;
+                keywordData = await response.json();
                 allKeywords = Object.keys(keywordData).map(name => ({ name })).sort((a, b) => a.name.localeCompare(b.name));
             } catch (error) {
                 console.error('Error loading data:', error);
@@ -135,10 +125,6 @@
         }
 
         // --- D3 GRAPH RENDERING ---
-        /**
-         * Main function to draw or redraw the entire graph.
-         * @param {string} keywordName - The central keyword for the graph.
-         */
         function drawGraph(keywordName) {
             if (simulation) simulation.stop();
             g.selectAll("*").remove();
@@ -146,51 +132,36 @@
 
             currentKeyword = keywordName;
             const keywordInfo = keywordData[keywordName];
-            if (!keywordInfo) {
-                console.error(`Keyword "${keywordName}" not found.`);
-                return;
-            }
+            if (!keywordInfo) return console.error(`Keyword "${keywordName}" not found.`);
 
             updateCurrentTopicDisplay(keywordName);
-
             const { nodes, links } = buildGraphData(keywordName, keywordInfo);
             renderGraph({ nodes, links });
             updateRelatedKeywordsPanel(keywordName, keywordInfo);
         }
 
-        /**
-         * Constructs the nodes and links arrays for the D3 simulation.
-         * @param {string} keywordName - The central keyword.
-         * @param {object} keywordInfo - The data object for the central keyword.
-         * @returns {{nodes: Array, links: Array}}
-         */
         function buildGraphData(keywordName, keywordInfo) {
             const nodes = [{ id: keywordName, name: keywordName, type: 'central' }];
             const links = [];
-            const relationshipTypes = ['broader', 'narrower', 'related', 'members'];
+            const nodeIds = new Set([keywordName]);
 
-            relationshipTypes.forEach(type => {
+            ['broader', 'narrower', 'related', 'members'].forEach(type => {
                 (keywordInfo[type] || []).forEach(relatedKeyword => {
-                    if (keywordData[relatedKeyword] && !nodes.find(n => n.id === relatedKeyword)) {
+                    if (keywordData[relatedKeyword] && !nodeIds.has(relatedKeyword)) {
                         nodes.push({ id: relatedKeyword, name: relatedKeyword, type });
                         links.push({ source: keywordName, target: relatedKeyword, type });
+                        nodeIds.add(relatedKeyword);
                     }
                 });
             });
             return { nodes, links };
         }
 
-        /**
-         * Renders the graph elements using D3.
-         * @param {object} graph - The graph data containing nodes and links.
-         */
         function renderGraph(graph) {
-            const centerX = width / 2;
-            const centerY = height / 2;
-
-            // Position nodes in a circular layout
-            const angleSlice = (2 * Math.PI) / (graph.nodes.length - 1);
+            const centerX = width / 2, centerY = height / 2;
             const radius = Math.min(width, height) * 0.3;
+            const angleSlice = graph.nodes.length > 1 ? (2 * Math.PI) / (graph.nodes.length - 1) : 0;
+
             graph.nodes.forEach((node, i) => {
                 if (node.type === 'central') {
                     node.fx = centerX;
@@ -208,12 +179,9 @@
                 .force("center", d3.forceCenter(centerX, centerY))
                 .force("collision", d3.forceCollide().radius(d => getNodeRadius(d) + 15));
 
-            const link = g.append("g").selectAll("line")
-                .data(graph.links).join("line")
-                .attr("class", d => `link ${d.type}`);
-
-            const node = g.append("g").selectAll("g")
-                .data(graph.nodes).join("g")
+            g.append("g").selectAll("line").data(graph.links).join("line").attr("class", d => `link ${d.type}`);
+            
+            const node = g.append("g").selectAll("g").data(graph.nodes).join("g")
                 .attr("class", "node")
                 .call(drag(simulation))
                 .on("click", handleNodeClick)
@@ -221,35 +189,24 @@
                 .on("mouseover", handleNodeMouseover)
                 .on("mouseout", handleNodeMouseout);
 
-            // Append shapes and text to nodes
             node.each(function(d) {
-                const nodeElement = d3.select(this);
-                const radius = getNodeRadius(d);
-                const color = getNodeColor(d);
-                
-                if (d.type === 'central') nodeElement.append("circle").attr("r", radius).attr("fill", color);
-                else if (d.type === 'broader') nodeElement.append("polygon").attr("points", `0,${-radius*1.4} ${radius*1.2},${radius*0.7} ${-radius*1.2},${radius*0.7}`).attr("fill", color);
-                else if (d.type === 'narrower') nodeElement.append("polygon").attr("points", `0,${radius*1.4} ${radius*1.2},${-radius*0.7} ${-radius*1.2},${-radius*0.7}`).attr("fill", color);
-                else if (d.type === 'related') nodeElement.append("polygon").attr("points", `0,${-radius*1.2} ${radius*1.2},0 0,${radius*1.2} ${-radius*1.2},0`).attr("fill", color);
-                else nodeElement.append("circle").attr("r", radius).attr("fill", color);
+                const el = d3.select(this), r = getNodeRadius(d), c = getNodeColor(d);
+                if (d.type === 'central') el.append("circle").attr("r", r).attr("fill", c);
+                else if (d.type === 'broader') el.append("polygon").attr("points", `0,${-r*1.4} ${r*1.2},${r*0.7} ${-r*1.2},${r*0.7}`).attr("fill", c);
+                else if (d.type === 'narrower') el.append("polygon").attr("points", `0,${r*1.4} ${r*1.2},${-r*0.7} ${-r*1.2},${-r*0.7}`).attr("fill", c);
+                else if (d.type === 'related') el.append("polygon").attr("points", `0,${-r*1.2} ${r*1.2},0 0,${r*1.2} ${-r*1.2},0`).attr("fill", c);
+                else el.append("circle").attr("r", r).attr("fill", c);
             });
 
-            node.append("text")
-                .text(d => getDisplayLabel(d.name))
-                .attr("dy", d => -getNodeRadius(d) - 8)
-                .attr("class", "node-label");
+            node.append("text").text(d => getDisplayLabel(d.name)).attr("dy", d => -getNodeRadius(d) - 8);
 
             simulation.on("tick", () => {
-                link.attr("x1", d => d.source.x).attr("y1", d => d.source.y)
-                    .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
-                node.attr("transform", d => `translate(${d.x},${d.y})`);
+                g.selectAll(".link").attr("x1", d => d.source.x).attr("y1", d => d.source.y).attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+                g.selectAll(".node").attr("transform", d => `translate(${d.x},${d.y})`);
             });
         }
 
         // --- UI & EVENT HANDLING ---
-        /**
-         * Initializes all event listeners for UI elements.
-         */
         function initializeEventListeners() {
             d3.select("#main-menu-btn").on("click", () => window.location.href = 'index.html');
             d3.select("#reset-zoom-btn").on("click", resetZoom);
@@ -260,252 +217,138 @@
 
         function handleNodeClick(event, d) {
             event.stopPropagation();
-            if (pinnedTooltipNode === d) {
-                pinnedTooltipNode = null;
-                hideTooltip();
-            } else {
-                pinnedTooltipNode = d;
-                showTooltip(event, d);
-            }
+            pinnedTooltipNode = (pinnedTooltipNode === d) ? null : d;
+            if (pinnedTooltipNode) showTooltip(event, d);
+            else hideTooltip();
         }
 
-        function handleNodeDblClick(event, d) {
-            if (d.type !== 'central') {
-                navigateToTopic(d.name);
-            }
-        }
+        function handleNodeDblClick(event, d) { if (d.type !== 'central') navigateToTopic(d.name); }
+        function handleNodeMouseover(event, d) { if (!pinnedTooltipNode) showTooltip(event, d); highlightRelated(d); }
+        function handleNodeMouseout() { if (!pinnedTooltipNode) hideTooltip(); resetHighlight(); }
 
-        function handleNodeMouseover(event, d) {
-            if (!pinnedTooltipNode) {
-                showTooltip(event, d);
-            }
-            highlightRelated(d);
-        }
-
-        function handleNodeMouseout() {
-            if (!pinnedTooltipNode) {
-                hideTooltip();
-            }
-            resetHighlight();
-        }
-
-        /**
-         * Sets up the search input with autocomplete suggestions.
-         */
         function setupSearch() {
-            const searchInput = document.getElementById('search-input');
-            const suggestions = document.getElementById('search-suggestions');
-
-            searchInput.addEventListener('input', function() {
-                const query = this.value.toLowerCase().trim();
-                if (!query) {
-                    suggestions.style.display = 'none';
-                    return;
-                }
+            const input = document.getElementById('search-input'), suggestions = document.getElementById('search-suggestions');
+            input.addEventListener('input', () => {
+                const query = input.value.toLowerCase().trim();
+                if (!query) { suggestions.style.display = 'none'; return; }
                 const filtered = allKeywords.filter(k => k.name.toLowerCase().includes(query)).slice(0, 8);
                 suggestions.innerHTML = filtered.map(k => `<div class="suggestion-item" data-keyword="${k.name}">${k.name}</div>`).join('');
                 suggestions.style.display = 'block';
             });
-
-            suggestions.addEventListener('click', function(e) {
-                if (e.target.classList.contains('suggestion-item')) {
-                    navigateToTopic(e.target.dataset.keyword);
-                }
-            });
-
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.search-panel')) {
-                    suggestions.style.display = 'none';
-                }
-            });
+            suggestions.addEventListener('click', e => { if (e.target.matches('.suggestion-item')) navigateToTopic(e.target.dataset.keyword); });
+            document.addEventListener('click', e => { if (!e.target.closest('.search-panel')) suggestions.style.display = 'none'; });
         }
 
-        /**
-         * Updates all text elements on the page to the current language.
-         */
         function updateUIText() {
-            // Update buttons
             document.getElementById('main-menu-btn').innerHTML = `🏠 ${getText('mainMenu')}`;
             document.getElementById('reset-zoom-btn').innerHTML = `🔍 ${getText('resetZoom')}`;
-            
-            // Update search placeholder
             document.getElementById('search-input').placeholder = getText('searchPlaceholder');
-
-            // Update legend
-            const legendContainer = d3.select("#legend");
-            legendContainer.html(""); // Clear existing legend
+            document.getElementById('panel-main-title').textContent = getText('relatedTopics');
+            
+            const legend = d3.select("#legend");
+            legend.html("");
             ['centralTopic', 'narrowerTerms', 'broaderTerms', 'relatedTerms', 'collectionMembers'].forEach(key => {
-                const item = legendContainer.append("div").attr("class", "legend-item");
+                const item = legend.append("div").attr("class", "legend-item");
                 item.append("div").attr("class", `legend-color ${key.replace('Terms', '-shape').replace('Topic', '').replace('Members', '')}`);
                 item.append("span").text(getText(key));
             });
-
-            // Update related panel title
-            document.getElementById('panel-main-title').textContent = getText('relatedTopics');
         }
 
-        /**
-         * Updates the main topic display at the top right.
-         * @param {string} keywordName - The keyword to display.
-         */
         function updateCurrentTopicDisplay(keywordName) {
-            const topicText = getText('topic');
-            document.getElementById('current-topic').textContent = `${topicText}: ${getDisplayLabel(keywordName)}`;
-            
-            const cbvLink = document.getElementById('current-topic-cbv-link');
-            const cbvURL = getCBVSourceURL(keywordName);
-            cbvLink.href = cbvURL || '#';
-            cbvLink.style.display = cbvURL ? 'inline' : 'none';
+            document.getElementById('current-topic').textContent = `${getText('topic')}: ${getDisplayLabel(keywordName)}`;
+            const link = document.getElementById('current-topic-cbv-link'), url = getCBVSourceURL(keywordName);
+            link.href = url || '#';
+            link.style.display = url ? 'inline' : 'none';
         }
 
-        /**
-         * Populates the related keywords panel on the left.
-         * @param {string} keywordName - The central keyword.
-         * @param {object} keywordInfo - The data for the central keyword.
-         */
+        // --- RELATED KEYWORDS PANEL (Restored Logic) ---
         function updateRelatedKeywordsPanel(keywordName, keywordInfo) {
-            const panel = document.getElementById('related-keywords-panel');
             const content = document.getElementById('related-content');
-            content.innerHTML = ''; // Clear previous content
-
-            const relationshipTypes = ['broader', 'narrower', 'related', 'members'];
+            content.innerHTML = '';
             let hasContent = false;
 
-            relationshipTypes.forEach(type => {
-                const keywords = keywordInfo[type] || [];
-                if (keywords.length > 0) {
+            const populate = (type, data, titleKey, itemClass = '') => {
+                if (data && data.length > 0) {
                     hasContent = true;
                     const section = document.createElement('div');
                     section.className = 'relationship-section';
-                    section.innerHTML = `
-                        <div class="relationship-title ${type}">${getText(type + 'Topics')} (${keywords.length})</div>
-                        <ul>${keywords.sort().map(item => `<li><a href="#" data-keyword="${item}">${getDisplayLabel(item)}</a></li>`).join('')}</ul>
-                    `;
+                    const listHTML = data.map(item => {
+                        const name = typeof item === 'object' ? item.name : item;
+                        const lang = typeof item === 'object' ? item.lang : null;
+                        const count = typeof item === 'object' ? item.count : null;
+                        const countText = count ? ` <span style="color:#95a5a6;font-size:11px;">(${count} ${getText('membersCount')})</span>` : '';
+                        const linkData = lang ? `data-lang="${lang}"` : '';
+                        return `<li><a href="#" class="${itemClass}" data-keyword="${name}" ${linkData}>${getDisplayLabel(name)}${countText}</a></li>`;
+                    }).join('');
+                    section.innerHTML = `<div class="relationship-title ${type}">${getText(titleKey)} (${data.length})</div><ul>${listHTML}</ul>`;
                     content.appendChild(section);
                 }
-            });
+            };
 
-            // Add parent collections
-            const parentCollections = findParentCollections(keywordName);
-            if (parentCollections.length > 0) {
-                hasContent = true;
-                const section = document.createElement('div');
-                section.className = 'relationship-section';
-                section.innerHTML = `
-                    <div class="relationship-title parent-collections">${getText('parentCollections')} (${parentCollections.length})</div>
-                    <ul>${parentCollections.map(item => `<li><a href="#" data-keyword="${item.name}">${getDisplayLabel(item.name)}</a></li>`).join('')}</ul>
-                `;
-                content.appendChild(section);
+            ['broader', 'narrower', 'related', 'members'].forEach(type => populate(type, keywordInfo[type], type + 'Topics'));
+            populate('parent-collections', findParentCollections(keywordName), 'parentCollections');
+            if (keywordInfo.type === 'collection') {
+                populate('other-collections', findOtherCollections(keywordName), 'otherCollections');
             }
+            populate('translations', getTranslations(keywordName, true), 'translations', 'translation-link');
 
-            panel.style.display = hasContent ? 'block' : 'none';
-            panel.querySelectorAll('a').forEach(a => a.addEventListener('click', (e) => {
+            document.getElementById('related-keywords-panel').style.display = hasContent ? 'block' : 'none';
+            content.querySelectorAll('a').forEach(a => a.addEventListener('click', e => {
                 e.preventDefault();
-                navigateToTopic(e.target.dataset.keyword);
+                if (e.target.classList.contains('translation-link')) {
+                    switchToTranslation(e.target.dataset.keyword, e.target.dataset.lang);
+                } else {
+                    navigateToTopic(e.target.dataset.keyword);
+                }
             }));
         }
 
         // --- TOOLTIP ---
-        /**
-         * Shows the tooltip with information about a node.
-         * @param {Event} event - The mouse event.
-         * @param {object} d - The D3 data object for the node.
-         */
         function showTooltip(event, d) {
             const contentDiv = document.getElementById('tooltip-content');
             let content = `<strong>${getDisplayLabel(d.name)}</strong>`;
-
-            if (d.type !== 'central') {
-                content += `<br><span style="font-size: 12px; color: #4ecdc4;">(${getText('doubleClickToExplore')})</span>`;
-            }
-
+            if (d.type !== 'central') content += `<br><span style="font-size:12px;color:#4ecdc4;">(${getText('doubleClickToExplore')})</span>`;
+            
             const definition = getDefinition(d.name);
-            if (definition) {
-                content += `<div class="tooltip-definition">${definition}</div>`;
-            }
-
+            if (definition) content += `<div class="tooltip-definition">${definition}</div>`;
+            
             const translations = getTranslations(d.name);
-            if (translations.length > 0) {
-                content += `<div class="tooltip-translations">${getText('also')}: ${translations.join(', ')}</div>`;
-            }
+            if (translations.length > 0) content += `<div class="tooltip-translations">${getText('also')}: ${translations.join(', ')}</div>`;
             
             contentDiv.innerHTML = content;
-
-            const tooltipWidth = tooltip.node().offsetWidth;
-            const tooltipHeight = tooltip.node().offsetHeight;
-            let left = event.pageX + 15;
-            let top = event.pageY - 15;
-
-            if (left + tooltipWidth > window.innerWidth) left = event.pageX - tooltipWidth - 15;
-            if (top + tooltipHeight > window.innerHeight) top = event.pageY - tooltipHeight - 15;
+            
+            const { offsetWidth, offsetHeight } = tooltip.node();
+            let left = event.pageX + 15, top = event.pageY - 15;
+            if (left + offsetWidth > width) left = event.pageX - offsetWidth - 15;
+            if (top + offsetHeight > height) top = event.pageY - offsetHeight - 15;
             if (top < 0) top = 5;
-
+            
             tooltip.style("display", "block").style("left", `${left}px`).style("top", `${top}px`);
         }
 
-        /**
-         * Hides the tooltip.
-         * @param {boolean} force - If true, hides the tooltip even if it's pinned.
-         */
         function hideTooltip(force = false) {
-            if (force) {
-                pinnedTooltipNode = null;
-            }
-            if (!pinnedTooltipNode) {
-                tooltip.style("display", "none");
-            }
+            if (force) pinnedTooltipNode = null;
+            if (!pinnedTooltipNode) tooltip.style("display", "none");
         }
 
         // --- VISUAL EFFECTS ---
-        /**
-         * Highlights a node and its direct connections.
-         * @param {object} d - The D3 data object for the hovered node.
-         */
         function highlightRelated(d) {
-            g.selectAll('.node').style('opacity', 0.2);
-            g.selectAll('.link').style('opacity', 0.1);
-
+            g.selectAll('.node, .link').style('opacity', 0.2);
             const connectedNodeIds = new Set([d.id]);
             g.selectAll('.link').filter(l => l.source.id === d.id || l.target.id === d.id)
                 .style('opacity', 1)
-                .each(l => {
-                    connectedNodeIds.add(l.source.id);
-                    connectedNodeIds.add(l.target.id);
-                });
-
+                .each(l => { connectedNodeIds.add(l.source.id); connectedNodeIds.add(l.target.id); });
             g.selectAll('.node').filter(n => connectedNodeIds.has(n.id)).style('opacity', 1);
         }
 
-        /**
-         * Resets all nodes and links to full opacity.
-         */
-        function resetHighlight() {
-            g.selectAll('.node, .link').style('opacity', 1);
-        }
-
-        /**
-         * Resets the graph's zoom and pan to the default state.
-         */
-        function resetZoom() {
-            svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
-        }
+        function resetHighlight() { g.selectAll('.node, .link').style('opacity', 1); }
+        function resetZoom() { svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity); }
 
         // --- D3 DRAG HELPERS ---
         function drag(simulation) {
-            function dragstarted(event, d) {
-                if (!event.active) simulation.alphaTarget(0.3).restart();
-                d.fx = d.x;
-                d.fy = d.y;
-            }
-            function dragged(event, d) {
-                d.fx = event.x;
-                d.fy = event.y;
-            }
-            function dragended(event, d) {
-                if (!event.active) simulation.alphaTarget(0);
-                d.fx = null;
-                d.fy = null;
-            }
+            const dragstarted = (e,d) => { if (!e.active) simulation.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; };
+            const dragged = (e,d) => { d.fx = e.x; d.fy = e.y; };
+            const dragended = (e,d) => { if (!e.active) simulation.alphaTarget(0); d.fx = null; d.fy = null; };
             return d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended);
         }
 
@@ -516,29 +359,25 @@
         const getDefinition = name => keywordData[name]?.definitions?.[currentLanguage]?.[0] || keywordData[name]?.definitions?.en?.[0];
         const getCBVSourceURL = name => keywordData[name]?.uri ? `https://cbv.cwr.wto.org/showvoc/#/datasets/WTO_Thesaurus/data?resId=${encodeURIComponent(keywordData[name].uri)}` : null;
         
-        function getTranslations(name) {
+        function getTranslations(name, forPanel = false) {
             const labels = keywordData[name]?.labels;
             if (!labels) return [];
             return ['es', 'fr'].reduce((acc, lang) => {
                 if (labels[lang]?.pref?.length) {
-                    acc.push(`${labels[lang].pref[0]} (${lang.toUpperCase()})`);
+                    const term = labels[lang].pref[0];
+                    acc.push(forPanel ? { name: term, lang: lang } : `${term} (${lang.toUpperCase()})`);
                 }
                 return acc;
             }, []);
         }
 
-        function findParentCollections(keywordName) {
-            return Object.values(keywordData)
-                .filter(item => item.type === 'collection' && (item.members || []).includes(keywordName))
-                .map(item => ({ name: getDisplayLabel(item.labels.en.pref[0]) }))
-                .sort((a, b) => a.name.localeCompare(b.name));
-        }
+        const findParentCollections = keywordName => Object.entries(keywordData).filter(([_,v]) => v.type === 'collection' && (v.members || []).includes(keywordName)).map(([k,_]) => ({ name: k })).sort((a,b) => a.name.localeCompare(b.name));
+        const findOtherCollections = currentKeyword => Object.entries(keywordData).filter(([k,v]) => v.type === 'collection' && k !== currentKeyword).map(([k,v]) => ({ name: k, count: (v.members || []).length })).sort((a,b) => a.name.localeCompare(b.name));
 
         function navigateToTopic(topicName) {
             document.getElementById('search-input').value = '';
             document.getElementById('search-suggestions').style.display = 'none';
-            const newUrl = `?keyword=${encodeURIComponent(topicName)}`;
-            window.history.pushState({ topic: topicName }, '', newUrl);
+            window.history.pushState({ topic: topicName }, '', `?keyword=${encodeURIComponent(topicName)}`);
             drawGraph(topicName);
         }
 
@@ -546,44 +385,30 @@
             currentLanguage = lang;
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
             updateUIText();
-            if (currentKeyword) {
-                drawGraph(currentKeyword); // Redraw graph with new language
+            if (currentKeyword) drawGraph(currentKeyword);
+        }
+        
+        function switchToTranslation(term, lang) {
+            const englishKeyword = Object.keys(keywordData).find(key => keywordData[key]?.labels?.[lang]?.pref?.includes(term));
+            if (englishKeyword) {
+                switchLanguage(lang);
+                navigateToTopic(englishKeyword);
             }
         }
 
         // --- MULTILINGUAL TEXT ---
         const UI_TEXTS = {
-            en: {
-                mainMenu: 'Main Menu', resetZoom: 'Reset Zoom', searchPlaceholder: 'Search for a keyword...', topic: 'Topic',
-                centralTopic: 'Central Topic', narrowerTerms: 'Narrower Terms', broaderTerms: 'Broader Terms', relatedTerms: 'Related Terms', collectionMembers: 'Collection Members',
-                relatedTopics: 'Related Topics', broaderTopics: '▲ Broader Topics', narrowerTopics: '▼ Narrower Topics', relatedTopics: '◆ Related Topics', membersTopics: '★ Collection Members', parentCollections: '📁 Parent Collections',
-                doubleClickToExplore: 'Double-click node to explore', also: 'Also'
-            },
-            es: {
-                mainMenu: 'Menú Principal', resetZoom: 'Reiniciar Zoom', searchPlaceholder: 'Buscar una palabra clave...', topic: 'Tema',
-                centralTopic: 'Tema Central', narrowerTerms: 'Términos Específicos', broaderTerms: 'Términos Amplios', relatedTerms: 'Términos Relacionados', collectionMembers: 'Miembros de Colección',
-                relatedTopics: 'Temas Relacionados', broaderTopics: '▲ Temas Amplios', narrowerTopics: '▼ Temas Específicos', relatedTopics: '◆ Temas Relacionados', membersTopics: '★ Miembros de Colección', parentCollections: '📁 Colecciones Padre',
-                doubleClickToExplore: 'Doble clic para explorar', also: 'También'
-            },
-            fr: {
-                mainMenu: 'Menu Principal', resetZoom: 'Réinitialiser le Zoom', searchPlaceholder: 'Rechercher un mot-clé...', topic: 'Sujet',
-                centralTopic: 'Sujet Central', narrowerTerms: 'Termes Spécifiques', broaderTerms: 'Termes Plus Larges', relatedTerms: 'Termes Connexes', collectionMembers: 'Membres de la Collection',
-                relatedTopics: 'Sujets Connexes', broaderTopics: '▲ Termes Plus Larges', narrowerTopics: '▼ Termes Spécifiques', relatedTopics: '◆ Termes Connexes', membersTopics: '★ Membres de la Collection', parentCollections: '📁 Collections Parentes',
-                doubleClickToExplore: 'Double-cliquez pour explorer', also: 'Aussi'
-            }
+            en: { mainMenu: 'Main Menu', resetZoom: 'Reset Zoom', searchPlaceholder: 'Search for a keyword...', topic: 'Topic', centralTopic: 'Central Topic', narrowerTerms: 'Narrower Terms', broaderTerms: 'Broader Terms', relatedTerms: 'Related Terms', collectionMembers: 'Collection Members', relatedTopics: 'Related Topics', broaderTopics: '▲ Broader Topics', narrowerTopics: '▼ Narrower Topics', membersTopics: '★ Collection Members', parentCollections: '📁 Parent Collections', otherCollections: '📚 Other Collections', translations: '◎ Translations', doubleClickToExplore: 'Double-click node to explore', also: 'Also', membersCount: 'members' },
+            es: { mainMenu: 'Menú Principal', resetZoom: 'Reiniciar Zoom', searchPlaceholder: 'Buscar...', topic: 'Tema', centralTopic: 'Tema Central', narrowerTerms: 'Términos Específicos', broaderTerms: 'Términos Amplios', relatedTerms: 'Términos Relacionados', collectionMembers: 'Miembros', relatedTopics: 'Temas Relacionados', broaderTopics: '▲ Temas Amplios', narrowerTopics: '▼ Temas Específicos', membersTopics: '★ Miembros', parentCollections: '📁 Colecciones Padre', otherCollections: '📚 Otras Colecciones', translations: '◎ Traducciones', doubleClickToExplore: 'Doble clic para explorar', also: 'También', membersCount: 'miembros' },
+            fr: { mainMenu: 'Menu Principal', resetZoom: 'Réinitialiser', searchPlaceholder: 'Rechercher...', topic: 'Sujet', centralTopic: 'Sujet Central', narrowerTerms: 'Termes Spécifiques', broaderTerms: 'Termes Plus Larges', relatedTerms: 'Termes Connexes', collectionMembers: 'Membres', relatedTopics: 'Sujets Connexes', broaderTopics: '▲ Termes Plus Larges', narrowerTopics: '▼ Termes Spécifiques', membersTopics: '★ Membres', parentCollections: '📁 Collections Parentes', otherCollections: '📚 Autres Collections', translations: '◎ Traductions', doubleClickToExplore: 'Double-cliquez pour explorer', also: 'Aussi', membersCount: 'membres' }
         };
         const getText = (key) => UI_TEXTS[currentLanguage]?.[key] || UI_TEXTS.en[key];
 
         // --- INITIALIZATION ---
-        /**
-         * Initializes the application.
-         */
         async function init() {
             await loadData();
             if (allKeywords.length === 0) return;
-
             const initialTopic = new URLSearchParams(window.location.search).get('keyword') || allKeywords[Math.floor(Math.random() * allKeywords.length)].name;
-            
             initializeEventListeners();
             updateUIText();
             drawGraph(initialTopic);
