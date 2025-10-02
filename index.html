@@ -260,7 +260,25 @@
             padding: 10px;
             background: #fafafa;
         }
-        
+        .keyword-link.collection {
+            background: rgba(231, 76, 60, 0.1);
+            border-color: rgba(231, 76, 60, 0.4);
+            font-weight: 600;
+            color: #c0392b;
+        }
+
+        .keyword-link.collection::before {
+            content: '📚';
+            margin-right: 6px;
+            font-size: 12px;
+        }
+
+        .keyword-link.collection:hover {
+            background: #e74c3c;
+            color: white;
+            border-color: #c0392b;
+        }
+
         .keyword-link {
             display: inline-block;
             margin: 3px 5px;
@@ -433,6 +451,7 @@
                 `;
             });
         
+            
         function displayKeywords() {
             const container = document.getElementById('all-keywords-list');
             if (filteredKeywords.length === 0) {
@@ -440,15 +459,21 @@
                 return;
             }
             
-            const keywordLinks = filteredKeywords.map(keyword => 
-                `<a href="graph.html?keyword=${encodeURIComponent(keyword.name)}" class="keyword-link">${keyword.name}</a>`
-            ).join('');
+            const keywordLinks = filteredKeywords.map(keyword => {
+                const keywordInfo = cbvData[keyword.name] || {};
+                const isCollection = keywordInfo.type === 'collection';
+                
+                const linkClass = isCollection ? 'keyword-link collection' : 'keyword-link';
+                const title = isCollection ? ` title="Collection: ${(keywordInfo.members || []).length} members"` : ' title="Click to explore this keyword"';
+                
+                return `<a href="graph.html?keyword=${encodeURIComponent(keyword.name)}" class="${linkClass}"${title}>${keyword.name}</a>`;
+            }).join('');
             
             container.innerHTML = keywordLinks;
         }
         
         function filterByLetter(letter) {
-            // Update active button
+
             document.querySelectorAll('.letter-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
             
