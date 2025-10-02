@@ -17,7 +17,7 @@
         .link.members { stroke: rgba(52, 152, 219, 0.6); stroke-width: 2; }
         
         .tooltip { position: absolute; background: rgba(0, 0, 0, 0.9); color: white; padding: 12px; border-radius: 8px; font-size: 14px; pointer-events: none; z-index: 1000; max-width: 300px; border: 1px solid rgba(255,255,255,0.2); cursor : default; }
-        .tooltip .tooltip-definition { font-size: 12px; color: #ddd; border-top: 1px solid #444; margin-top: 8px; padding-top: 8px; font-style: italic; }
+        .tooltip .tooltip-definition { font-size: 12px; color: #a7d1d2; border-top: 1px solid #444; margin-top: 8px; padding-top: 8px; font-style: italic; }
         .tooltip .tooltip-translations { font-size: 12px; color: #ccc; border-top: 1px solid #444; margin-top: 8px; padding-top: 8px; }
         .tooltip-close {position: absolute; top: 5px; right: 8px; background: transparent; border: none; color: #aaa; font-size: 20px; cursor: pointer; padding: 0; line-height: 1; }
         .tooltip-close:hover { color: white; }
@@ -260,7 +260,7 @@
 
     <svg id="graph-container"></svg>
     <div class="tooltip" id="tooltip" style="display: none;">
-        <button class="tooltip-close" onclick="hideTooltip()">×</button>
+        <button class="tooltip-close" onclick="forceHideTooltip()">×</button>
         <div id="tooltip-content"></div>
     </div>
 
@@ -1170,42 +1170,37 @@
                 .attr("class", d => `link ${d.type}`)
                 .attr("stroke-width", d => d.type === 'broader' || d.type === 'narrower' ? 2.5 : 2);
             
-        const node = g.append("g").selectAll("g")
-            .data(graph.nodes)
-            .join("g")
-            .attr("class", "node")
-            .call(d3.drag()
+            const node = g.append("g").selectAll("g")
+                .data(graph.nodes)
+                .join("g")
+                .attr("class", "node")
+                .call(d3.drag()
                 .on("start", dragstarted)
                 .on("drag", dragged)
                 .on("end", dragended))
-            .on("click", (event, d) => {
-                event.stopPropagation(); // Prevent the background click from firing
-                if (pinnedTooltipNode === d) {
-                    // If clicking the same node, hide the tooltip
-                    hideTooltip();
-                } else {
-                    // Otherwise, show the tooltip for this node
+                .on("click", (event, d) => {
+                    event.stopPropagation();
+                    // Pin the tooltip on click
                     pinnedTooltipNode = d;
                     showTooltip(event, d);
-                }
-            })
-            .on("dblclick", (event, d) => {
-                // Navigate on double-click instead of single click
-                if (d.ring !== 'center') {
-                    navigateToTopic(d.name);
-                }
-            })
-            .on("mouseover", (event, d) => {
-                highlightRelated(d);
-            })
-            .on("mouseout", () => {
-                resetHighlight();
+                })
+                .on("dblclick", (event, d) => {
+                    if (d.ring !== 'center') {
+                        navigateToTopic(d.name);
+                    }
+                })
+                .on("mouseover", (event, d) => {
+                    showTooltip(event, d);
+                    highlightRelated(d);
+                })
+                .on("mouseout", () => {
+                    hideTooltip();
+                    resetHighlight();
+                });
+                    // Add a click listener to the SVG background to close the tooltip
+            svg.on('click', () => {
+                forceHideTooltip();
             });
-
-        // Add a click listener to the SVG background to close the tooltip
-        svg.on('click', () => {
-            hideTooltip();
-        });
 
             // Add shapes based on node type
             node.each(function(d) {
@@ -1428,7 +1423,7 @@
                 } else if (d.type === 'members') {
                     content += `<span style="color: #3498db;">★ Collection Member</span><br/>`;
                 }
-                content += `<span style="font-size: 12px; color: #ccc;">(Double-click node to explore)</span>`;
+                content += `<span style="font-size: 12px; color: #4ecdc4;">(Double-click node to explore)</span>`;
             }
             
             const keywordInfo = keywordData[d.name];
@@ -1476,9 +1471,17 @@
                 .style("top", topPos + "px");
         }
 
-        function hideTooltip() { 
-            tooltip.style("display", "none"); 
+        function hideTooltip() {
+            // Only hide the tooltip if a node hasn't been clicked (pinned)
+            if (!pinnedTooltipNode) {
+                tooltip.style("display", "none");
+            }
+        }
+
+        function forceHideTooltip() {
+            // Unpin any node and force the tooltip to hide
             pinnedTooltipNode = null;
+            tooltip.style("display", "none");
         }
         
         function filterRelationshipList(type, searchTerm) {
