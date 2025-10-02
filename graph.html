@@ -62,7 +62,7 @@
         .legend-color { width: 12px; height: 12px; border-radius: 50%; margin-right: 8px; }
         .legend-color.broader-shape { border-radius: 0; transform: rotate(45deg); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
         .legend-color.narrower-shape { border-radius: 0; transform: rotate(-135deg); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
-        .legend-color.related-shape { border-radius: 0; transform: rotate(45deg); }
+        .legend-color.related-shape { border-radius: 0; transform: rotate(45deg); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
     </style>
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
@@ -248,13 +248,24 @@
             document.getElementById('reset-zoom-btn').innerHTML = `🔍 ${getText('resetZoom')}`;
             document.getElementById('search-input').placeholder = getText('searchPlaceholder');
             document.getElementById('panel-main-title').textContent = getText('relatedTopics');
-            
-            const legend = d3.select("#legend");
-            legend.html("");
-            ['centralTopic', 'narrowerTerms', 'broaderTerms', 'relatedTerms', 'collectionMembers'].forEach(key => {
-                const item = legend.append("div").attr("class", "legend-item");
-                item.append("div").attr("class", `legend-color ${key.replace('Terms', '-shape').replace('Topic', '').replace('Members', '')}`);
-                item.append("span").text(getText(key));
+
+            const legendItems = [
+                { key: 'centralTopic', shapeClass: 'central-shape', color: '#ff6b6b' },
+                { key: 'narrowerTerms', shapeClass: 'narrower-shape', color: '#8a68cc' },
+                { key: 'broaderTerms', shapeClass: 'broader-shape', color: '#ff8c42' },
+                { key: 'relatedTerms', shapeClass: 'related-shape', color: '#4a90e2' },
+                { key: 'collectionMembers', shapeClass: 'members-shape', color: '#3498db' }
+            ];
+
+            const legendContainer = d3.select("#legend");
+            legendContainer.html(""); // Clear existing legend
+
+            legendItems.forEach(legendItem => {
+                const item = legendContainer.append("div").attr("class", "legend-item");
+                item.append("div")
+                    .attr("class", `legend-color ${legendItem.shapeClass}`)
+                    .style("background-color", legendItem.color); // Apply color directly
+                item.append("span").text(getText(legendItem.key));
             });
         }
 
